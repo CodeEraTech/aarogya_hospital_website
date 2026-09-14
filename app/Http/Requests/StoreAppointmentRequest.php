@@ -20,7 +20,7 @@ class StoreAppointmentRequest extends FormRequest
             'name' => ['required', 'string', 'min:2', 'max:80'],
             'phone' => ['required', 'regex:/^[0-9 +()-]{10,18}$/'],
             'email' => ['nullable', 'email:rfc', 'max:120'],
-            'speciality' => ['required', 'in:Orthopaedics,Robotic Joint Replacement,Infertility & IVF,Trauma,Other'],
+            'speciality' => ['nullable', 'string', 'max:80'],
             'doctor' => ['nullable', 'string', 'max:100'],
             'date' => ['nullable', 'date', 'after_or_equal:today'],
             'time' => ['nullable', 'string', 'max:80'],

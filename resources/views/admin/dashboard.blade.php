@@ -1,0 +1,8 @@
+@extends('layouts.admin')
+@section('title','Dashboard')
+@section('heading','Dashboard')
+@section('content')
+<div class="welcome"><div><h1>Welcome back, {{ auth()->user()->name }}</h1><p class="muted">Here is an overview of your hospital website.</p></div><a class="button button-primary" href="{{ route('admin.resource.create','blogs') }}">Create blog post</a></div>
+<div class="stat-grid">@foreach($counts as $label=>$count) @php($target=['Appointments'=>'appointments','Feedback'=>'feedback','Doctors'=>'doctors','Blog posts'=>'blogs'][$label])<a class="stat-card" href="{{ route('admin.resource.index',$target) }}"><span>{{ $label }}</span><strong>{{ $count }}</strong><small>View records →</small></a>@endforeach</div>
+<section class="panel"><div class="panel-head"><div><p class="eyebrow">LATEST ENQUIRIES</p><h3>Recent appointments</h3></div><a class="text-link" href="{{ route('admin.resource.index','appointments') }}">View all</a></div><div class="table-wrap"><table><thead><tr><th>Patient ID</th><th>Patient</th><th>Doctor</th><th>Date</th><th>Status</th></tr></thead><tbody>@forelse($recentAppointments as $appointment)<tr><td class="mono">{{ optional($appointment->patient)->patient_id ?: '—' }}</td><td><strong>{{ $appointment->patient_name }}</strong><small>{{ $appointment->mobile_number }}</small></td><td>{{ $appointment->preferred_doctor ?: 'Any available' }}</td><td>{{ optional($appointment->preferred_date)->format('d M Y') ?: '—' }}</td><td><span class="badge">{{ $appointment->status }}</span></td></tr>@empty<tr><td colspan="5" class="empty">No appointments received yet.</td></tr>@endforelse</tbody></table></div></section>
+@endsection

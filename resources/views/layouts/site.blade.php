@@ -3,8 +3,9 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>@yield('title') | Aarogya Hospital</title>
-    <meta name="description" content="@yield('description', 'Patient information and services at Aarogya Hospital, Hisar.')">
+    <title>@yield('title', $siteSettings['seo_meta_title'] ?? 'Aarogya Hospital')</title>
+    <meta name="description" content="@yield('description', $siteSettings['seo_meta_description'] ?? 'Patient information and services at Aarogya Hospital, Hisar.')">
+    <link rel="icon" href="{{ asset($siteSettings['website_favicon'] ?? 'favicon.ico') }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">

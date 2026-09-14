@@ -10,7 +10,6 @@ return new class extends Migration
     {
         Schema::create('appointments', function (Blueprint $table) {
             $table->id();
-            $table->string('reference', 32)->unique();
             $table->string('patient_name', 80);
             $table->string('mobile_number', 15)->index();
             $table->string('email', 120)->nullable();

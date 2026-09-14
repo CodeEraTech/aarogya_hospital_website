@@ -6,8 +6,8 @@
 <section class="inner-section"><div class="wrap">
     <div class="gallery-intro"><span class="eyebrow">OUR HOSPITAL</span><h2>Care, technology, and human connection.</h2><p>Explore moments from Aarogya Hospital. Select an image to view it in detail.</p></div>
     <div class="hospital-gallery" aria-label="Aarogya Hospital image gallery">
-@foreach(['gallery-01.png', 'gallery-02.jpg', 'gallery-03.png', 'gallery-04.jpg', 'gallery-05.png', 'gallery-06.jpg', 'gallery-07.jpg', 'gallery-08.jpg', 'gallery-09.jpg', 'gallery-10.jpg', 'gallery-11.jpg', 'gallery-12.jpg'] as $index => $filename)
-        <button class="gallery-item" type="button" data-gallery-image="{{ asset('assets/hospital/images/'.$filename) }}" data-gallery-alt="Aarogya Hospital gallery image {{ $index + 1 }}"><img src="{{ asset('assets/hospital/images/'.$filename) }}" alt="Aarogya Hospital gallery image {{ $index + 1 }}" width="1200" height="900" loading="lazy"><span>View image</span></button>
+@foreach($galleryItems as $index => $item)
+        <button class="gallery-item" type="button" data-gallery-image="{{ asset($item->image) }}" data-gallery-alt="{{ $item->title }}"><img src="{{ asset($item->image) }}" alt="{{ $item->title }}" width="1200" height="900" loading="lazy"><span>{{ $item->title }}</span></button>
 @endforeach
     </div>
 </div></section>

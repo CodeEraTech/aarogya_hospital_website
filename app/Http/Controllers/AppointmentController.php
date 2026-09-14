@@ -5,20 +5,22 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreAppointmentRequest;
 use App\Models\Appointment;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Str;
+use App\Services\PatientService;
 
 class AppointmentController extends Controller
 {
-    public function store(StoreAppointmentRequest $request): RedirectResponse
+    public function store(StoreAppointmentRequest $request, PatientService $patients): RedirectResponse
     {
         $validated = $request->validated();
 
+        $patient = $patients->findOrCreate($validated['name'], $validated['phone'], $validated['email'] ?? null);
+
         Appointment::create([
-            'reference' => 'APT-'.now()->format('ymd').'-'.Str::upper(Str::random(6)),
+            'patient_id' => $patient->id,
             'patient_name' => $validated['name'],
             'mobile_number' => preg_replace('/\D+/', '', $validated['phone']),
             'email' => $validated['email'] ?? null,
-            'speciality' => $validated['speciality'],
+            'speciality' => $validated['speciality'] ?? null,
             'preferred_doctor' => $validated['doctor'] ?? null,
             'preferred_date' => $validated['date'] ?? null,
             'preferred_time' => $validated['time'] ?? null,

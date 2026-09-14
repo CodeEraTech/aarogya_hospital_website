@@ -12,7 +12,7 @@ class Appointment extends Model
     use HasFactory;
 
     protected $fillable = [
-        'reference',
+        'patient_id',
         'patient_name',
         'mobile_number',
         'email',
@@ -29,4 +29,6 @@ class Appointment extends Model
     {
         return ['preferred_date' => 'date'];
     }
+
+    public function patient() { return $this->belongsTo(Patient::class); }
 }
