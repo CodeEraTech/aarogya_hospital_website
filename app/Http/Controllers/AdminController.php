@@ -18,7 +18,7 @@ class AdminController extends Controller
         'blogs' => [Blog::class, 'Blog posts', ['title', 'slug', 'content', 'image', 'published_at', 'status', 'meta_title', 'meta_description']],
         'gallery' => [GalleryItem::class, 'Gallery', ['title', 'image', 'description', 'status', 'sort_order']],
         'slides' => [Slide::class, 'Slides', ['title', 'slug', 'subtitle', 'image', 'button_text', 'button_url', 'status', 'sort_order']],
-        'testimonials' => [Testimonial::class, 'Patient testimonials', ['name', 'designation', 'quote', 'video_url', 'thumbnail', 'status', 'sort_order']],
+        'testimonials' => [Testimonial::class, 'Patient testimonials', ['name', 'type', 'quote', 'video_file', 'video_url', 'status', 'sort_order']],
         'appointments' => [Appointment::class, 'Appointments', ['patient_id', 'patient_name', 'mobile_number', 'email', 'preferred_doctor', 'preferred_date', 'preferred_time', 'status', 'message']],
         'feedback' => [Feedback::class, 'Feedback', ['name', 'phone', 'email', 'department', 'rating', 'message', 'status']],
     ];
@@ -140,8 +140,8 @@ class AdminController extends Controller
 
     private function processFiles(array $data, Request $request, string $resource): array
     {
-        foreach (['image', 'thumbnail'] as $field) if ($request->hasFile($field)) {
-            $request->validate([$field => 'file|mimes:jpg,jpeg,png,webp,gif,ico|max:5120']);
+        foreach (['image', 'video_file'] as $field) if ($request->hasFile($field)) {
+            $request->validate([$field => $field === 'video_file' ? 'file|mimes:mp4,webm,ogg,mov|max:51200' : 'file|mimes:jpg,jpeg,png,webp,gif,ico|max:5120']);
             $data[$field] = $this->storeFile($request->file($field), $resource);
         }
         return $data;
