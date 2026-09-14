@@ -15,7 +15,7 @@ class AdminController extends Controller
         'doctors' => [Doctor::class, 'Doctors', ['name', 'designation', 'image', 'sort_order', 'status', 'meta_title', 'meta_description']],
         'specialities' => [Speciality::class, 'Specialities', ['name', 'slug', 'short_label', 'description', 'content', 'status', 'sort_order']],
         'pages' => [Page::class, 'Pages', ['title', 'status', 'content']],
-        'blogs' => [Blog::class, 'Blog posts', ['title', 'slug', 'author', 'category', 'excerpt', 'content', 'image', 'published_at', 'status']],
+        'blogs' => [Blog::class, 'Blog posts', ['title', 'slug', 'content', 'image', 'published_at', 'status', 'meta_title', 'meta_description']],
         'gallery' => [GalleryItem::class, 'Gallery', ['title', 'image', 'description', 'status', 'sort_order']],
         'slides' => [Slide::class, 'Slides', ['title', 'slug', 'subtitle', 'image', 'button_text', 'button_url', 'status', 'sort_order']],
         'testimonials' => [Testimonial::class, 'Patient testimonials', ['name', 'designation', 'quote', 'video_url', 'thumbnail', 'status', 'sort_order']],
@@ -107,7 +107,7 @@ class AdminController extends Controller
         abort_if($resource === 'feedback', 404);
         [$model] = $this->resources[$resource];
         $data = $request->except(['_token', '_method']);
-        if (in_array($resource, ['doctors', 'specialities', 'pages', 'blogs', 'slides']) && blank($data['slug'] ?? null)) $data['slug'] = Str::slug($data['title'] ?? $data['name']);
+        if (in_array($resource, ['doctors', 'specialities', 'pages', 'blogs', 'slides'])) $data['slug'] = Str::slug($data['title'] ?? $data['name']);
         $data = $this->processFiles($data, $request, $resource);
         if (in_array('status', $this->resources[$resource][2])) $data['status'] = $data['status'] ?? 'Active';
         $model::create($data);
