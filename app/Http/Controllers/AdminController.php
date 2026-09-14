@@ -16,7 +16,7 @@ class AdminController extends Controller
         'specialities' => [Speciality::class, 'Specialities', ['name', 'slug', 'short_label', 'description', 'content', 'status', 'sort_order']],
         'pages' => [Page::class, 'Pages', ['title', 'status', 'content']],
         'blogs' => [Blog::class, 'Blog posts', ['title', 'slug', 'content', 'image', 'published_at', 'status', 'meta_title', 'meta_description']],
-        'gallery' => [GalleryItem::class, 'Gallery', ['title', 'image', 'description', 'status', 'sort_order']],
+        'gallery' => [GalleryItem::class, 'Gallery', ['title', 'image', 'status', 'sort_order']],
         'slides' => [Slide::class, 'Slides', ['title', 'slug', 'subtitle', 'image', 'button_text', 'button_url', 'status', 'sort_order']],
         'testimonials' => [Testimonial::class, 'Patient testimonials', ['name', 'type', 'quote', 'video_file', 'video_url', 'status', 'sort_order']],
         'appointments' => [Appointment::class, 'Appointments', ['patient_id', 'patient_name', 'mobile_number', 'email', 'preferred_doctor', 'preferred_date', 'preferred_time', 'status', 'message']],
@@ -107,6 +107,7 @@ class AdminController extends Controller
         abort_if($resource === 'feedback', 404);
         [$model] = $this->resources[$resource];
         $data = $request->except(['_token', '_method']);
+        if ($resource === 'gallery') $request->validate(['image'=>'required|file|mimes:jpg,jpeg,png,webp,gif|max:5120']);
         if (in_array($resource, ['doctors', 'specialities', 'pages', 'blogs', 'slides'])) $data['slug'] = Str::slug($data['title'] ?? $data['name']);
         $data = $this->processFiles($data, $request, $resource);
         if (in_array('status', $this->resources[$resource][2])) $data['status'] = $data['status'] ?? 'Active';
