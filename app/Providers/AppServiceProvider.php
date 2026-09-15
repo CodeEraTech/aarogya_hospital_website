@@ -24,7 +24,14 @@ class AppServiceProvider extends ServiceProvider
     {
         Schema::defaultStringLength(191);
         View::composer(['layouts.site', 'home', 'layouts.admin', 'admin.auth.login'], function ($view): void {
-            $view->with('siteSettings', Schema::hasTable('settings') ? Setting::pluck('value', 'key') : collect());
+            $settings = Schema::hasTable('settings') ? Setting::pluck('value', 'key') : collect();
+            if (!empty($settings['website_logo']) && is_file(public_path($settings['website_logo'])) && $settings['website_logo'] !== 'assets/hospital/images/aarogya-logo.png') {
+                copy(public_path($settings['website_logo']), public_path('assets/hospital/images/aarogya-logo.png'));
+            }
+            if (!empty($settings['website_favicon']) && is_file(public_path($settings['website_favicon'])) && $settings['website_favicon'] !== 'favicon.ico') {
+                copy(public_path($settings['website_favicon']), public_path('favicon.ico'));
+            }
+            $view->with('siteSettings', $settings);
         });
     }
 }
