@@ -75,7 +75,12 @@ class AdminController extends Controller
     {
         foreach ($request->input('settings', []) as $key => $value) Setting::where('key', $key)->update(['value' => $value]);
         foreach (['website_logo' => 'site-settings', 'website_favicon' => 'site-settings'] as $key => $folder) {
-            if ($request->hasFile("settings_files.$key")) Setting::where('key', $key)->update(['value' => $this->storeFile($request->file("settings_files.$key"), $folder)]);
+            if ($request->hasFile("settings_files.$key")) {
+                $path = $this->storeFile($request->file("settings_files.$key"), $folder);
+                Setting::where('key', $key)->update(['value' => $path]);
+                $legacyPath = $key === 'website_logo' ? public_path('assets/hospital/images/aarogya-logo.png') : public_path('favicon.ico');
+                copy(public_path($path), $legacyPath);
+            }
         }
         return back()->with('success', 'Website settings saved successfully.');
     }
