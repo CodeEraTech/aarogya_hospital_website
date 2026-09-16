@@ -7,12 +7,13 @@ use App\Models\Doctor;
 use App\Models\GalleryItem;
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\OpdScheduleController;
+use App\Http\Controllers\EmpanelledController;
 use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'home')->name('home');
 Route::post('/appointments', [AppointmentController::class, 'store'])->middleware('throttle:5,1')->name('appointments.store');
 Route::get('/doctors', fn () => view('pages.doctors', ['doctors' => Doctor::where('status', 'Published')->orderBy('sort_order')->get()]))->name('doctors.index');
-Route::view('/patient-resources/empanelled-corporate', 'pages.empanelled-corporate')->name('empanelled-corporate');
+Route::get('/patient-resources/empanelled-corporate/{slug}', [EmpanelledController::class, 'show'])->name('empanelled-corporate');
 Route::get('/patient-resources/opd-schedule', [OpdScheduleController::class, 'publicIndex'])->name('opd-schedule');
 Route::view('/patient-resources/feedback', 'pages.feedback')->name('feedback.create');
 Route::post('/feedback', [FeedbackController::class, 'store'])->middleware('throttle:5,1')->name('feedback.store');
@@ -44,6 +45,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/settings', [AdminController::class, 'settings'])->name('settings');
         Route::put('/settings', [AdminController::class, 'saveSettings'])->name('settings.save');
         Route::resource('opd-schedules', OpdScheduleController::class)->except(['show']);
+        Route::get('/empanelled-corporate/{key}/edit', [EmpanelledController::class, 'edit'])->whereNumber('key')->name('empanelled.edit');
+        Route::put('/empanelled-corporate/{key}', [EmpanelledController::class, 'update'])->whereNumber('key')->name('empanelled.update');
+        Route::delete('/empanelled-images/{empanelledSection}/{index}', [EmpanelledController::class, 'removeImage'])->whereNumber('index')->name('empanelled.image.destroy');
         Route::get('/{resource}', [AdminController::class, 'index'])->name('resource.index');
         Route::get('/{resource}/create', [AdminController::class, 'create'])->name('resource.create');
         Route::post('/{resource}', [AdminController::class, 'store'])->name('resource.store');

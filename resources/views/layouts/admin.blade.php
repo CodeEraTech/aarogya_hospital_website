@@ -20,6 +20,10 @@
             <a href="{{ route('admin.resource.index','appointments') }}">Appointments</a>
             <a href="{{ route('admin.opd-schedules.index') }}">OPD schedules</a>
             <a href="{{ route('admin.resource.index','feedback') }}">Feedback</a>
+            <span class="nav-label">Empanelled Corporate</span>
+            @foreach(config('empanelled') as $key => $empanelled)
+                <a class="nav-subitem" href="{{ route('admin.empanelled.edit', $key) }}">{{ $empanelled['name'] }}</a>
+            @endforeach
             <span class="nav-label">Website</span>
             <a href="{{ route('admin.resource.index','pages') }}">Pages</a>
             <a href="{{ route('admin.resource.index','doctors') }}">Doctors</a>
@@ -57,5 +61,6 @@ document.querySelectorAll('.delete-form').forEach(function(form){form.addEventLi
 document.querySelectorAll('form[action*="/logout"]').forEach(function(form){form.addEventListener('submit',function(event){event.preventDefault();Swal.fire({title:'Sign out?',text:'You will need to sign in again.',icon:'question',showCancelButton:true,confirmButtonColor:'#168a86',confirmButtonText:'Sign out',cancelButtonText:'Cancel'}).then(function(result){if(result.isConfirmed)form.submit()})})});
 document.querySelectorAll('textarea.rich-text-source').forEach(function(area){var box=document.createElement('div');area.after(box);area.hidden=true;var q=new Quill(box,{theme:'snow',modules:{toolbar:[[{'header':[1,2,3,false]}],['bold','italic','underline','strike'],[{'list':'ordered'},{'list':'bullet'}],['blockquote','code-block'],['link','image'],['clean']]}});q.root.innerHTML=area.value;area.form.addEventListener('submit',function(){area.value=q.root.innerHTML})});
 </script>
+@stack('scripts')
 </body>
 </html>
