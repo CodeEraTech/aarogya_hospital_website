@@ -16,5 +16,8 @@
 .admin-brand{height:165px;padding:10px 16px}.admin-logo{width:220px;height:145px}
 .login-logo{display:block;width:220px;height:82px;object-fit:contain;object-position:left center;margin-bottom:22px}.login-error{display:flex;gap:8px;align-items:flex-start;padding:10px 12px;margin-top:20px;border-left:3px solid var(--danger);border-radius:5px;background:#fff0f0;color:var(--danger);font-size:12px}.login-error i{margin-top:3px}@media(max-width:600px){.login-logo{width:190px;height:70px}}
 @media(max-width:900px){.sidebar{left:-252px;transition:left .2s}.sidebar.open{left:0}.admin-main{margin-left:0}.admin-header{z-index:15}}
+.sidebar{width:220px;flex-basis:220px}.admin-main{margin-left:220px}.admin-brand{height:110px;min-height:110px;padding:5px 10px;justify-content:center}.admin-brand .admin-logo{width:180px;max-width:180px;height:90px;max-height:90px;object-position:center}
+.side-nav{padding-top:16px;padding-bottom:16px}
+@media(max-width:900px){.sidebar{left:-220px}.sidebar.open{left:0}.admin-main{margin-left:0}}
 .side-nav a:before{content:none}
 .side-nav a[href$="/dashboard"]:before{content:"\f00a"}.side-nav a[href$="/appointments"]:before{content:"\f274"}.side-nav a[href$="/feedback"]:before{content:"\f0e6"}.side-nav a[href$="/pages"]:before{content:"\f15c"}.side-nav a[href$="/doctors"]:before{content:"\f0f0"}.side-nav a[href$="/specialities"]:before{content:"\f0fa"}.side-nav a[href$="/blogs"]:before{content:"\f044"}.side-nav a[href$="/slides"]:before{content:"\f03e"}.side-nav a[href$="/testimonials"]:before{content:"\f10d"}.side-nav a[href$="/gallery"]:before{content:"\f03e"}.side-nav a[href$="/settings"]:before{content:"\f013"}
