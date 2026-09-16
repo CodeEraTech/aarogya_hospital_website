@@ -18,6 +18,7 @@
             <a href="{{ route('admin.dashboard') }}">Dashboard</a>
             <span class="nav-label">Inbox</span>
             <a href="{{ route('admin.resource.index','appointments') }}">Appointments</a>
+            <a href="{{ route('admin.opd-schedules.index') }}">OPD schedules</a>
             <a href="{{ route('admin.resource.index','feedback') }}">Feedback</a>
             <span class="nav-label">Website</span>
             <a href="{{ route('admin.resource.index','pages') }}">Pages</a>
