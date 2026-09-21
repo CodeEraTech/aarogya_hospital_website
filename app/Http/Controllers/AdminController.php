@@ -13,7 +13,7 @@ class AdminController extends Controller
 {
     private array $resources = [
         'doctors' => [Doctor::class, 'Doctors', ['name', 'designation', 'speciality_id', 'image', 'sort_order', 'status', 'meta_title', 'meta_description']],
-        'specialities' => [Speciality::class, 'Specialities', ['name', 'slug', 'short_label', 'description', 'content', 'status', 'sort_order']],
+        'specialities' => [Speciality::class, 'Specialities', ['name', 'short_label', 'description', 'content', 'image', 'status', 'sort_order']],
         'pages' => [Page::class, 'Pages', ['title', 'status', 'content']],
         'blogs' => [Blog::class, 'Blog posts', ['title', 'slug', 'content', 'image', 'published_at', 'status', 'meta_title', 'meta_description']],
         'gallery' => [GalleryItem::class, 'Gallery', ['title', 'image', 'status', 'sort_order']],
@@ -114,6 +114,7 @@ class AdminController extends Controller
         [$model] = $this->resources[$resource];
         $data = $request->except(['_token', '_method']);
         if ($resource === 'doctors') $request->validate(['speciality_id' => 'required|exists:specialities,id']);
+        if ($resource === 'specialities') $request->validate(['description' => 'nullable|string|max:1000', 'image' => 'required|file|mimes:jpg,jpeg,png,webp,gif|max:5120']);
         if ($resource === 'gallery') $request->validate(['image'=>'required|file|mimes:jpg,jpeg,png,webp,gif|max:5120']);
         if (in_array($resource, ['doctors', 'specialities', 'pages', 'blogs', 'slides'])) $data['slug'] = Str::slug($data['title'] ?? $data['name']);
         $data = $this->processFiles($data, $request, $resource);
@@ -136,6 +137,7 @@ class AdminController extends Controller
         [$model] = $this->resources[$resource];
         $data = $resource === 'feedback' ? $request->only('status') : $request->except(['_token', '_method']);
         if ($resource === 'doctors') $request->validate(['speciality_id' => 'required|exists:specialities,id']);
+        if ($resource === 'specialities') $request->validate(['description' => 'nullable|string|max:1000', 'image' => 'nullable|file|mimes:jpg,jpeg,png,webp,gif|max:5120']);
         unset($data['slug']);
         $data = $this->processFiles($data, $request, $resource);
         $model::findOrFail($id)->update($data);

@@ -13,13 +13,13 @@
             <div class="form-grid">
                 @foreach($fields as $field)
                     @if($field !== 'slug' && !($resource === 'appointments' && $field === 'reference'))
-                        @php($long = in_array($field, ['content', 'bio', 'description', 'excerpt', 'message', 'subtitle']))
+                        @php($long = in_array($field, ['content', 'bio', 'description', 'excerpt', 'message', 'subtitle']) && !($resource === 'specialities' && $field === 'description'))
                         @php($file = $field === 'image')
                         @php($testimonialField = $resource === 'testimonials' && in_array($field, ['type', 'quote', 'video_file', 'video_url']))
                         @php($wide = $long || $field === 'meta_description' || ($resource === 'blogs' && in_array($field, ['meta_title', 'meta_description'])) || ($resource === 'blogs' && $field === 'title') || ($testimonialField && $field !== 'type'))
-                        @php($required = in_array($field, ['name', 'title', 'key', 'content']))
+                        @php($required = in_array($field, ['name', 'title', 'key', 'content']) || ($resource === 'specialities' && $field === 'image' && !$item))
                         <label class="{{ $wide ? 'wide' : '' }} {{ $testimonialField ? 'testimonial-field testimonial-'.$field : '' }}">
-                            <span>{{ $field === 'type' ? 'Testimonial type' : ($field === 'speciality_id' ? 'Speciality' : ucwords(str_replace('_', ' ', $field))) }} @if($required || ($resource === 'doctors' && $field === 'speciality_id'))<b class="required">*</b>@endif</span>
+                            <span>{{ $field === 'type' ? 'Testimonial type' : ($field === 'speciality_id' ? 'Speciality' : ($resource === 'specialities' && $field === 'description' ? 'Short Description' : ($resource === 'specialities' && $field === 'image' ? 'Featured Image' : ucwords(str_replace('_', ' ', $field))))) }} @if($required || ($resource === 'doctors' && $field === 'speciality_id'))<b class="required">*</b>@endif</span>
                             @if($resource === 'doctors' && $field === 'speciality_id')
                                 <select name="speciality_id" required>
                                     <option value="">Select speciality</option>
@@ -39,8 +39,10 @@
                             @elseif($resource === 'testimonials' && $field === 'video_url')
                                 <input type="url" name="video_url" value="{{ old($field, $item?->{$field}) }}" placeholder="Enter video URL">
                             @elseif($file)
-                                <input type="file" name="{{ $field }}" accept="image/*">
+                                <input type="file" name="{{ $field }}" accept="image/jpeg,image/png,image/webp,image/gif" {{ $required ? 'required' : '' }}>
                                 @if($item?->{$field})<img class="file-preview" src="{{ asset($item->{$field}) }}" alt="Current image">@endif
+                            @elseif($resource === 'specialities' && $field === 'description')
+                                <textarea name="description" rows="5" maxlength="1000" placeholder="Enter a brief summary for the speciality card.">{{ old($field, $item?->{$field}) }}</textarea>
                             @elseif($resource === 'testimonials' && $field === 'quote')
                                 <textarea name="quote" rows="7">{{ old($field, $item?->{$field}) }}</textarea>
                             @elseif($resource === 'appointments' && $field === 'preferred_doctor')

@@ -5,6 +5,7 @@ use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\AdminController;
 use App\Models\Doctor;
 use App\Models\GalleryItem;
+use App\Models\Speciality;
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\OpdScheduleController;
 use App\Http\Controllers\EmpanelledController;
@@ -26,7 +27,8 @@ Route::view('/emergency', 'home')->name('emergency');
 Route::view('/privacy', 'home');
 Route::view('/terms', 'home');
 Route::view('/disclaimer', 'home');
-Route::view('/specialities/{slug?}', 'home');
+Route::get('/specialities', fn () => view('pages.specialities', ['specialities' => Speciality::where('status', 'Active')->orderBy('sort_order')->orderBy('name')->get()]))->name('specialities.index');
+Route::view('/specialities/{slug}', 'home');
 Route::view('/doctors/{slug}', 'home');
 Route::view('/patient-resources/{slug}', 'home');
 
