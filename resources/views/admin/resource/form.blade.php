@@ -16,10 +16,10 @@
                         @php($long = in_array($field, ['content', 'bio', 'description', 'excerpt', 'message', 'subtitle']) && !($resource === 'specialities' && $field === 'description'))
                         @php($file = $field === 'image')
                         @php($testimonialField = $resource === 'testimonials' && in_array($field, ['type', 'quote', 'video_file', 'video_url']))
-                        @php($wide = $long || $field === 'meta_description' || ($resource === 'blogs' && in_array($field, ['meta_title', 'meta_description'])) || ($resource === 'blogs' && $field === 'title') || ($testimonialField && $field !== 'type'))
+                        @php($wide = $long || $field === 'meta_description' || ($resource === 'specialities' && $field === 'description') || ($resource === 'blogs' && in_array($field, ['meta_title', 'meta_description'])) || ($resource === 'blogs' && $field === 'title') || ($testimonialField && $field !== 'type'))
                         @php($required = in_array($field, ['name', 'title', 'key', 'content']) || ($resource === 'specialities' && $field === 'image' && !$item))
                         <label class="{{ $wide ? 'wide' : '' }} {{ $testimonialField ? 'testimonial-field testimonial-'.$field : '' }}">
-                            <span>{{ $field === 'type' ? 'Testimonial type' : ($field === 'speciality_id' ? 'Speciality' : ($resource === 'specialities' && $field === 'description' ? 'Short Description' : ($resource === 'specialities' && $field === 'image' ? 'Featured Image' : ucwords(str_replace('_', ' ', $field))))) }} @if($required || ($resource === 'doctors' && $field === 'speciality_id'))<b class="required">*</b>@endif</span>
+                            <span>{{ $field === 'type' ? 'Testimonial type' : ($field === 'speciality_id' ? 'Speciality' : ($resource === 'specialities' && $field === 'description' ? 'Short Description' : ($resource === 'specialities' && $field === 'image' ? 'Featured Image' : ($resource === 'specialities' && $field === 'meta_tags' ? 'Meta Tags' : ucwords(str_replace('_', ' ', $field)))))) }} @if($required || ($resource === 'doctors' && $field === 'speciality_id'))<b class="required">*</b>@endif</span>
                             @if($resource === 'doctors' && $field === 'speciality_id')
                                 <select name="speciality_id" required>
                                     <option value="">Select speciality</option>
@@ -57,6 +57,8 @@
                                 <textarea class="rich-text-source" name="{{ $field }}" rows="12">{{ old($field, $item?->{$field}) }}</textarea>
                             @elseif($field === 'meta_title')
                                 <input type="text" name="meta_title" value="{{ old($field, $item?->{$field}) }}">
+                            @elseif($field === 'meta_tags')
+                                <input type="text" name="meta_tags" value="{{ old($field, $item?->{$field}) }}" placeholder="e.g. orthopaedics, joint replacement, Hisar">
                             @elseif($field === 'meta_description')
                                 <textarea name="meta_description" rows="5">{{ old($field, $item?->{$field}) }}</textarea>
                             @elseif($field === 'status')

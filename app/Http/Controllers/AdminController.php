@@ -13,7 +13,7 @@ class AdminController extends Controller
 {
     private array $resources = [
         'doctors' => [Doctor::class, 'Doctors', ['name', 'designation', 'speciality_id', 'image', 'sort_order', 'status', 'meta_title', 'meta_description']],
-        'specialities' => [Speciality::class, 'Specialities', ['name', 'short_label', 'description', 'content', 'image', 'status', 'sort_order']],
+        'specialities' => [Speciality::class, 'Specialities', ['name', 'description', 'content', 'image', 'status', 'sort_order', 'meta_title', 'meta_tags', 'meta_description']],
         'pages' => [Page::class, 'Pages', ['title', 'status', 'content']],
         'blogs' => [Blog::class, 'Blog posts', ['title', 'slug', 'content', 'image', 'published_at', 'status', 'meta_title', 'meta_description']],
         'gallery' => [GalleryItem::class, 'Gallery', ['title', 'image', 'status', 'sort_order']],

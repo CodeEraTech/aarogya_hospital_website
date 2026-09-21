@@ -14,7 +14,6 @@
                         <img src="{{ asset($speciality->image) }}" alt="{{ $speciality->name }}" loading="lazy">
                     </div>
                     <div class="speciality-directory-body">
-                        @if($speciality->short_label)<span>{{ $speciality->short_label }}</span>@endif
                         <h2>{{ $speciality->name }}</h2>
                         @if($speciality->description)<p>{{ $speciality->description }}</p>@endif
                     </div>
