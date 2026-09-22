@@ -16,15 +16,13 @@
     </form>
     <div class="table-wrap">
         <table>
-            <thead><tr>@foreach(($fields ?: ['id']) as $field)<th>{{ $field === 'speciality_id' ? 'Speciality' : ucwords(str_replace('_', ' ', $field)) }}</th>@endforeach<th>Actions</th></tr></thead>
+            <thead><tr>@foreach(($fields ?: ['id']) as $field)<th>{{ ucwords(str_replace('_', ' ', $field)) }}</th>@endforeach<th>Actions</th></tr></thead>
             <tbody>
             @forelse($items as $item)
                 <tr>
                     @foreach(($fields ?: ['id']) as $field)
                         <td>
-                            @if($resource === 'doctors' && $field === 'speciality_id')
-                                {{ $item->speciality?->name ?: '—' }}
-                            @elseif(in_array($field, ['content', 'bio', 'description', 'message', 'quote']))
+                            @if(in_array($field, ['content', 'bio', 'description', 'message', 'quote']))
                                 <span class="truncate">{{ strip_tags($item->$field) }}</span>
                             @elseif(in_array($field, ['image', 'thumbnail']))
                                 @if($item->$field)<img class="file-preview" src="{{ asset($item->$field) }}" alt="Uploaded image">@else—@endif

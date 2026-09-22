@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\{Appointment, Blog, Doctor, Feedback, GalleryItem, Page, Setting, Speciality, Slide, Testimonial};
+use App\Models\{Appointment, Blog, Doctor, Feedback, GalleryItem, Page, Service, Setting, Slide, Testimonial};
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -12,8 +12,8 @@ use Illuminate\Validation\Rule;
 class AdminController extends Controller
 {
     private array $resources = [
-        'doctors' => [Doctor::class, 'Doctors', ['name', 'designation', 'speciality_id', 'image', 'sort_order', 'status', 'meta_title', 'meta_description']],
-        'specialities' => [Speciality::class, 'Specialities', ['name', 'description', 'content', 'image', 'status', 'sort_order', 'meta_title', 'meta_tags', 'meta_description']],
+        'doctors' => [Doctor::class, 'Doctors', ['name', 'designation', 'speciality', 'image', 'sort_order', 'status', 'meta_title', 'meta_description']],
+        'services' => [Service::class, 'Services', ['name', 'description', 'content', 'image', 'status', 'sort_order', 'meta_title', 'meta_tags', 'meta_description']],
         'pages' => [Page::class, 'Pages', ['title', 'status', 'content']],
         'blogs' => [Blog::class, 'Blog posts', ['title', 'slug', 'content', 'image', 'published_at', 'status', 'meta_title', 'meta_description']],
         'gallery' => [GalleryItem::class, 'Gallery', ['title', 'image', 'status', 'sort_order']],
@@ -90,7 +90,6 @@ class AdminController extends Controller
         abort_unless(isset($this->resources[$resource]), 404);
         [$model, $label] = $this->resources[$resource];
         $query = $model::query();
-        if ($resource === 'doctors') $query->with('speciality');
         if ($request->filled('search')) {
             $term = $request->search;
             $query->where(function ($q) use ($term) {
@@ -104,7 +103,7 @@ class AdminController extends Controller
     {
         abort_unless(isset($this->resources[$resource]), 404);
         abort_if($resource === 'feedback', 404);
-        return view('admin.resource.form', ['resource' => $resource, 'label' => $this->resources[$resource][1], 'fields' => $this->resources[$resource][2], 'item' => null, 'statusOptions' => $this->statusOptions($resource), 'activeDoctors' => Doctor::where('status', 'Active')->orderBy('name')->get(), 'specialities' => Speciality::orderBy('name')->get()]);
+        return view('admin.resource.form', ['resource' => $resource, 'label' => $this->resources[$resource][1], 'fields' => $this->resources[$resource][2], 'item' => null, 'statusOptions' => $this->statusOptions($resource), 'activeDoctors' => Doctor::where('status', 'Active')->orderBy('name')->get()]);
     }
 
     public function store(string $resource, Request $request)
@@ -113,10 +112,10 @@ class AdminController extends Controller
         abort_if($resource === 'feedback', 404);
         [$model] = $this->resources[$resource];
         $data = $request->except(['_token', '_method']);
-        if ($resource === 'doctors') $request->validate(['speciality_id' => 'required|exists:specialities,id']);
-        if ($resource === 'specialities') $request->validate(['description' => 'nullable|string|max:1000', 'image' => 'required|file|mimes:jpg,jpeg,png,webp,gif|max:5120']);
+        if ($resource === 'doctors') $request->validate(['speciality' => 'required|string|max:190']);
+        if ($resource === 'services') $request->validate(['description' => 'nullable|string|max:1000', 'image' => 'required|file|mimes:jpg,jpeg,png,webp,gif|max:5120']);
         if ($resource === 'gallery') $request->validate(['image'=>'required|file|mimes:jpg,jpeg,png,webp,gif|max:5120']);
-        if (in_array($resource, ['doctors', 'specialities', 'pages', 'blogs', 'slides'])) $data['slug'] = Str::slug($data['title'] ?? $data['name']);
+        if (in_array($resource, ['doctors', 'services', 'pages', 'blogs', 'slides'])) $data['slug'] = Str::slug($data['title'] ?? $data['name']);
         $data = $this->processFiles($data, $request, $resource);
         if (in_array('status', $this->resources[$resource][2])) $data['status'] = $data['status'] ?? 'Active';
         $model::create($data);
@@ -128,7 +127,7 @@ class AdminController extends Controller
         abort_unless(isset($this->resources[$resource]), 404);
         [$model, $label, $fields] = $this->resources[$resource];
         if ($resource === 'feedback') $fields = ['status'];
-        return view('admin.resource.form', compact('resource', 'label', 'fields') + ['item' => $model::findOrFail($id), 'statusOptions' => $this->statusOptions($resource), 'activeDoctors' => Doctor::where('status', 'Active')->orderBy('name')->get(), 'specialities' => Speciality::orderBy('name')->get()]);
+        return view('admin.resource.form', compact('resource', 'label', 'fields') + ['item' => $model::findOrFail($id), 'statusOptions' => $this->statusOptions($resource), 'activeDoctors' => Doctor::where('status', 'Active')->orderBy('name')->get()]);
     }
 
     public function update(string $resource, Request $request, int $id)
@@ -136,8 +135,8 @@ class AdminController extends Controller
         abort_unless(isset($this->resources[$resource]), 404);
         [$model] = $this->resources[$resource];
         $data = $resource === 'feedback' ? $request->only('status') : $request->except(['_token', '_method']);
-        if ($resource === 'doctors') $request->validate(['speciality_id' => 'required|exists:specialities,id']);
-        if ($resource === 'specialities') $request->validate(['description' => 'nullable|string|max:1000', 'image' => 'nullable|file|mimes:jpg,jpeg,png,webp,gif|max:5120']);
+        if ($resource === 'doctors') $request->validate(['speciality' => 'required|string|max:190']);
+        if ($resource === 'services') $request->validate(['description' => 'nullable|string|max:1000', 'image' => 'nullable|file|mimes:jpg,jpeg,png,webp,gif|max:5120']);
         unset($data['slug']);
         $data = $this->processFiles($data, $request, $resource);
         $model::findOrFail($id)->update($data);

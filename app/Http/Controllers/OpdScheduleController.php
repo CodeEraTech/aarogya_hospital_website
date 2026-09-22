@@ -12,13 +12,13 @@ class OpdScheduleController extends Controller
 
     public function index()
     {
-        $schedules = OpdSchedule::with('doctor.speciality')->orderBy('sort_order')->orderBy('start_time')->paginate(15);
+        $schedules = OpdSchedule::with('doctor')->orderBy('sort_order')->orderBy('start_time')->paginate(15);
         return view('admin.opd-schedules.index', compact('schedules'));
     }
 
     public function publicIndex()
     {
-        $schedules = OpdSchedule::with('doctor.speciality')->where('status', 'Active')->orderBy('sort_order')->orderBy('start_time')->get();
+        $schedules = OpdSchedule::with('doctor')->where('status', 'Active')->orderBy('sort_order')->orderBy('start_time')->get();
         return view('pages.opd-schedule', compact('schedules'));
     }
 
@@ -52,7 +52,7 @@ class OpdScheduleController extends Controller
 
     private function doctors()
     {
-        return Doctor::with('speciality')->where('status', 'Active')->orderBy('name')->get();
+        return Doctor::where('status', 'Active')->orderBy('name')->get();
     }
 
     private function validated(Request $request): array

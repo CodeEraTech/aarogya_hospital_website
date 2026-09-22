@@ -27,7 +27,7 @@
             <span class="nav-label">Website</span>
             <a href="{{ route('admin.resource.index','pages') }}">Pages</a>
             <a href="{{ route('admin.resource.index','doctors') }}">Doctors</a>
-            <a href="{{ route('admin.resource.index','specialities') }}">Specialities</a>
+            <a href="{{ route('admin.resource.index','services') }}">Services</a>
             <a href="{{ route('admin.resource.index','blogs') }}">Blog posts</a>
             <a href="{{ route('admin.resource.index','slides') }}">Slides</a>
             <a href="{{ route('admin.resource.index','testimonials') }}">Testimonials</a>
