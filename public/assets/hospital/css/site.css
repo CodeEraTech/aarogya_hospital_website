@@ -141,7 +141,7 @@ h1, h2, h3 { color: var(--navy); line-height: 1.2; }
 .section-head>a { font-size: 12px; font-weight: 700; color: var(--teal); white-space: nowrap; }
 .section-head>a span { margin-left: 12px; }
 .speciality-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
-.speciality-card { position: relative; border: 1px solid var(--line); border-radius: 6px; background: white; transition: border-color .2s, transform .2s; }
+.speciality-card { position: relative; border: 1px solid var(--line); border-radius: 6px; background: white; transition: border-color .2s, transform .2s; cursor: pointer; }
 .speciality-card:hover { border-color: var(--teal); transform: translateY(-4px); }
 .speciality-card { overflow: hidden; border-radius: 10px; }
 .service-art { display: flex; align-items: center; gap: 14px; margin: 24px 24px 0; }
