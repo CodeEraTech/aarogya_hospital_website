@@ -9,7 +9,7 @@
         <div class="about-section">
             @if(isset($about['about_image']) && $about['about_image'])
             <div class="about-image">
-                <img src="{{ asset('storage/' . $about['about_image']) }}" alt="About Aarogya Hospital">
+                <img src="{{ asset($about['about_image']) }}" alt="About Aarogya Hospital">
             </div>
             @endif
             <div class="about-text">
@@ -24,7 +24,7 @@
         <div class="chairman-section">
             @if(isset($about['chairman_image']) && $about['chairman_image'])
             <div class="chairman-image">
-                <img src="{{ asset('storage/' . $about['chairman_image']) }}" alt="Chairman">
+                <img src="{{ asset($about['chairman_image']) }}" alt="Chairman">
             </div>
             @endif
             <div class="chairman-text">
@@ -86,9 +86,9 @@
                 </div>
                 <div class="certificates-display">
                     @foreach($certificates as $cert)
-                    @if(is_file(public_path('storage/' . $cert)))
+                    @if(is_file(public_path($cert)))
                     <div class="certificate-card">
-                        <img src="{{ asset('storage/' . $cert) }}" alt="Certificate" loading="lazy">
+                        <img src="{{ asset($cert) }}" alt="Certificate" loading="lazy">
                     </div>
                     @endif
                     @endforeach

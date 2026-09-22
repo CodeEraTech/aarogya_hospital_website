@@ -29,3 +29,7 @@
 @media(max-width:900px){.sidebar{left:-250px}.sidebar.open{left:0}.admin-main{margin-left:0}}
 .side-nav a:before{content:none}
 .side-nav a[href$="/dashboard"]:before{content:"\f00a"}.side-nav a[href$="/appointments"]:before{content:"\f274"}.side-nav a[href$="/feedback"]:before{content:"\f0e6"}.side-nav a[href$="/pages"]:before{content:"\f15c"}.side-nav a[href$="/doctors"]:before{content:"\f0f0"}.side-nav a[href$="/specialities"]:before{content:"\f0fa"}.side-nav a[href$="/blogs"]:before{content:"\f044"}.side-nav a[href$="/slides"]:before{content:"\f03e"}.side-nav a[href$="/testimonials"]:before{content:"\f10d"}.side-nav a[href$="/gallery"]:before{content:"\f03e"}.side-nav a[href$="/settings"]:before{content:"\f013"}
+
+/* Sidebar Icons with Font Awesome */
+.side-nav a .fa { width: 20px; text-align: center; margin-right: 10px; font-size: 14px; }
+.side-nav .nav-subitem .fa { width: 16px; font-size: 11px; }

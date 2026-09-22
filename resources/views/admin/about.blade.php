@@ -22,8 +22,8 @@
             <label>
                 <span>About Image</span>
                 <input type="file" name="about_image" accept="image/*">
-                @if(isset($about['about_image']) && $about['about_image'] && is_file(public_path('storage/' . $about['about_image'])))
-                    <img class="setting-preview" src="{{ asset('storage/' . $about['about_image']) }}" alt="About" style="max-width: 300px; margin-top: 10px; border-radius: 8px;">
+                @if(isset($about['about_image']) && $about['about_image'] && is_file(public_path($about['about_image'])))
+                    <img class="setting-preview" src="{{ asset($about['about_image']) }}" alt="About" style="max-width: 300px; margin-top: 10px; border-radius: 8px;">
                 @endif
             </label>
             <label class="full">
@@ -44,8 +44,8 @@
             <label>
                 <span>Chairman Image</span>
                 <input type="file" name="chairman_image" accept="image/*">
-                @if(isset($about['chairman_image']) && $about['chairman_image'] && is_file(public_path('storage/' . $about['chairman_image'])))
-                    <img class="setting-preview" src="{{ asset('storage/' . $about['chairman_image']) }}" alt="Chairman" style="max-width: 300px; margin-top: 10px; border-radius: 8px;">
+                @if(isset($about['chairman_image']) && $about['chairman_image'] && is_file(public_path($about['chairman_image'])))
+                    <img class="setting-preview" src="{{ asset($about['chairman_image']) }}" alt="Chairman" style="max-width: 300px; margin-top: 10px; border-radius: 8px;">
                 @endif
             </label>
             <label class="full">
@@ -122,9 +122,9 @@
                     <span style="font-weight: 700; font-size: 12px; display: block; margin-bottom: 12px;">Current Certificates:</span>
                     <div class="certificates-grid">
                         @foreach($certificates as $index => $cert)
-                        @if(is_file(public_path('storage/' . $cert)))
+                        @if(is_file(public_path($cert)))
                         <div class="certificate-item">
-                            <img src="{{ asset('storage/' . $cert) }}" alt="Certificate {{ $index + 1 }}">
+                            <img src="{{ asset($cert) }}" alt="Certificate {{ $index + 1 }}">
                             <label class="delete-certificate">
                                 <input type="checkbox" name="delete_certificates[]" value="{{ $cert }}">
                                 <span>Delete</span>

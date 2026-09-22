@@ -142,8 +142,8 @@
                     @foreach($doctors as $doctor)
                     <article class="doctor-card">
                         <div class="doctor-photo">
-                            @if($doctor->image && file_exists(public_path('storage/' . $doctor->image)))
-                            <img src="{{ asset('storage/' . $doctor->image) }}" alt="{{ $doctor->name }}" width="684" height="1024" loading="lazy">
+                            @if($doctor->image && file_exists(public_path($doctor->image)))
+                            <img src="{{ asset($doctor->image) }}" alt="{{ $doctor->name }}" width="684" height="1024" loading="lazy">
                             @else
                             <img src="{{ asset('assets/hospital/images/doctor-placeholder.jpg') }}" alt="{{ $doctor->name }}" width="684" height="1024" loading="lazy">
                             @endif
@@ -215,7 +215,7 @@
                     <article class="blog-card">
                         <a href="{{ route('blogs.show', $blog->slug) }}">
                             @if($blog->image)
-                            <img src="{{ asset('storage/' . $blog->image) }}" alt="{{ $blog->title }}" loading="lazy">
+                            <img src="{{ asset($blog->image) }}" alt="{{ $blog->title }}" loading="lazy">
                             @else
                             <img src="{{ asset('assets/hospital/images/placeholder-blog.jpg') }}" alt="{{ $blog->title }}" loading="lazy">
                             @endif
