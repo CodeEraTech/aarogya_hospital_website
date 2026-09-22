@@ -37,7 +37,10 @@ Route::get('/doctors', fn () => view('pages.doctors', ['doctors' => Doctor::wher
 Route::view('/appointment', 'pages.appointment')->name('appointment.create');
 Route::get('/testimonials', fn () => view('pages.testimonials', ['testimonials' => Testimonial::where('status', 'Active')->orderBy('sort_order')->latest()->get()]))->name('testimonials');
 Route::get('/blogs', fn () => view('pages.blogs', ['blogs' => Blog::where('status', 'Active')->orderByDesc('published_at')->orderByDesc('created_at')->paginate(9)]))->name('blogs.index');
-Route::get('/blogs/{slug}', fn (string $slug) => view('pages.blog', ['blog' => Blog::where('status', 'Active')->where('slug', $slug)->firstOrFail()]))->name('blogs.show');
+Route::get('/blogs/{slug}', fn (string $slug) => view('pages.blog', [
+    'blog' => Blog::where('status', 'Active')->where('slug', $slug)->firstOrFail(),
+    'relatedBlogs' => Blog::where('status', 'Active')->where('slug', '!=', $slug)->orderByDesc('published_at')->limit(3)->get()
+]))->name('blogs.show');
 Route::get('/site-socials', function () {
     $settings = Setting::whereIn('key', ['social_facebook', 'social_instagram', 'social_linkedin', 'social_youtube', 'social_whatsapp', 'whatsapp_number'])->pluck('value', 'key');
     $whatsapp = $settings['social_whatsapp'] ?? $settings['whatsapp_number'] ?? null;
@@ -111,7 +114,10 @@ Route::view('/terms', 'home');
 Route::view('/disclaimer', 'home');
 Route::get('/services', fn () => view('pages.services', ['services' => Service::where('status', 'Active')->orderBy('sort_order')->orderBy('name')->paginate(9)]))->name('services.index');
 Route::get('/services-data', fn () => Service::where('status', 'Active')->orderBy('sort_order')->orderBy('name')->get(['name', 'slug', 'description', 'image']))->name('services.data');
-Route::get('/services/{slug}', fn (string $slug) => view('pages.service', ['service' => Service::where('status', 'Active')->where('slug', $slug)->firstOrFail()]))->name('services.show');
+Route::get('/services/{slug}', fn (string $slug) => view('pages.service', [
+    'service' => Service::where('status', 'Active')->where('slug', $slug)->firstOrFail(),
+    'relatedServices' => Service::where('status', 'Active')->where('slug', '!=', $slug)->orderBy('sort_order')->limit(4)->get()
+]))->name('services.show');
 Route::redirect('/specialities', '/services', 301);
 Route::get('/specialities/{slug}', fn (string $slug) => redirect()->route('services.show', ['slug' => $slug], 301));
 Route::view('/doctors/{slug}', 'home');
