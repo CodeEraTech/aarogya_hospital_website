@@ -15,9 +15,10 @@
                     @if($field !== 'slug' && !($resource === 'appointments' && $field === 'reference'))
                         @php($long = in_array($field, ['content', 'bio', 'description', 'excerpt', 'message', 'subtitle']) && !($resource === 'services' && $field === 'description'))
                         @php($file = $field === 'image')
-                        @php($testimonialField = $resource === 'testimonials' && in_array($field, ['type', 'quote', 'video_file', 'video_url']))
+                        @php($testimonialType = $resource === 'testimonials' ? old('type', $item?->type ?? 'Text') : null)
+                        @php($testimonialField = $resource === 'testimonials' && in_array($field, ['name', 'type', 'quote', 'video_file', 'video_url']))
                         @php($wide = $long || $field === 'meta_description' || ($resource === 'services' && $field === 'description') || ($resource === 'blogs' && in_array($field, ['meta_title', 'meta_description'])) || ($resource === 'blogs' && $field === 'title') || ($testimonialField && $field !== 'type'))
-                        @php($required = in_array($field, ['name', 'title', 'key', 'content']) || ($resource === 'services' && $field === 'image' && !$item))
+                        @php($required = (in_array($field, ['name', 'title', 'key', 'content']) && !($resource === 'testimonials' && $field === 'name' && $testimonialType !== 'Text')) || ($resource === 'services' && $field === 'image' && !$item))
                         <label class="{{ $wide ? 'wide' : '' }} {{ $testimonialField ? 'testimonial-field testimonial-'.$field : '' }}">
                             <span>{{ $field === 'type' ? 'Testimonial type' : ($resource === 'services' && $field === 'description' ? 'Short Description' : ($resource === 'services' && $field === 'image' ? 'Featured Image' : ($resource === 'services' && $field === 'meta_tags' ? 'Meta Tags' : ucwords(str_replace('_', ' ', $field))))) }} @if($required)<b class="required">*</b>@endif</span>
                             @if($resource === 'testimonials' && $field === 'type')
@@ -68,7 +69,7 @@
     </section>
 </div>
 @if($resource === 'testimonials')
-<script>document.addEventListener('DOMContentLoaded',function(){var type=document.querySelector('select.testimonial-type');var fields={Text:document.querySelector('label.testimonial-quote'),File:document.querySelector('label.testimonial-video_file'),'Video Link':document.querySelector('label.testimonial-video_url')};function toggle(){Object.keys(fields).forEach(function(key){if(fields[key])fields[key].style.display=type.value===key?'grid':'none'});var quote=fields.Text&&fields.Text.querySelector('textarea');if(quote)quote.required=type.value==='Text'}if(type){type.addEventListener('change',toggle);toggle()}});</script>
+<script>document.addEventListener('DOMContentLoaded',function(){var type=document.querySelector('select.testimonial-type');var fields={Text:document.querySelector('label.testimonial-quote'),File:document.querySelector('label.testimonial-video_file'),'Video Link':document.querySelector('label.testimonial-video_url'),Name:document.querySelector('label.testimonial-name')};function toggle(){Object.keys(fields).forEach(function(key){if(fields[key])fields[key].style.display=type.value===key||key==='Name'&&type.value==='Text'?'grid':'none'});var quote=fields.Text&&fields.Text.querySelector('textarea');if(quote)quote.required=type.value==='Text';var name=fields.Name&&fields.Name.querySelector('input');if(name)name.required=type.value==='Text'}if(type){type.addEventListener('change',toggle);toggle()}});</script>
 @endif
 @if($resource === 'gallery')
 <script>document.addEventListener('DOMContentLoaded',function(){var title=document.querySelector('input[name="title"]')?.closest('label');title?.querySelector('.required')?.remove();title?.querySelector('input')?.removeAttribute('required');var image=document.querySelector('input[type="file"][name="image"]');if(image&&!{{ $item ? 'true' : 'false' }})image.required=true});</script>

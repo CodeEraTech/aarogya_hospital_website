@@ -77,7 +77,9 @@ Route::get('/site-footer', function () {
 })->name('site.footer');
 Route::get('/patient-resources/empanelled-corporate/{slug}', [EmpanelledController::class, 'show'])->name('empanelled-corporate');
 Route::get('/patient-resources/opd-schedule', [OpdScheduleController::class, 'publicIndex'])->name('opd-schedule');
-Route::view('/patient-resources/feedback', 'pages.feedback')->name('feedback.create');
+Route::get('/patient-resources/feedback', fn () => view('pages.feedback', [
+    'departments' => Service::where('status', 'Active')->orderBy('sort_order')->orderBy('name')->pluck('name'),
+]))->name('feedback.create');
 Route::post('/feedback', [FeedbackController::class, 'store'])->middleware('throttle:5,1')->name('feedback.store');
 Route::get('/about', function () {
     $about = \App\Models\Setting::whereIn('key', [
