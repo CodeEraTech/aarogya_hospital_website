@@ -41,7 +41,8 @@ h1, h2, h3 { color: var(--navy); line-height: 1.2; }
 .utility nav { margin-left: auto; }
 .utility-inner > .social-links { flex: 0 0 auto; }
 .utility .social-links { display: inline-flex; align-items: center; gap: 8px; }
-.utility .social-links a { display: grid; place-items: center; width: 24px; height: 24px; color: var(--teal-dark); border: 1px solid var(--line); border-radius: 50%; font-size: 12px; transition: color .2s, background .2s, border-color .2s; }
+.utility .social-links a { display: grid; place-items: center; width: 34px; height: 34px; color: var(--teal-dark); border: 1px solid var(--line); border-radius: 50%; font-size: 16px; line-height: 1; transition: color .2s, background .2s, border-color .2s; }
+.utility .social-links a i { display: block; width: 100%; height: 100%; font-style: normal; line-height: 32px; text-align: center; }
 .utility .social-links a:hover { color: #fff; background: var(--teal); border-color: var(--teal); }
 .utility .social-links .social-facebook { color: #1877f2; }
 .utility .social-links .social-instagram { color: #d62976; }
