@@ -15,7 +15,19 @@ use App\Http\Controllers\OpdScheduleController;
 use App\Http\Controllers\EmpanelledController;
 use Illuminate\Support\Facades\Route;
 
-Route::view('/', 'home')->name('home');
+Route::get('/', function () {
+    return view('home', [
+        'testimonials' => Testimonial::where('status', 'Active')
+            ->whereNull('video_url')
+            ->orderBy('sort_order')
+            ->get(),
+        'blogs' => Blog::where('status', 'Active')
+            ->orderByDesc('published_at')
+            ->orderByDesc('created_at')
+            ->limit(3)
+            ->get()
+    ]);
+})->name('home');
 Route::post('/appointments', [AppointmentController::class, 'store'])->middleware('throttle:5,1')->name('appointments.store');
 Route::get('/doctors', fn () => view('pages.doctors', ['doctors' => Doctor::where('status', 'Active')->orderBy('sort_order')->orderBy('name')->get()]))->name('doctors.index');
 Route::view('/appointment', 'pages.appointment')->name('appointment.create');

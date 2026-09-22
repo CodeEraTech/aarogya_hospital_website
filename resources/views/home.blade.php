@@ -171,15 +171,75 @@
         </section>
         <section class="stories" id="resources">
             <div class="wrap story-layout">
-                <div>
-                    <div class="eyebrow">PATIENT RESOURCES</div>
-                    <h2>Plan your visit with confidence.</h2>
-                    <div class="patient-resource-links"><a href="{{ route('opd-schedule') }}"><strong>OPD hours</strong><span>Monday–Saturday, 10 AM–3 PM →</span></a><a href="{{ route('empanelled-corporate', ['slug' => config('empanelled.1.slug')]) }}"><strong>Insurance &amp; empanelment</strong><span>Contact our coordination desk →</span></a><a href="{{ route('feedback.create') }}"><strong>Share your experience</strong><span>Send feedback to our care team →</span></a></div>
+                <div class="testimonials-carousel-wrapper">
+                    <div class="eyebrow">PATIENT TESTIMONIALS</div>
+                    <h2>Hear from our patients.</h2>
+                    @if(isset($testimonials) && $testimonials->count() > 0)
+                    <div class="testimonials-carousel" data-testimonials-carousel>
+                        @foreach($testimonials as $index => $testimonial)
+                        <div class="testimonial-slide" data-testimonial-index="{{ $index }}" @if($index === 0) data-active @endif>
+                            <blockquote class="testimonial-quote">
+                                <p>"{{ $testimonial->quote }}"</p>
+                                <footer class="testimonial-author">
+                                    <strong>{{ $testimonial->name }}</strong>
+                                    @if($testimonial->designation)
+                                    <span>{{ $testimonial->designation }}</span>
+                                    @endif
+                                </footer>
+                            </blockquote>
+                        </div>
+                        @endforeach
+                    </div>
+                    @if($testimonials->count() > 1)
+                    <div class="testimonial-dots" data-testimonial-dots>
+                        @foreach($testimonials as $index => $testimonial)
+                        <button type="button" class="testimonial-dot" data-dot-index="{{ $index }}" @if($index === 0) data-active @endif aria-label="View testimonial {{ $index + 1 }}"></button>
+                        @endforeach
+                    </div>
+                    @endif
+                    @else
+                    <p>No testimonials available at the moment.</p>
+                    @endif
                 </div>
                 <aside class="priority">
                     <h2>Your Health<br>Our Priority</h2>
                     <p>Arrange a consultation with our specialist team.</p><button class="btn btn-light" type="button" data-open-appointment>Book an Appointment <span>→</span></button>
                 </aside>
+            </div>
+        </section>
+        <section class="section" id="blogs">
+            <div class="wrap">
+                <div class="section-head">
+                    <div>
+                        <div class="eyebrow">HEALTH INSIGHTS</div>
+                        <h2>Latest from Our Blog</h2>
+                    </div><a href="{{ route('blogs.index') }}">View All Blogs <span>→</span></a>
+                </div>
+                @if(isset($blogs) && $blogs->count() > 0)
+                <div class="blog-directory">
+                    @foreach($blogs as $blog)
+                    <article class="blog-card">
+                        <a href="{{ route('blogs.show', $blog->slug) }}">
+                            @if($blog->image)
+                            <img src="{{ asset('storage/' . $blog->image) }}" alt="{{ $blog->title }}" loading="lazy">
+                            @else
+                            <img src="{{ asset('assets/hospital/images/placeholder-blog.jpg') }}" alt="{{ $blog->title }}" loading="lazy">
+                            @endif
+                        </a>
+                        <div class="blog-card-body">
+                            @if($blog->published_at)
+                            <time datetime="{{ $blog->published_at->format('Y-m-d') }}">{{ $blog->published_at->format('M d, Y') }}</time>
+                            @endif
+                            <h2><a href="{{ route('blogs.show', $blog->slug) }}">{{ $blog->title }}</a></h2>
+                            <p>{{ Str::limit(strip_tags($blog->excerpt ?? $blog->content), 120) }}</p>
+                            <a class="blog-card-link" href="{{ route('blogs.show', $blog->slug) }}">Read More <span>→</span></a>
+                        </div>
+                    </article>
+                    @endforeach
+                </div>
+                @else
+                <p style="text-align: center; color: var(--muted); padding: 40px 0;">No blogs available at the moment.</p>
+                @endif
             </div>
         </section>
         <section class="why" id="gallery">
