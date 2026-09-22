@@ -22,16 +22,16 @@
         {{-- Chairman Message --}}
         @if(isset($about['chairman_message']) || isset($about['chairman_image']))
         <div class="chairman-section">
-            @if(isset($about['chairman_image']) && $about['chairman_image'])
-            <div class="chairman-image">
-                <img src="{{ asset($about['chairman_image']) }}" alt="Chairman">
-            </div>
-            @endif
             <div class="chairman-text">
                 <span class="eyebrow">LEADERSHIP</span>
                 <h2>Chairman's Message</h2>
                 <div class="chairman-content">{!! $about['chairman_message'] ?? '<p>Welcome to Aarogya Hospital...</p>' !!}</div>
             </div>
+            @if(isset($about['chairman_image']) && $about['chairman_image'])
+            <div class="chairman-image">
+                <img src="{{ asset($about['chairman_image']) }}" alt="Chairman">
+            </div>
+            @endif
         </div>
         @endif
 
