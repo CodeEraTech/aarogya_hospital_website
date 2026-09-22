@@ -12,7 +12,7 @@ use Illuminate\Validation\Rule;
 class AdminController extends Controller
 {
     private array $resources = [
-        'doctors' => [Doctor::class, 'Doctors', ['name', 'designation', 'speciality', 'image', 'sort_order', 'status', 'meta_title', 'meta_description']],
+        'doctors' => [Doctor::class, 'Doctors', ['name', 'designation', 'image', 'sort_order', 'status', 'meta_title', 'meta_description']],
         'services' => [Service::class, 'Services', ['name', 'description', 'content', 'image', 'status', 'sort_order', 'meta_title', 'meta_tags', 'meta_description']],
         'pages' => [Page::class, 'Pages', ['title', 'status', 'content']],
         'blogs' => [Blog::class, 'Blog posts', ['title', 'slug', 'content', 'image', 'published_at', 'status', 'meta_title', 'meta_description']],

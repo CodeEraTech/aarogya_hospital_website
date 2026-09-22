@@ -137,36 +137,30 @@
                         <h2>Experts Who Care</h2>
                     </div><a href="{{ route('doctors.index') }}">View All Doctors <span>→</span></a>
                 </div>
+                @if(isset($doctors) && $doctors->count() > 0)
                 <div class="doctor-grid">
+                    @foreach($doctors as $doctor)
                     <article class="doctor-card">
-                        <div class="doctor-photo"><img src="{{ asset('assets/hospital/images/dr-amit-bhutani.jpg') }}" alt="Dr. Amit Bhutani" width="684" height="1024" loading="lazy"></div>
+                        <div class="doctor-photo">
+                            @if($doctor->image && file_exists(public_path('storage/' . $doctor->image)))
+                            <img src="{{ asset('storage/' . $doctor->image) }}" alt="{{ $doctor->name }}" width="684" height="1024" loading="lazy">
+                            @else
+                            <img src="{{ asset('assets/hospital/images/doctor-placeholder.jpg') }}" alt="{{ $doctor->name }}" width="684" height="1024" loading="lazy">
+                            @endif
+                        </div>
                         <div>
-                            <h3>Dr. Amit Bhutani</h3>
-                            <p>Orthopaedics & Joint Replacement Specialist</p><button class="doctor-book" type="button" data-open-appointment data-appointment-doctor="Dr. Amit Bhutani">Book consultation →</button>
+                            <h3>{{ $doctor->name }}</h3>
+                            @if($doctor->designation)
+                            <p>{{ $doctor->designation }}</p>
+                            @endif
+                            <button class="doctor-book" type="button" data-open-appointment data-appointment-doctor="{{ $doctor->name }}">Book consultation →</button>
                         </div>
                     </article>
-                    <article class="doctor-card">
-                        <div class="doctor-photo"><img src="{{ asset('assets/hospital/images/dr-puja-bhutani.jpg') }}" alt="Dr. Puja Bhutani" width="684" height="1024" loading="lazy"></div>
-                        <div>
-                            <h3>Dr. Puja Bhutani</h3>
-                            <p>Obstetrics, Gynaecology & Infertility Specialist</p><button class="doctor-book" type="button" data-open-appointment data-appointment-doctor="Dr. Puja Bhutani">Book consultation →</button>
-                        </div>
-                    </article>
-                    <article class="doctor-card">
-                        <div class="doctor-photo"><img src="{{ asset('assets/hospital/images/dr-deepak-gunjan-gupta.jpg') }}" alt="Dr. Deepak Gupta & Dr. Gunjan Gupta" width="684" height="1024" loading="lazy"></div>
-                        <div>
-                            <h3>Dr. Deepak Gupta & Dr. Gunjan Gupta</h3>
-                            <p>Anaesthesia, Intensive Care & ICU</p><button class="doctor-book" type="button" data-open-appointment data-appointment-doctor="Dr. Deepak Gupta & Dr. Gunjan Gupta">Book consultation →</button>
-                        </div>
-                    </article>
-                    <article class="doctor-card">
-                        <div class="doctor-photo"><img src="{{ asset('assets/hospital/images/dr-sachin-thakral.jpg') }}" alt="Dr. Sachin Thakral" width="684" height="1024" loading="lazy"></div>
-                        <div>
-                            <h3>Dr. Sachin Thakral</h3>
-                            <p>Physiotherapy & Sports Injury Specialist</p><button class="doctor-book" type="button" data-open-appointment data-appointment-doctor="Dr. Sachin Thakral">Book consultation →</button>
-                        </div>
-                    </article>
+                    @endforeach
                 </div>
+                @else
+                <p style="text-align: center; color: var(--muted); padding: 40px 0;">No doctors available at the moment.</p>
+                @endif
             </div>
         </section>
         <section class="stories" id="resources">

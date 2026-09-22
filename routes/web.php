@@ -25,6 +25,10 @@ Route::get('/', function () {
             ->orderByDesc('published_at')
             ->orderByDesc('created_at')
             ->limit(3)
+            ->get(),
+        'doctors' => Doctor::where('status', 'Active')
+            ->orderBy('sort_order')
+            ->limit(4)
             ->get()
     ]);
 })->name('home');
