@@ -44,7 +44,8 @@
             <div class="why-choose-grid">
                 @for($i = 1; $i <= 6; $i++)
                 @if(isset($about['why_choose_' . $i . '_title']) && $about['why_choose_' . $i . '_title'])
-                <div class="why-box">
+                <div class="why-box why-box-{{ $i }}">
+                    <div class="why-box-number">{{ $i }}</div>
                     <h3>{{ $about['why_choose_' . $i . '_title'] }}</h3>
                     <p>{{ $about['why_choose_' . $i . '_content'] ?? '' }}</p>
                 </div>
