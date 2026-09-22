@@ -809,6 +809,17 @@ input:not([type="checkbox"]):not([type="radio"]):focus-visible, select:focus-vis
 @media(max-width:900px){.values-section{grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}.values-section .value-box:last-child{grid-column:1/-1}}
 @media(max-width:600px){.values-section{grid-template-columns:1fr;margin:46px 0 54px}.values-section .value-box:last-child{grid-column:auto}.values-section .value-box{min-height:0;padding:24px}.values-section .value-icon{margin-bottom:18px}}
 
+/* Reusable Google Maps section */
+.map-section { padding: 56px 0 64px; background: #fff; }
+.map-layout { display: grid; grid-template-columns: minmax(220px, .72fr) minmax(0, 1.55fr); gap: 42px; align-items: stretch; }
+.map-copy { display: flex; flex-direction: column; justify-content: center; }
+.map-copy h2 { margin: 12px 0 14px; font-size: 32px; color: var(--ink); }
+.map-copy p { max-width: 34ch; margin: 0; color: var(--muted); font-size: 14px; line-height: 1.7; }
+.map-frame { min-height: 300px; overflow: hidden; border: 1px solid var(--line); border-radius: 12px; background: #f6f9f7; box-shadow: 0 8px 24px rgb(23 44 39 / 5%); }
+.map-frame iframe { display: block; width: 100%; height: 100%; min-height: 300px; border: 0; }
+@media(max-width:900px){.map-layout{grid-template-columns:1fr;gap:24px}.map-copy p{max-width:60ch}.map-frame,.map-frame iframe{min-height:320px}}
+@media(max-width:600px){.map-section{padding:40px 0 48px}.map-copy h2{font-size:27px}.map-frame,.map-frame iframe{min-height:260px;border-radius:10px}}
+
 /* Consistent healthcare feature illustrations */
 .pillars div { gap: 12px; }
 .pillar-icon { display: grid; place-items: center; width: 48px; height: 48px; margin: 0 auto; color: var(--teal); }

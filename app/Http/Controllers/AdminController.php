@@ -73,7 +73,10 @@ class AdminController extends Controller
 
     public function saveSettings(Request $request)
     {
-        foreach ($request->input('settings', []) as $key => $value) Setting::where('key', $key)->update(['value' => $value]);
+        foreach ($request->input('settings', []) as $key => $value) {
+            if ($key === 'google_maps_embed_url') $value = $this->sanitizeMapEmbedUrl($value);
+            Setting::where('key', $key)->update(['value' => $value]);
+        }
         foreach (['website_logo' => 'site-settings', 'website_favicon' => 'site-settings'] as $key => $folder) {
             if ($request->hasFile("settings_files.$key")) {
                 $path = $this->storeFile($request->file("settings_files.$key"), $folder);
@@ -83,6 +86,18 @@ class AdminController extends Controller
             }
         }
         return back()->with('success', 'Website settings saved successfully.');
+    }
+
+    private function sanitizeMapEmbedUrl(?string $value): string
+    {
+        $value = trim((string) $value);
+        if (preg_match('/<iframe[^>]+src=["\']([^"\']+)["\']/i', $value, $match)) $value = html_entity_decode($match[1]);
+        $url = filter_var($value, FILTER_VALIDATE_URL);
+        $host = $url ? strtolower((string) parse_url($url, PHP_URL_HOST)) : '';
+        $path = $url ? (string) parse_url($url, PHP_URL_PATH) : '';
+        $allowedHosts = ['google.com', 'www.google.com', 'maps.google.com'];
+        if (!$url || !in_array($host, $allowedHosts, true) || !str_contains($path, '/maps/')) return '';
+        return $url;
     }
 
     public function about()

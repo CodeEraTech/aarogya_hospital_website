@@ -247,6 +247,7 @@
             </div>
         </section>
     </main>
+    @include('partials.google-map')
     <footer class="footer" id="contact">
         <div class="wrap footer-grid">
             <div><a class="logo footer-logo" href="/"><img class="hospital-logo" src="{{ asset('assets/hospital/images/aarogya-logo.png') }}" alt="Dr. Bhutani’s Aarogya Hospital" width="597" height="250"></a>
