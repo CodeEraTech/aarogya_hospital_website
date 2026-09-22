@@ -5594,13 +5594,13 @@ textarea:focus-visible {
 
 .testimonial-video-grid {
     display: grid;
-    grid-template-columns: repeat(3, 260px);
+    grid-template-columns: repeat(4, 220px);
     justify-content: center;
-    gap: 28px;
+    gap: 22px;
 }
 
 .testimonial-video-item {
-    width: 260px;
+    width: 220px;
     aspect-ratio: 9 / 16;
     overflow: hidden;
     border-radius: 12px;
