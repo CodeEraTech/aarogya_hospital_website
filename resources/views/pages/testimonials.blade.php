@@ -34,30 +34,36 @@ $textTestimonials = $testimonials->filter(fn ($testimonial) => $testimonial->typ
         </div>
         <div class="testimonial-text-grid">
             @foreach($textTestimonials as $testimonial)
-            @php
-            $initials = 'P';
 
-            if (!empty($testimonial->name)) {
+            @php
+            $name = trim($testimonial->name ?? '');
+
             $nameParts = preg_split(
             '/\s+/',
-            trim($testimonial->name),
+            $name,
             -1,
             PREG_SPLIT_NO_EMPTY
             );
 
             $initials = collect($nameParts)
             ->take(2)
-            ->map(fn ($part) => strtoupper(substr($part, 0, 1)))
+            ->map(function ($part) {
+            return strtoupper(substr($part, 0, 1));
+            })
             ->implode('');
 
-            $initials = $initials ?: 'P';
+            if (empty($initials)) {
+            $initials = 'P';
             }
             @endphp
 
             <article class="testimonial-text-card">
+
                 <div class="testimonial-card-mark" aria-hidden="true">“</div>
 
-                <blockquote>{{ $testimonial->quote }}</blockquote>
+                <blockquote>
+                    {{ $testimonial->quote }}
+                </blockquote>
 
                 <footer>
                     <span class="testimonial-initials" aria-hidden="true">
@@ -69,7 +75,9 @@ $textTestimonials = $testimonials->filter(fn ($testimonial) => $testimonial->typ
                         <span>Aarogya Hospital patient</span>
                     </div>
                 </footer>
+
             </article>
+
             @endforeach
         </div>
     </div>
