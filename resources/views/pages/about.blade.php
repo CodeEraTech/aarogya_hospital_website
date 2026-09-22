@@ -57,19 +57,22 @@
         {{-- Mission, Vision, Quality Policy --}}
         <div class="values-section">
             @if(isset($about['our_mission']) && $about['our_mission'])
-            <div class="value-box">
+            <div class="value-box value-mission">
+                <div class="value-icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M12 3 19 6v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6l7-3Z"></path></svg></div>
                 <span class="eyebrow">OUR MISSION</span>
                 <div class="value-content">{!! $about['our_mission'] !!}</div>
             </div>
             @endif
             @if(isset($about['our_vision']) && $about['our_vision'])
-            <div class="value-box">
+            <div class="value-box value-vision">
+                <div class="value-icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M3 12s3.2-5 9-5 9 5 9 5-3.2 5-9 5-9-5-9-5Z"></path><circle cx="12" cy="12" r="2.5"></circle><path d="M19 4v4m-2-2h4"></path></svg></div>
                 <span class="eyebrow">OUR VISION</span>
                 <div class="value-content">{!! $about['our_vision'] !!}</div>
             </div>
             @endif
             @if(isset($about['quality_policy']) && $about['quality_policy'])
-            <div class="value-box">
+            <div class="value-box value-quality">
+                <div class="value-icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M20.8 8.8c0 5.2-8.8 10-8.8 10s-8.8-4.8-8.8-10A4.8 4.8 0 0 1 12 6.2a4.8 4.8 0 0 1 8.8 2.6Z"></path><path d="m8.5 12 2.2 2.2 4.8-5"></path></svg></div>
                 <span class="eyebrow">QUALITY POLICY</span>
                 <div class="value-content">{!! $about['quality_policy'] !!}</div>
             </div>

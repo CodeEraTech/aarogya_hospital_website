@@ -585,6 +585,40 @@ input:not([type="checkbox"]):not([type="radio"]):focus-visible, select:focus-vis
 @media(max-width:900px){.why-choose-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:600px){.why-choose-section{margin:40px 0 48px}.why-choose-grid{grid-template-columns:1fr}.why-box{min-height:0;padding:26px 22px 24px 68px}.why-box-number{left:22px;top:26px}}
 
+/* Mission, vision and quality cards */
+.values-section { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; margin: 62px 0 72px; }
+.value-box {
+    position: relative;
+    min-height: 270px;
+    overflow: hidden;
+    padding: 28px 30px 30px;
+    border: 1px solid #cfe2dc;
+    border-radius: 18px;
+    background: #f7fbfa;
+    box-shadow: 0 8px 24px rgb(23 44 39 / 4%);
+    transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease;
+}
+.value-box::after {
+    content: '';
+    position: absolute;
+    top: -34px;
+    right: -28px;
+    width: 130px;
+    height: 130px;
+    border: 1px solid rgb(0 132 105 / 12%);
+    border-radius: 50%;
+    box-shadow: -22px 22px 0 -1px #f7fbfa, -22px 22px 0 0 rgb(0 132 105 / 10%), -44px 44px 0 -1px #f7fbfa, -44px 44px 0 0 rgb(0 132 105 / 8%);
+    pointer-events: none;
+}
+.value-box:hover { border-color: var(--teal); box-shadow: 0 14px 30px rgb(23 44 39 / 8%); transform: translateY(-3px); }
+.value-icon { position: relative; z-index: 1; display: grid; place-items: center; width: 44px; height: 44px; margin-bottom: 22px; border-radius: 12px; background: rgb(0 132 105 / 10%); color: var(--teal-dark); }
+.value-icon svg { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.value-box .eyebrow { position: relative; z-index: 1; display: block; color: var(--teal-dark); font-size: 12px; letter-spacing: .02em; }
+.value-content { position: relative; z-index: 1; margin-top: 18px; max-width: 42ch; color: var(--ink); font-size: 14px; line-height: 1.75; }
+.value-content p { margin: 0; }
+@media(max-width:900px){.values-section{grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}.value-box:last-child{grid-column:1/-1}}
+@media(max-width:600px){.values-section{grid-template-columns:1fr;margin:46px 0 54px}.value-box:last-child{grid-column:auto}.value-box{min-height:0;padding:24px}.value-icon{margin-bottom:18px}}
+
 /* Consistent circular social icons */
 .utility .social-links a,
 .footer-socials .social-link {
@@ -761,6 +795,19 @@ input:not([type="checkbox"]):not([type="radio"]):focus-visible, select:focus-vis
     .related-item img { width: 70px; height: 70px; }
     .related-item h4 { font-size: 13px; }
 }
+
+/* Final values-card overrides */
+.values-section { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; margin: 62px 0 72px; }
+.values-section .value-box { position: relative; min-height: 270px; overflow: hidden; padding: 28px 30px 30px; border: 1px solid #cfe2dc; border-radius: 18px; background: #f7fbfa; box-shadow: 0 8px 24px rgb(23 44 39 / 4%); }
+.values-section .value-box::after { content: ''; position: absolute; top: -34px; right: -28px; width: 130px; height: 130px; border: 1px solid rgb(0 132 105 / 12%); border-radius: 50%; box-shadow: -22px 22px 0 -1px #f7fbfa, -22px 22px 0 0 rgb(0 132 105 / 10%), -44px 44px 0 -1px #f7fbfa, -44px 44px 0 0 rgb(0 132 105 / 8%); pointer-events: none; }
+.values-section .value-box:hover { border-color: var(--teal); box-shadow: 0 14px 30px rgb(23 44 39 / 8%); transform: translateY(-3px); }
+.values-section .value-icon { position: relative; z-index: 1; display: grid; place-items: center; width: 44px; height: 44px; margin-bottom: 22px; border-radius: 12px; background: rgb(0 132 105 / 10%); color: var(--teal-dark); }
+.values-section .value-icon svg { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.values-section .value-box .eyebrow { position: relative; z-index: 1; display: block; color: var(--teal-dark); font-size: 12px; letter-spacing: .02em; }
+.values-section .value-content { position: relative; z-index: 1; margin-top: 18px; max-width: 42ch; color: var(--ink); font-size: 14px; line-height: 1.75; }
+.values-section .value-content p { margin: 0; }
+@media(max-width:900px){.values-section{grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}.values-section .value-box:last-child{grid-column:1/-1}}
+@media(max-width:600px){.values-section{grid-template-columns:1fr;margin:46px 0 54px}.values-section .value-box:last-child{grid-column:auto}.values-section .value-box{min-height:0;padding:24px}.values-section .value-icon{margin-bottom:18px}}
 
 /* Final About card treatment */
 .why-choose-section { margin: 58px 0 68px; }
