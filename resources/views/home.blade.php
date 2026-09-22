@@ -238,12 +238,12 @@
         </section>
         <section class="why" id="gallery">
             <div class="wrap pillars">
-                <div><i>⌂</i><span>Modern Infrastructure</span></div>
-                <div><i>⚙</i><span>Advanced Technology</span></div>
-                <div><i>♡</i><span>Compassionate Care</span></div>
-                <div><i>♧</i><span>Experienced Specialists</span></div>
-                <div><i>₹</i><span>Affordable Treatment</span></div>
-                <div><i>⌖</i><span>Convenient Location</span></div>
+                <div><span class="pillar-icon" aria-hidden="true"><svg viewBox="0 0 48 48" focusable="false"><path d="m8 22 16-14 16 14v18H8Z"></path><path d="M18 40V26h12v14"></path></svg></span><span>Modern Infrastructure</span></div>
+                <div><span class="pillar-icon" aria-hidden="true"><svg viewBox="0 0 48 48" focusable="false"><circle cx="24" cy="24" r="8"></circle><path d="M24 6v6m0 24v6M6 24h6m24 0h6M11.3 11.3l4.2 4.2m17 17 4.2 4.2m0-25.4-4.2 4.2m-17 17-4.2 4.2M31 24a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z"></path></svg></span><span>Advanced Technology</span></div>
+                <div><span class="pillar-icon" aria-hidden="true"><svg viewBox="0 0 48 48" focusable="false"><path d="M24 39S8 29 8 18a8 8 0 0 1 16-3 8 8 0 0 1 16 3c0 11-16 21-16 21Z"></path></svg></span><span>Compassionate Care</span></div>
+                <div><span class="pillar-icon" aria-hidden="true"><svg viewBox="0 0 48 48" focusable="false"><circle cx="24" cy="15" r="6"></circle><path d="M12 39c1-8 5-12 12-12s11 4 12 12M35 10v8m-4-4h8"></path></svg></span><span>Experienced Specialists</span></div>
+                <div><span class="pillar-icon" aria-hidden="true"><svg viewBox="0 0 48 48" focusable="false"><circle cx="24" cy="24" r="16"></circle><path d="M17 17h14M17 23h14M20 29h10M20 11c3 3 5 7 5 13s-2 10-5 13"></path></svg></span><span>Affordable Treatment</span></div>
+                <div><span class="pillar-icon" aria-hidden="true"><svg viewBox="0 0 48 48" focusable="false"><circle cx="24" cy="24" r="14"></circle><circle cx="24" cy="24" r="5"></circle><path d="M24 4v7m0 26v7M4 24h7m26 0h7"></path></svg></span><span>Convenient Location</span></div>
             </div>
         </section>
     </main>

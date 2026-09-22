@@ -809,6 +809,12 @@ input:not([type="checkbox"]):not([type="radio"]):focus-visible, select:focus-vis
 @media(max-width:900px){.values-section{grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}.values-section .value-box:last-child{grid-column:1/-1}}
 @media(max-width:600px){.values-section{grid-template-columns:1fr;margin:46px 0 54px}.values-section .value-box:last-child{grid-column:auto}.values-section .value-box{min-height:0;padding:24px}.values-section .value-icon{margin-bottom:18px}}
 
+/* Consistent healthcare feature illustrations */
+.pillars div { gap: 12px; }
+.pillar-icon { display: grid; place-items: center; width: 48px; height: 48px; margin: 0 auto; color: var(--teal); }
+.pillar-icon svg { display: block; width: 42px; height: 42px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+@media(max-width:600px){.pillar-icon{width:42px;height:42px}.pillar-icon svg{width:36px;height:36px}}
+
 /* Footer surface and responsive contact layout */
 .footer { background: #F6F9F7; }
 .footer-grid-modern { column-gap: 42px; row-gap: 28px; }
