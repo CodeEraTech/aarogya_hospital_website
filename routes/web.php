@@ -8,6 +8,7 @@ use App\Models\GalleryItem;
 use App\Models\Service;
 use App\Models\Setting;
 use App\Models\Testimonial;
+use App\Models\Blog;
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\OpdScheduleController;
 use App\Http\Controllers\EmpanelledController;
@@ -18,6 +19,8 @@ Route::post('/appointments', [AppointmentController::class, 'store'])->middlewar
 Route::get('/doctors', fn () => view('pages.doctors', ['doctors' => Doctor::where('status', 'Active')->orderBy('sort_order')->orderBy('name')->get()]))->name('doctors.index');
 Route::view('/appointment', 'pages.appointment')->name('appointment.create');
 Route::get('/testimonials', fn () => view('pages.testimonials', ['testimonials' => Testimonial::where('status', 'Active')->orderBy('sort_order')->latest()->get()]))->name('testimonials');
+Route::get('/blogs', fn () => view('pages.blogs', ['blogs' => Blog::where('status', 'Active')->orderByDesc('published_at')->orderByDesc('created_at')->paginate(9)]))->name('blogs.index');
+Route::get('/blogs/{slug}', fn (string $slug) => view('pages.blog', ['blog' => Blog::where('status', 'Active')->where('slug', $slug)->firstOrFail()]))->name('blogs.show');
 Route::get('/site-socials', function () {
     $settings = Setting::whereIn('key', ['social_facebook', 'social_instagram', 'social_linkedin', 'social_youtube', 'social_whatsapp', 'whatsapp_number'])->pluck('value', 'key');
     $whatsapp = $settings['social_whatsapp'] ?? $settings['whatsapp_number'] ?? null;
