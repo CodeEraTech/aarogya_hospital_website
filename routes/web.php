@@ -105,7 +105,7 @@ Route::get('/about', function () {
     return view('pages.about', compact('about'));
 })->name('about');
 Route::view('/robotic-surgery', 'home');
-Route::get('/gallery', fn () => view('pages.gallery', ['galleryItems' => GalleryItem::where('status', 'Published')->orderBy('sort_order')->get()]))->name('gallery');
+Route::get('/gallery', fn () => view('pages.gallery', ['galleryItems' => GalleryItem::where('status', 'Active')->orderBy('sort_order')->get()]))->name('gallery');
 Route::view('/contact', 'pages.contact')->name('contact');
 Route::get('/pages/{slug}', fn (string $slug) => view('pages.cms-page', ['page' => Page::where('status', 'Active')->where('slug', $slug)->firstOrFail()]))->name('pages.show');
 Route::view('/emergency', 'home')->name('emergency');
