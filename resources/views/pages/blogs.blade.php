@@ -1,7 +1,7 @@
 @extends('layouts.site')
 
-@section('title', 'Health &amp; Hospital Blogs | Aarogya Hospital')
-@section('heading', 'Health &amp; Hospital Blogs')
+@section('title', 'Hospital Blogs | Aarogya Hospital')
+@section('heading', 'Hospital Blogs')
 @section('intro', 'Helpful guidance, hospital updates, and trusted health information from our care team.')
 
 @section('content')
