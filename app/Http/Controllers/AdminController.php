@@ -67,7 +67,7 @@ class AdminController extends Controller
 
     public function settings()
     {
-        $groups = Setting::orderBy('group')->orderBy('key')->get()->groupBy('group');
+        $groups = Setting::where('group', '!=', 'About Us')->orderBy('group')->orderBy('key')->get()->groupBy('group');
         return view('admin.settings', compact('groups'));
     }
 
