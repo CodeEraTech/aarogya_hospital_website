@@ -1,9 +1,7 @@
 @php
     $mapAddress = trim($siteSettings['address'] ?? '');
     $mapQuery = trim('Aarogya Hospital, '.$mapAddress, ', ');
-    $mapSource = $mapAddress
-        ? 'https://www.google.com/maps?q='.rawurlencode($mapQuery).'&z=17&output=embed'
-        : ($siteSettings['google_maps_embed_url'] ?? '');
+    $mapSource = $mapAddress ? 'https://www.google.com/maps?q='.rawurlencode($mapQuery).'&z=17&output=embed' : '';
 @endphp
 @if($mapSource)
 <section class="map-section" aria-labelledby="map-title">
