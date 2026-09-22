@@ -15,25 +15,25 @@
         <div class="admin-brand"><img class="admin-logo" src="{{ asset($siteSettings['website_logo'] ?? 'assets/hospital/images/aarogya-logo.png') }}" alt="Aarogya Hospital"></div>
         <nav class="side-nav">
             <span class="nav-label">Workspace</span>
-            <a href="{{ route('admin.dashboard') }}"><i class="fa fa-dashboard"></i> Dashboard</a>
+            <a href="{{ route('admin.dashboard') }}">Dashboard</a>
             <span class="nav-label">Inbox</span>
-            <a href="{{ route('admin.resource.index','appointments') }}"><i class="fa fa-calendar"></i> Appointments</a>
-            <a href="{{ route('admin.opd-schedules.index') }}"><i class="fa fa-clock-o"></i> OPD schedules</a>
-            <a href="{{ route('admin.resource.index','feedback') }}"><i class="fa fa-comments"></i> Feedback</a>
+            <a href="{{ route('admin.resource.index','appointments') }}">Appointments</a>
+            <a href="{{ route('admin.opd-schedules.index') }}">OPD schedules</a>
+            <a href="{{ route('admin.resource.index','feedback') }}">Feedback</a>
             <span class="nav-label">Empanelled Corporate</span>
             @foreach(config('empanelled') as $key => $empanelled)
-                <a class="nav-subitem" href="{{ route('admin.empanelled.edit', $key) }}"><i class="fa fa-building"></i> {{ $empanelled['name'] }}</a>
+                <a class="nav-subitem" href="{{ route('admin.empanelled.edit', $key) }}">{{ $empanelled['name'] }}</a>
             @endforeach
             <span class="nav-label">Website</span>
-            <a href="{{ route('admin.resource.index','pages') }}"><i class="fa fa-file-text"></i> Pages</a>
-            <a href="{{ route('admin.resource.index','doctors') }}"><i class="fa fa-user-md"></i> Doctors</a>
-            <a href="{{ route('admin.resource.index','services') }}"><i class="fa fa-stethoscope"></i> Services</a>
-            <a href="{{ route('admin.resource.index','blogs') }}"><i class="fa fa-pencil"></i> Blog posts</a>
-            <a href="{{ route('admin.resource.index','slides') }}"><i class="fa fa-image"></i> Slides</a>
-            <a href="{{ route('admin.resource.index','testimonials') }}"><i class="fa fa-quote-left"></i> Testimonials</a>
-            <a href="{{ route('admin.resource.index','gallery') }}"><i class="fa fa-picture-o"></i> Gallery</a>
+            <a href="{{ route('admin.resource.index','pages') }}">Pages</a>
+            <a href="{{ route('admin.resource.index','doctors') }}">Doctors</a>
+            <a href="{{ route('admin.resource.index','services') }}">Services</a>
+            <a href="{{ route('admin.resource.index','blogs') }}">Blog posts</a>
+            <a href="{{ route('admin.resource.index','slides') }}">Slides</a>
+            <a href="{{ route('admin.resource.index','testimonials') }}">Testimonials</a>
+            <a href="{{ route('admin.resource.index','gallery') }}">Gallery</a>
             <a href="{{ route('admin.about') }}"><i class="fa fa-info-circle"></i> About Us</a>
-            <a href="{{ route('admin.settings') }}"><i class="fa fa-cog"></i> Settings</a>
+            <a href="{{ route('admin.settings') }}">Settings</a>
         </nav>
         <div class="sidebar-footer"><a href="{{ route('home') }}" target="_blank">View website</a></div>
     </aside>
