@@ -30,7 +30,7 @@
                 <span>About Content</span>
                 <div class="editor-container">
                     <div id="about_content_editor" style="height: 250px;">{!! $about['about_content'] ?? '<p>Aarogya Hospital brings advanced orthopaedic, robotic joint replacement, obstetrics-gynaecology and infertility care to Hisar.</p>' !!}</div>
-                    <input type="hidden" name="about_content" id="about_content">
+                    <input type="hidden" name="about_content" id="about_content" value="{{ $about['about_content'] ?? '' }}">
                 </div>
             </label>
         </div>
@@ -52,7 +52,7 @@
                 <span>Chairman Message</span>
                 <div class="editor-container">
                     <div id="chairman_message_editor" style="height: 250px;">{!! $about['chairman_message'] ?? '<p>Welcome to Aarogya Hospital...</p>' !!}</div>
-                    <input type="hidden" name="chairman_message" id="chairman_message">
+                    <input type="hidden" name="chairman_message" id="chairman_message" value="{{ $about['chairman_message'] ?? '' }}">
                 </div>
             </label>
         </div>
@@ -85,21 +85,21 @@
                 <span>Our Mission</span>
                 <div class="editor-container">
                     <div id="our_mission_editor" style="height: 150px;">{!! $about['our_mission'] ?? '<p>Our mission statement...</p>' !!}</div>
-                    <input type="hidden" name="our_mission" id="our_mission">
+                    <input type="hidden" name="our_mission" id="our_mission" value="{{ $about['our_mission'] ?? '' }}">
                 </div>
             </label>
             <label class="full">
                 <span>Our Vision</span>
                 <div class="editor-container">
                     <div id="our_vision_editor" style="height: 150px;">{!! $about['our_vision'] ?? '<p>Our vision statement...</p>' !!}</div>
-                    <input type="hidden" name="our_vision" id="our_vision">
+                    <input type="hidden" name="our_vision" id="our_vision" value="{{ $about['our_vision'] ?? '' }}">
                 </div>
             </label>
             <label class="full">
                 <span>Quality Policy</span>
                 <div class="editor-container">
                     <div id="quality_policy_editor" style="height: 150px;">{!! $about['quality_policy'] ?? '<p>Our quality policy...</p>' !!}</div>
-                    <input type="hidden" name="quality_policy" id="quality_policy">
+                    <input type="hidden" name="quality_policy" id="quality_policy" value="{{ $about['quality_policy'] ?? '' }}">
                 </div>
             </label>
         </div>
