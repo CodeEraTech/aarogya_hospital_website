@@ -6,6 +6,8 @@ use App\Http\Controllers\AdminController;
 use App\Models\Doctor;
 use App\Models\GalleryItem;
 use App\Models\Service;
+use App\Models\Setting;
+use App\Models\Testimonial;
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\OpdScheduleController;
 use App\Http\Controllers\EmpanelledController;
@@ -15,6 +17,19 @@ Route::view('/', 'home')->name('home');
 Route::post('/appointments', [AppointmentController::class, 'store'])->middleware('throttle:5,1')->name('appointments.store');
 Route::get('/doctors', fn () => view('pages.doctors', ['doctors' => Doctor::where('status', 'Active')->orderBy('sort_order')->orderBy('name')->get()]))->name('doctors.index');
 Route::view('/appointment', 'pages.appointment')->name('appointment.create');
+Route::get('/testimonials', fn () => view('pages.testimonials', ['testimonials' => Testimonial::where('status', 'Active')->orderBy('sort_order')->latest()->get()]))->name('testimonials');
+Route::get('/site-socials', function () {
+    $settings = Setting::whereIn('key', ['social_facebook', 'social_instagram', 'social_linkedin', 'social_youtube', 'social_whatsapp', 'whatsapp_number'])->pluck('value', 'key');
+    $whatsapp = $settings['social_whatsapp'] ?? $settings['whatsapp_number'] ?? null;
+    if ($whatsapp && ! str_starts_with($whatsapp, 'http')) $whatsapp = 'https://wa.me/'.preg_replace('/\D+/', '', $whatsapp);
+    return response()->json(array_filter([
+        'facebook' => $settings['social_facebook'] ?? null,
+        'instagram' => $settings['social_instagram'] ?? null,
+        'linkedin' => $settings['social_linkedin'] ?? null,
+        'youtube' => $settings['social_youtube'] ?? null,
+        'whatsapp' => $whatsapp,
+    ]));
+})->name('site.socials');
 Route::get('/patient-resources/empanelled-corporate/{slug}', [EmpanelledController::class, 'show'])->name('empanelled-corporate');
 Route::get('/patient-resources/opd-schedule', [OpdScheduleController::class, 'publicIndex'])->name('opd-schedule');
 Route::view('/patient-resources/feedback', 'pages.feedback')->name('feedback.create');
@@ -22,7 +37,6 @@ Route::post('/feedback', [FeedbackController::class, 'store'])->middleware('thro
 Route::view('/about', 'pages.about')->name('about');
 Route::view('/robotic-surgery', 'home');
 Route::get('/gallery', fn () => view('pages.gallery', ['galleryItems' => GalleryItem::where('status', 'Published')->orderBy('sort_order')->get()]))->name('gallery');
-Route::view('/testimonials', 'home');
 Route::view('/contact', 'pages.contact')->name('contact');
 Route::view('/emergency', 'home')->name('emergency');
 Route::view('/privacy', 'home');

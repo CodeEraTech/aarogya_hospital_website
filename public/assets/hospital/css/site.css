@@ -33,6 +33,25 @@ h1, h2, h3 { color: var(--navy); line-height: 1.2; }
 .utility b { color: var(--teal); font-size: 11px; }
 .utility i { height: 12px; width: 1px; background: var(--line); }
 .utility nav a:first-child { color: #aa433e; }
+.utility nav { flex-wrap: wrap; justify-content: flex-end; gap: 14px; }
+.utility .utility-action { color: var(--teal-dark); font-weight: 700; white-space: nowrap; }
+.utility .top-utility-links { display: inline-flex; align-items: center; gap: 14px; }
+.utility-inner { justify-content: flex-end; }
+.utility nav { margin-left: auto; }
+.utility .social-links { display: inline-flex; align-items: center; gap: 8px; }
+.utility .social-links a { display: grid; place-items: center; width: 24px; height: 24px; color: var(--teal-dark); border: 1px solid var(--line); border-radius: 50%; font-size: 12px; transition: color .2s, background .2s, border-color .2s; }
+.utility .social-links a:hover { color: #fff; background: var(--teal); border-color: var(--teal); }
+.testimonial-directory { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; }
+.testimonial-card { position: relative; display: flex; flex-direction: column; min-height: 280px; padding: 28px; border: 1px solid var(--line); border-radius: 10px; background: #fff; box-shadow: var(--shadow); }
+.testimonial-card-mark { color: var(--teal); font-size: 42px; line-height: .8; }
+.testimonial-card blockquote { margin: 20px 0; color: var(--ink); font-size: 15px; line-height: 1.7; }
+.testimonial-card footer { display: grid; gap: 2px; margin-top: auto; border-top: 1px solid var(--line); padding-top: 16px; }
+.testimonial-card footer strong { color: var(--navy); font-size: 14px; }
+.testimonial-card footer span { color: var(--muted); font-size: 11px; }
+.testimonial-card video { width: 100%; max-height: 220px; margin-top: 18px; border-radius: 6px; }
+.testimonial-video-link { margin: 12px 0; color: var(--teal-dark); font-weight: 700; }
+@media(max-width:900px){.testimonial-directory{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.utility-inner{align-items:flex-start;flex-direction:column;padding-block:10px}.utility nav{justify-content:flex-start;gap:10px}.utility .social-links{width:100%}.testimonial-directory{grid-template-columns:1fr}}
 .site-header { height: 94px; background: #fff; position: sticky; top: 0; z-index: 100; border-bottom: 1px solid var(--line); }
 .nav-row { display: flex; align-items: center; height: 100%; gap: 28px; }
 .logo { display: flex; align-items: center; gap: 10px; flex: none; }
