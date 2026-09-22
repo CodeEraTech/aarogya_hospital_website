@@ -85,6 +85,90 @@ class AdminController extends Controller
         return back()->with('success', 'Website settings saved successfully.');
     }
 
+    public function about()
+    {
+        $about = Setting::whereIn('key', [
+            'about_image',
+            'about_content',
+            'chairman_image',
+            'chairman_message',
+            'why_choose_1_title',
+            'why_choose_1_content',
+            'why_choose_2_title',
+            'why_choose_2_content',
+            'why_choose_3_title',
+            'why_choose_3_content',
+            'why_choose_4_title',
+            'why_choose_4_content',
+            'why_choose_5_title',
+            'why_choose_5_content',
+            'why_choose_6_title',
+            'why_choose_6_content',
+            'our_mission',
+            'our_vision',
+            'quality_policy',
+            'certificates'
+        ])->pluck('value', 'key');
+        return view('admin.about', compact('about'));
+    }
+
+    public function saveAbout(Request $request)
+    {
+        $validated = $request->validate([
+            'about_content' => 'nullable|string',
+            'chairman_message' => 'nullable|string',
+            'why_choose_1_title' => 'nullable|string|max:255',
+            'why_choose_1_content' => 'nullable|string',
+            'why_choose_2_title' => 'nullable|string|max:255',
+            'why_choose_2_content' => 'nullable|string',
+            'why_choose_3_title' => 'nullable|string|max:255',
+            'why_choose_3_content' => 'nullable|string',
+            'why_choose_4_title' => 'nullable|string|max:255',
+            'why_choose_4_content' => 'nullable|string',
+            'why_choose_5_title' => 'nullable|string|max:255',
+            'why_choose_5_content' => 'nullable|string',
+            'why_choose_6_title' => 'nullable|string|max:255',
+            'why_choose_6_content' => 'nullable|string',
+            'our_mission' => 'nullable|string',
+            'our_vision' => 'nullable|string',
+            'quality_policy' => 'nullable|string',
+        ]);
+
+        foreach ($validated as $key => $value) {
+            Setting::updateOrCreate(['key' => $key], ['value' => $value, 'group' => 'About Us']);
+        }
+
+        foreach (['about_image', 'chairman_image'] as $key) {
+            if ($request->hasFile($key)) {
+                $path = $this->storeFile($request->file($key), 'about');
+                Setting::updateOrCreate(['key' => $key], ['value' => $path, 'group' => 'About Us']);
+            }
+        }
+
+        // Handle multiple certificate uploads
+        if ($request->hasFile('certificates')) {
+            $certificatePaths = [];
+            foreach ($request->file('certificates') as $file) {
+                $certificatePaths[] = $this->storeFile($file, 'certificates');
+            }
+            $existing = Setting::where('key', 'certificates')->value('value');
+            $existingPaths = $existing ? json_decode($existing, true) : [];
+            $allPaths = array_merge($existingPaths, $certificatePaths);
+            Setting::updateOrCreate(['key' => 'certificates'], ['value' => json_encode($allPaths), 'group' => 'About Us']);
+        }
+
+        // Handle certificate deletion
+        if ($request->has('delete_certificates')) {
+            $existing = Setting::where('key', 'certificates')->value('value');
+            $existingPaths = $existing ? json_decode($existing, true) : [];
+            $toDelete = $request->input('delete_certificates', []);
+            $remainingPaths = array_values(array_diff($existingPaths, $toDelete));
+            Setting::updateOrCreate(['key' => 'certificates'], ['value' => json_encode($remainingPaths), 'group' => 'About Us']);
+        }
+
+        return back()->with('success', 'About Us content saved successfully.');
+    }
+
     public function index(string $resource, Request $request)
     {
         abort_unless(isset($this->resources[$resource]), 404);

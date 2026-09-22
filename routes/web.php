@@ -72,7 +72,31 @@ Route::get('/patient-resources/empanelled-corporate/{slug}', [EmpanelledControll
 Route::get('/patient-resources/opd-schedule', [OpdScheduleController::class, 'publicIndex'])->name('opd-schedule');
 Route::view('/patient-resources/feedback', 'pages.feedback')->name('feedback.create');
 Route::post('/feedback', [FeedbackController::class, 'store'])->middleware('throttle:5,1')->name('feedback.store');
-Route::view('/about', 'pages.about')->name('about');
+Route::get('/about', function () {
+    $about = \App\Models\Setting::whereIn('key', [
+        'about_image',
+        'about_content',
+        'chairman_image',
+        'chairman_message',
+        'why_choose_1_title',
+        'why_choose_1_content',
+        'why_choose_2_title',
+        'why_choose_2_content',
+        'why_choose_3_title',
+        'why_choose_3_content',
+        'why_choose_4_title',
+        'why_choose_4_content',
+        'why_choose_5_title',
+        'why_choose_5_content',
+        'why_choose_6_title',
+        'why_choose_6_content',
+        'our_mission',
+        'our_vision',
+        'quality_policy',
+        'certificates'
+    ])->pluck('value', 'key');
+    return view('pages.about', compact('about'));
+})->name('about');
 Route::view('/robotic-surgery', 'home');
 Route::get('/gallery', fn () => view('pages.gallery', ['galleryItems' => GalleryItem::where('status', 'Published')->orderBy('sort_order')->get()]))->name('gallery');
 Route::view('/contact', 'pages.contact')->name('contact');
@@ -103,6 +127,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::put('/profile', [AdminController::class, 'updateProfile'])->name('profile.update');
         Route::get('/settings', [AdminController::class, 'settings'])->name('settings');
         Route::put('/settings', [AdminController::class, 'saveSettings'])->name('settings.save');
+        Route::get('/about', [AdminController::class, 'about'])->name('about');
+        Route::put('/about', [AdminController::class, 'saveAbout'])->name('about.save');
         Route::resource('opd-schedules', OpdScheduleController::class)->except(['show']);
         Route::get('/empanelled-corporate/{key}/edit', [EmpanelledController::class, 'edit'])->whereNumber('key')->name('empanelled.edit');
         Route::put('/empanelled-corporate/{key}', [EmpanelledController::class, 'update'])->whereNumber('key')->name('empanelled.update');
