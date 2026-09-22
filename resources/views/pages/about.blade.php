@@ -45,7 +45,7 @@
                 @for($i = 1; $i <= 6; $i++)
                 @if(isset($about['why_choose_' . $i . '_title']) && $about['why_choose_' . $i . '_title'])
                 <div class="why-box why-box-{{ $i }}">
-                    <div class="why-box-number">{{ $i }}</div>
+                    <div class="why-box-number" aria-hidden="true"><svg viewBox="0 0 40 40" focusable="false"><circle cx="20" cy="20" r="18"></circle></svg><span>{{ $i }}</span></div>
                     <h3>{{ $about['why_choose_' . $i . '_title'] }}</h3>
                     <p>{{ $about['why_choose_' . $i . '_content'] ?? '' }}</p>
                 </div>

@@ -545,6 +545,46 @@ input:not([type="checkbox"]):not([type="radio"]):focus-visible, select:focus-vis
 @media(max-width:900px){.footer-grid-modern{column-gap:28px;row-gap:22px}}
 @media(max-width:600px){.footer-grid-modern{column-gap:0;row-gap:24px}.footer{padding-top:36px}}
 
+/* Calm, single-accent About page feature cards */
+.why-choose-section { margin: 58px 0 68px; }
+.why-choose-section > .section-head { margin-bottom: 28px; }
+.why-choose-section > .section-head h2 { color: var(--ink); letter-spacing: -.03em; }
+.why-choose-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+.why-box,
+.why-box-1, .why-box-2, .why-box-3, .why-box-4, .why-box-5, .why-box-6 {
+    min-height: 208px;
+    padding: 30px 28px 28px 78px;
+    border: 1px solid var(--line) !important;
+    border-radius: 10px;
+    background: #fff;
+    box-shadow: none;
+    transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease;
+}
+.why-box:hover { border-color: color-mix(in srgb, var(--teal) 45%, var(--line)) !important; box-shadow: 0 12px 28px rgb(23 44 39 / 7%); transform: translateY(-2px); }
+.why-box-number,
+.why-box-1 .why-box-number, .why-box-2 .why-box-number, .why-box-3 .why-box-number,
+.why-box-4 .why-box-number, .why-box-5 .why-box-number, .why-box-6 .why-box-number {
+    top: 30px;
+    left: 28px;
+    width: 32px;
+    height: 32px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    color: var(--teal-dark);
+    background: transparent;
+    box-shadow: none;
+    font-size: 14px;
+    font-weight: 800;
+}
+.why-box-number svg { position: absolute; inset: 0; width: 100%; height: 100%; color: var(--teal); opacity: .14; }
+.why-box-number svg circle { fill: currentColor; }
+.why-box-number span { position: relative; z-index: 1; }
+.why-box h3 { margin: 4px 0 14px; color: var(--ink); font-size: 18px; line-height: 1.35; }
+.why-box p { color: var(--muted); font-size: 13px; line-height: 1.65; }
+@media(max-width:900px){.why-choose-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){.why-choose-section{margin:40px 0 48px}.why-choose-grid{grid-template-columns:1fr}.why-box{min-height:0;padding:26px 22px 24px 68px}.why-box-number{left:22px;top:26px}}
+
 /* Consistent circular social icons */
 .utility .social-links a,
 .footer-socials .social-link {
@@ -721,3 +761,43 @@ input:not([type="checkbox"]):not([type="radio"]):focus-visible, select:focus-vis
     .related-item img { width: 70px; height: 70px; }
     .related-item h4 { font-size: 13px; }
 }
+
+/* Final About card treatment */
+.why-choose-section { margin: 58px 0 68px; }
+.why-choose-section .section-header { margin-bottom: 28px; }
+.why-choose-section .section-header h2 { color: var(--ink); letter-spacing: -.03em; }
+.why-choose-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+.why-box,
+.why-box-1, .why-box-2, .why-box-3, .why-box-4, .why-box-5, .why-box-6 {
+    min-height: 208px;
+    padding: 30px 28px 28px 78px;
+    border: 1px solid var(--line) !important;
+    border-radius: 10px;
+    background: #fff;
+    box-shadow: none;
+    transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease;
+}
+.why-box:hover { border-color: var(--teal) !important; box-shadow: 0 12px 28px rgb(23 44 39 / 7%); transform: translateY(-2px); }
+.why-box-number,
+.why-box-1 .why-box-number, .why-box-2 .why-box-number, .why-box-3 .why-box-number,
+.why-box-4 .why-box-number, .why-box-5 .why-box-number, .why-box-6 .why-box-number {
+    top: 30px;
+    left: 28px;
+    width: 32px;
+    height: 32px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    color: var(--teal-dark);
+    background: transparent !important;
+    box-shadow: none;
+    font-size: 14px;
+    font-weight: 800;
+}
+.why-box-number svg { position: absolute; inset: 0; width: 100%; height: 100%; color: var(--teal); opacity: .14; }
+.why-box-number svg circle { fill: currentColor; }
+.why-box-number span { position: relative; z-index: 1; }
+.why-box h3 { margin: 4px 0 14px; color: var(--ink); font-size: 18px; line-height: 1.35; }
+.why-box p { color: var(--muted); font-size: 13px; line-height: 1.65; }
+@media(max-width:900px){.why-choose-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){.why-choose-section{margin:40px 0 48px}.why-choose-grid{grid-template-columns:1fr}.why-box{min-height:0;padding:26px 22px 24px 68px}.why-box-number{left:22px;top:26px}}
