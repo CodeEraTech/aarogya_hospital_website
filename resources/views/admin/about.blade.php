@@ -139,7 +139,7 @@
         </div>
     </section>
 
-    <div class="form-actions"><button class="button button-primary">Save About Us Content</button></div>
+    <div class="form-actions"><button type="submit" class="button button-primary">Save About Us Content</button></div>
 </form>
 
 <style>
@@ -165,6 +165,12 @@ document.addEventListener('DOMContentLoaded', function() {
     ];
 
     editors.forEach(function(editor) {
+        const editorElement = document.getElementById(editor.id + '_editor');
+        if (!editorElement) {
+            console.error('Editor element not found:', editor.id + '_editor');
+            return;
+        }
+
         const quill = new Quill('#' + editor.id + '_editor', {
             theme: 'snow',
             modules: {
@@ -179,19 +185,39 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Store quill instance for later use
         quillInstances[editor.field] = quill;
-    });
-
-    // Update hidden fields before form submission
-    const form = document.querySelector('form');
-    form.addEventListener('submit', function(e) {
-        editors.forEach(function(editor) {
-            const quill = quillInstances[editor.field];
+        
+        // Auto-sync content on text change
+        quill.on('text-change', function() {
             const hiddenInput = document.getElementById(editor.field);
-            if (quill && hiddenInput) {
+            if (hiddenInput) {
                 hiddenInput.value = quill.root.innerHTML;
             }
         });
     });
+
+    // Update hidden fields before form submission (backup)
+    const form = document.querySelector('form');
+    if (form) {
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Sync all editors to hidden fields
+            editors.forEach(function(editor) {
+                const quill = quillInstances[editor.field];
+                const hiddenInput = document.getElementById(editor.field);
+                if (quill && hiddenInput) {
+                    const content = quill.root.innerHTML;
+                    hiddenInput.value = content;
+                    console.log('Syncing ' + editor.field + ':', content.substring(0, 100) + '...');
+                }
+            });
+            
+            // Small delay to ensure values are set, then submit
+            setTimeout(function() {
+                form.submit();
+            }, 100);
+        });
+    }
 });
 </script>
 @endsection

@@ -114,6 +114,14 @@ class AdminController extends Controller
 
     public function saveAbout(Request $request)
     {
+        // Log incoming data for debugging
+        \Log::info('About form submission:', [
+            'about_content_length' => strlen($request->input('about_content', '')),
+            'chairman_message_length' => strlen($request->input('chairman_message', '')),
+            'about_content_preview' => substr($request->input('about_content', ''), 0, 200),
+            'chairman_message_preview' => substr($request->input('chairman_message', ''), 0, 200),
+        ]);
+
         $validated = $request->validate([
             'about_content' => 'nullable|string|max:65535',
             'chairman_message' => 'nullable|string|max:65535',
@@ -166,6 +174,8 @@ class AdminController extends Controller
             Setting::updateOrCreate(['key' => 'certificates'], ['value' => json_encode($remainingPaths), 'group' => 'About Us']);
         }
 
+        \Log::info('About content saved successfully');
+        
         return back()->with('success', 'About Us content saved successfully.');
     }
 
