@@ -809,6 +809,29 @@ input:not([type="checkbox"]):not([type="radio"]):focus-visible, select:focus-vis
 @media(max-width:900px){.values-section{grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}.values-section .value-box:last-child{grid-column:1/-1}}
 @media(max-width:600px){.values-section{grid-template-columns:1fr;margin:46px 0 54px}.values-section .value-box:last-child{grid-column:auto}.values-section .value-box{min-height:0;padding:24px}.values-section .value-icon{margin-bottom:18px}}
 
+/* Footer surface and responsive contact layout */
+.footer { background: #F6F9F7; }
+.footer-grid-modern { column-gap: 42px; row-gap: 28px; }
+.footer-grid-modern > div:not(.footer-brand) { min-width: 0; }
+.footer-grid-modern > div:last-child { min-width: 0; }
+.footer-grid-modern > div:last-child span { overflow-wrap: anywhere; }
+@media(max-width:900px){
+    .footer-grid-modern { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 28px; row-gap: 30px; }
+    .footer-grid-modern .footer-brand { grid-column: 1 / -1; }
+    .footer-grid-modern > div:last-child { grid-column: 1 / -1; padding-top: 24px; border-top: 1px solid var(--line); }
+}
+@media(max-width:600px){
+    .footer { padding: 38px 0 16px; }
+    .footer-grid-modern { grid-template-columns: 1fr; gap: 26px; }
+    .footer-grid-modern .footer-brand,
+    .footer-grid-modern > div:last-child { grid-column: auto; }
+    .footer-grid-modern > div:last-child { padding-top: 24px; }
+    .footer-logo-image { width: min(220px, 100%); height: 76px; }
+    .footer-brand p { max-width: 34ch; }
+    .footer-grid-modern h3 { margin-bottom: 10px; }
+    .footer-bottom-modern { margin-top: 24px; padding-top: 16px; }
+}
+
 /* Final About card treatment */
 .why-choose-section { margin: 58px 0 68px; }
 .why-choose-section .section-header { margin-bottom: 28px; }
