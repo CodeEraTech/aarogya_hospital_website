@@ -38,16 +38,12 @@
             </div>
             @endif
 
-            {{-- Share Section --}}
-            <div class="sidebar-box share-box">
-                <h3>Share This Service</h3>
-                <div class="share-buttons">
-                    <a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(url()->current()) }}" target="_blank" rel="noopener" class="share-btn share-facebook" aria-label="Share on Facebook"><i class="fa fa-facebook"></i></a>
-                    <a href="https://twitter.com/intent/tweet?url={{ urlencode(url()->current()) }}&text={{ urlencode($service->name) }}" target="_blank" rel="noopener" class="share-btn share-twitter" aria-label="Share on Twitter"><i class="fa fa-twitter"></i></a>
-                    <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ urlencode(url()->current()) }}&title={{ urlencode($service->name) }}" target="_blank" rel="noopener" class="share-btn share-linkedin" aria-label="Share on LinkedIn"><i class="fa fa-linkedin"></i></a>
-                    <a href="https://wa.me/?text={{ urlencode($service->name . ' - ' . url()->current()) }}" target="_blank" rel="noopener" class="share-btn share-whatsapp" aria-label="Share on WhatsApp"><i class="fa fa-whatsapp"></i></a>
-                </div>
-            </div>
+            {{-- CTA Box --}}
+            <aside class="priority">
+                <h2>Your Health<br>Our Priority</h2>
+                <p>Arrange a consultation with our specialist team.</p>
+                <button class="btn btn-light" type="button" data-open-appointment>Book an Appointment <span>→</span></button>
+            </aside>
         </aside>
     </div>
 </section>

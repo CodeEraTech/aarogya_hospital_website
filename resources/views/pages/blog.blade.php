@@ -38,11 +38,11 @@
             @endif
 
             {{-- CTA Box --}}
-            <div class="sidebar-box cta-box">
-                <h3>Your Health<br>Our Priority</h3>
+            <aside class="priority">
+                <h2>Your Health<br>Our Priority</h2>
                 <p>Arrange a consultation with our specialist team.</p>
-                <button class="btn btn-primary" type="button" data-open-appointment>Book an Appointment <span>→</span></button>
-            </div>
+                <button class="btn btn-light" type="button" data-open-appointment>Book an Appointment <span>→</span></button>
+            </aside>
         </aside>
     </div>
 </article>
