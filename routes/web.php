@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('home', [
         'testimonials' => Testimonial::where('status', 'Active')
-            ->whereNull('video_url')
+            ->where('type','Text')
             ->orderBy('sort_order')
             ->get(),
         'blogs' => Blog::where('status', 'Active')
