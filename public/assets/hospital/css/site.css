@@ -565,6 +565,8 @@ input:not([type="checkbox"]):not([type="radio"]):focus-visible, select:focus-vis
     height: auto !important;
     line-height: 1 !important;
     color: #fff !important;
+    font-family: FontAwesome !important;
+    font-weight: normal !important;
     text-align: center;
 }
 .utility .social-links a:hover,
