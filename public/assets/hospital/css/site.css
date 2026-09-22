@@ -31,7 +31,7 @@ h1, h2, h3 { color: var(--navy); line-height: 1.2; }
 .utility-inner, .utility-inner>span, .utility nav { display: flex; align-items: center; gap: 24px; }
 .utility-inner { min-height: 38px; justify-content: space-between; }
 .utility b { color: var(--teal); font-size: 11px; }
-.utility i { height: 12px; width: 1px; background: var(--line); }
+.utility-inner > span > i { height: 12px; width: 1px; background: var(--line); }
 .utility nav a:first-child { color: #aa433e; }
 .utility nav { flex-wrap: wrap; justify-content: flex-end; gap: 14px; }
 .utility .utility-action { color: var(--teal-dark); font-weight: 700; white-space: nowrap; }
@@ -565,6 +565,7 @@ input:not([type="checkbox"]):not([type="radio"]):focus-visible, select:focus-vis
     height: auto !important;
     line-height: 1 !important;
     color: #fff !important;
+    background: transparent !important;
     font-family: FontAwesome !important;
     font-weight: normal !important;
     text-align: center;
