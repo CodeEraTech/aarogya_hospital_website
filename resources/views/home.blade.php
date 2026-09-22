@@ -40,7 +40,7 @@
     <a class="skip-link" href="#main">Skip to main content</a>
     <div class="utility">
         <div class="wrap utility-inner"><span><b>CARE WITH COMPASSION</b><i></i> Hisar, Haryana</span>
-            <nav aria-label="Utility"><a href="/emergency">◉ 24×7 Emergency</a><a data-track="phone" href="tel:+911662245450">☎ 01662-245450</a><a href="#location">⌖ Location</a></nav>
+            <nav aria-label="Utility"><a href="/emergency">◉ 24×7 Emergency</a><a data-track="phone" href="tel:+911662245450">☎ 01662-245450</a></nav>
         </div>
     </div>
     <header class="site-header">
@@ -244,18 +244,6 @@
                 <div><i>♧</i><span>Experienced Specialists</span></div>
                 <div><i>₹</i><span>Affordable Treatment</span></div>
                 <div><i>⌖</i><span>Convenient Location</span></div>
-            </div>
-        </section>
-        <section class="location-section" id="location">
-            <div class="wrap location-grid">
-                <div>
-                    <div class="eyebrow">VISIT AAROGYA</div>
-                    <h2>Care, Closer to Home</h2>
-                    <p>Opposite Vishwas School, Near LIC Office, Urban Estate II, Hisar, Haryana 125001.</p>
-                    <p>OPD: Monday–Saturday, 10:00 AM–3:00 PM. Please call to confirm availability.</p>
-                    <p>24/7 emergency care for orthopaedic and obstetrics-gynaecology patients.</p>
-                </div>
-                <div class="location-actions"><a class="btn btn-outline" data-track="directions" href="https://maps.google.com/?q=Aarogya+Hospital+Hisar" target="_blank" rel="noopener">Get Directions ↗</a><a class="btn btn-primary" href="tel:+911662245450">Call 01662-245450</a></div>
             </div>
         </section>
     </main>
