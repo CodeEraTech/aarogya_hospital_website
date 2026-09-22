@@ -9,6 +9,7 @@ use App\Models\Service;
 use App\Models\Setting;
 use App\Models\Testimonial;
 use App\Models\Blog;
+use App\Models\Page;
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\OpdScheduleController;
 use App\Http\Controllers\EmpanelledController;
@@ -33,6 +34,28 @@ Route::get('/site-socials', function () {
         'whatsapp' => $whatsapp,
     ]));
 })->name('site.socials');
+Route::get('/site-footer', function () {
+    $keys = ['footer_about', 'website_logo', 'site_phone', 'site_email', 'whatsapp_number', 'address', 'social_facebook', 'social_instagram', 'social_linkedin', 'social_youtube', 'social_whatsapp'];
+    $settings = Setting::whereIn('key', $keys)->pluck('value', 'key');
+    $whatsapp = $settings['social_whatsapp'] ?? $settings['whatsapp_number'] ?? null;
+    if ($whatsapp && ! str_starts_with($whatsapp, 'http')) $whatsapp = 'https://wa.me/'.preg_replace('/\D+/', '', $whatsapp);
+    return response()->json([
+        'about' => $settings['footer_about'] ?? '',
+        'logo' => $settings['website_logo'] ?? 'assets/hospital/images/aarogya-logo.png',
+        'phone' => $settings['site_phone'] ?? '',
+        'email' => $settings['site_email'] ?? '',
+        'whatsapp' => $whatsapp,
+        'address' => $settings['address'] ?? '',
+        'pages' => Page::where('status', 'Active')->orderBy('title')->get(['title', 'slug']),
+        'socials' => array_filter([
+            'facebook' => $settings['social_facebook'] ?? null,
+            'instagram' => $settings['social_instagram'] ?? null,
+            'linkedin' => $settings['social_linkedin'] ?? null,
+            'youtube' => $settings['social_youtube'] ?? null,
+            'whatsapp' => $whatsapp,
+        ]),
+    ]);
+})->name('site.footer');
 Route::get('/patient-resources/empanelled-corporate/{slug}', [EmpanelledController::class, 'show'])->name('empanelled-corporate');
 Route::get('/patient-resources/opd-schedule', [OpdScheduleController::class, 'publicIndex'])->name('opd-schedule');
 Route::view('/patient-resources/feedback', 'pages.feedback')->name('feedback.create');
@@ -41,6 +64,7 @@ Route::view('/about', 'pages.about')->name('about');
 Route::view('/robotic-surgery', 'home');
 Route::get('/gallery', fn () => view('pages.gallery', ['galleryItems' => GalleryItem::where('status', 'Published')->orderBy('sort_order')->get()]))->name('gallery');
 Route::view('/contact', 'pages.contact')->name('contact');
+Route::get('/pages/{slug}', fn (string $slug) => view('pages.cms-page', ['page' => Page::where('status', 'Active')->where('slug', $slug)->firstOrFail()]))->name('pages.show');
 Route::view('/emergency', 'home')->name('emergency');
 Route::view('/privacy', 'home');
 Route::view('/terms', 'home');

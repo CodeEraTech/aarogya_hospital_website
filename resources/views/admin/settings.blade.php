@@ -14,7 +14,7 @@
     @csrf
     @method('PUT')
 
-    @php($socialLabels = ['social_facebook' => 'Facebook', 'social_instagram' => 'Instagram', 'social_linkedin' => 'LinkedIn', 'social_youtube' => 'YouTube'])
+    @php($socialLabels = ['social_facebook' => 'Facebook', 'social_instagram' => 'Instagram', 'social_linkedin' => 'LinkedIn', 'social_youtube' => 'YouTube', 'social_whatsapp' => 'WhatsApp'])
     @forelse($groups as $group => $settings)
         <section class="panel settings-panel">
             <div class="panel-head">
@@ -30,6 +30,8 @@
                             @if($setting->value && is_file(public_path($setting->value)) && filesize(public_path($setting->value)) > 0)
                                 <img class="setting-preview {{ $setting->key === 'website_favicon' ? 'favicon' : '' }}" src="{{ asset($setting->value) }}" alt="Current {{ $settingLabel }}">
                             @endif
+                        @elseif($setting->key === 'footer_about')
+                            <textarea name="settings[{{ $setting->key }}]" rows="5" placeholder="Enter footer about text">{{ $setting->value }}</textarea>
                         @else
                             <input type="{{ str_starts_with($setting->key, 'social_') ? 'url' : 'text' }}" name="settings[{{ $setting->key }}]" value="{{ $setting->value }}" placeholder="{{ array_key_exists($setting->key, $socialLabels) ? 'Enter '.$settingLabel.' URL' : 'Enter '.strtolower($settingLabel) }}">
                         @endif
