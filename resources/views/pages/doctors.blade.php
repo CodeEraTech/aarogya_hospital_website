@@ -8,7 +8,7 @@
 @php($category = str_contains(strtolower($doctor->designation), 'fertility') || str_contains(strtolower($doctor->designation), 'gynaec') ? 'fertility' : (str_contains(strtolower($doctor->designation), 'anaesthesia') || str_contains(strtolower($doctor->designation), 'icu') ? 'critical-care' : (str_contains(strtolower($doctor->designation), 'physio') ? 'physiotherapy' : 'orthopaedics')))
 <article class="directory-card" data-doctor-card="{{ $category }}">
     <div class="directory-photo"><img src="{{ $doctor->image ? asset($doctor->image) : asset('assets/hospital/images/aarogya-logo.png') }}" alt="{{ $doctor->name }}" width="684" height="1024" loading="lazy"></div>
-    <div><h2>{{ $doctor->name }}</h2><p>{{ $doctor->designation }}</p><div class="doctor-meta"><span>Aarogya Hospital, Hisar</span></div><a class="btn btn-outline" href="{{ route('home', ['book' => 1]) }}">Book Consultation</a></div>
+    <div><h2>{{ $doctor->name }}</h2><p>{{ $doctor->designation }}</p><div class="doctor-meta"><span>Aarogya Hospital, Hisar</span></div><a class="btn btn-outline" href="{{ route('appointment.create') }}">Book Consultation</a></div>
 </article>
 @endforeach
 </div></div></section>

@@ -1,6 +1,8 @@
 @extends('layouts.site')
 
 @section('title', $service->name.' | Aarogya Hospital')
+@section('description', $service->meta_description ?: ($service->description ?: 'Learn more about '.$service->name.' at Aarogya Hospital.'))
+@section('keywords', $service->meta_tags ?: $service->name)
 @section('heading', $service->name)
 @section('intro', $service->description)
 
