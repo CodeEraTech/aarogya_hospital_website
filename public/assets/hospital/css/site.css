@@ -577,3 +577,4 @@ input:not([type="checkbox"]):not([type="radio"]):focus-visible, select:focus-vis
 .footer-socials .social-link:hover i { color: #fff !important; }
 .utility .social-links,
 .footer-socials { align-items: center !important; }
+.footer-socials .social-link { width: 30px !important; height: 30px !important; font-size: 14px !important; }
