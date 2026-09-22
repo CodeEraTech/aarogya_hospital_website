@@ -1,9 +1,9 @@
 @php
-    $mapAddress = trim($siteSettings['address'] ?? '');
+    $mapAddress = trim($siteSettings['address'] ?? 'Opposite Vishwas School, Near LIC Office, Urban Estate II, Hisar, Haryana 125001');
+    if ($mapAddress === '') $mapAddress = 'Opposite Vishwas School, Near LIC Office, Urban Estate II, Hisar, Haryana 125001';
     $mapQuery = trim('Aarogya Hospital, '.$mapAddress, ', ');
-    $mapSource = $mapAddress ? 'https://www.google.com/maps?q='.rawurlencode($mapQuery).'&z=17&output=embed' : '';
+    $mapSource = 'https://www.google.com/maps?q='.rawurlencode($mapQuery).'&z=17&output=embed';
 @endphp
-@if($mapSource)
 <section class="map-section" aria-labelledby="map-title">
     <div class="wrap map-layout">
         <div class="map-copy">
@@ -16,4 +16,3 @@
         </div>
     </div>
 </section>
-@endif

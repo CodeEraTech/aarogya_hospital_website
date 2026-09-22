@@ -17,10 +17,14 @@
                 <div><strong>Visit us</strong><span>Opposite Vishwas School, Near LIC Office, Urban Estate II, Hisar, Haryana 125001</span></div>
             </div>
         </div>
-        <div class="contact-page-card">
-            <h2>Plan your visit</h2>
-            <p>OPD hours are Monday–Saturday, 10:00 AM–3:00 PM. Please call before visiting to confirm availability.</p>
-            <div class="contact-page-actions"><a class="btn btn-primary" href="{{ route('appointment.create') }}">Book an Appointment</a><a class="btn btn-outline" href="https://maps.google.com/?q=Aarogya+Hospital+Hisar" target="_blank" rel="noopener">Get Directions</a></div>
+        @php
+            $mapAddress = trim($siteSettings['address'] ?? 'Opposite Vishwas School, Near LIC Office, Urban Estate II, Hisar, Haryana 125001');
+            if ($mapAddress === '') $mapAddress = 'Opposite Vishwas School, Near LIC Office, Urban Estate II, Hisar, Haryana 125001';
+            $mapQuery = trim('Aarogya Hospital, '.$mapAddress, ', ');
+            $mapSource = 'https://www.google.com/maps?q='.rawurlencode($mapQuery).'&z=17&output=embed';
+        @endphp
+        <div class="contact-map">
+            <iframe src="{{ $mapSource }}" title="Aarogya Hospital location map" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
         </div>
     </div>
 </section>
