@@ -115,23 +115,23 @@ class AdminController extends Controller
     public function saveAbout(Request $request)
     {
         $validated = $request->validate([
-            'about_content' => 'nullable|string',
-            'chairman_message' => 'nullable|string',
+            'about_content' => 'nullable|string|max:65535',
+            'chairman_message' => 'nullable|string|max:65535',
             'why_choose_1_title' => 'nullable|string|max:255',
-            'why_choose_1_content' => 'nullable|string',
+            'why_choose_1_content' => 'nullable|string|max:1000',
             'why_choose_2_title' => 'nullable|string|max:255',
-            'why_choose_2_content' => 'nullable|string',
+            'why_choose_2_content' => 'nullable|string|max:1000',
             'why_choose_3_title' => 'nullable|string|max:255',
-            'why_choose_3_content' => 'nullable|string',
+            'why_choose_3_content' => 'nullable|string|max:1000',
             'why_choose_4_title' => 'nullable|string|max:255',
-            'why_choose_4_content' => 'nullable|string',
+            'why_choose_4_content' => 'nullable|string|max:1000',
             'why_choose_5_title' => 'nullable|string|max:255',
-            'why_choose_5_content' => 'nullable|string',
+            'why_choose_5_content' => 'nullable|string|max:1000',
             'why_choose_6_title' => 'nullable|string|max:255',
-            'why_choose_6_content' => 'nullable|string',
-            'our_mission' => 'nullable|string',
-            'our_vision' => 'nullable|string',
-            'quality_policy' => 'nullable|string',
+            'why_choose_6_content' => 'nullable|string|max:1000',
+            'our_mission' => 'nullable|string|max:65535',
+            'our_vision' => 'nullable|string|max:65535',
+            'quality_policy' => 'nullable|string|max:65535',
         ]);
 
         foreach ($validated as $key => $value) {

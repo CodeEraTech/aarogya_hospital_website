@@ -154,6 +154,8 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
+    const quillInstances = {};
+    
     const editors = [
         { id: 'about_content', field: 'about_content' },
         { id: 'chairman_message', field: 'chairman_message' },
@@ -174,10 +176,20 @@ document.addEventListener('DOMContentLoaded', function() {
                 ]
             }
         });
+        
+        // Store quill instance for later use
+        quillInstances[editor.field] = quill;
+    });
 
-        const form = document.querySelector('form');
-        form.addEventListener('submit', function() {
-            document.getElementById(editor.field).value = quill.root.innerHTML;
+    // Update hidden fields before form submission
+    const form = document.querySelector('form');
+    form.addEventListener('submit', function(e) {
+        editors.forEach(function(editor) {
+            const quill = quillInstances[editor.field];
+            const hiddenInput = document.getElementById(editor.field);
+            if (quill && hiddenInput) {
+                hiddenInput.value = quill.root.innerHTML;
+            }
         });
     });
 });
