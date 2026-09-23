@@ -33,7 +33,7 @@
             <a href="{{ route('admin.resource.index','testimonials') }}">Testimonials</a>
             <a href="{{ route('admin.resource.index','gallery') }}">Gallery</a>
             <a href="{{ route('admin.about') }}"><i class="fa fa-info-circle"></i> About Us</a>
-            <a href="{{ route('admin.robotic-surgery') }}">Robotic Surgery</a>
+            <a href="{{ route('admin.robotic-surgery') }}"><i class="fa fa-cog"></i> Robotic Surgery</a>
             <a href="{{ route('admin.settings') }}">Settings</a>
         </nav>
         <div class="sidebar-footer"><a href="{{ route('home') }}" target="_blank">View website</a></div>

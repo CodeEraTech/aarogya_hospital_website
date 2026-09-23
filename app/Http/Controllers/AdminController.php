@@ -193,7 +193,7 @@ class AdminController extends Controller
             'robotic_how_it_works_image',
             'robotic_benefits_content',
             'robotic_comparison_content'
-        ])->pluck('value', 'key');
+        ])->pluck('value', 'key')->toArray();
         return view('admin.robotic-surgery', compact('robotic'));
     }
 

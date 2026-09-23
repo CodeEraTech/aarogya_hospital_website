@@ -2083,12 +2083,16 @@ h3 {
 }
 .rating-options {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(5, minmax(0, 1fr));
     gap: 8px;
     margin-top: 8px;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
 }
 .rating-options label {
     cursor: pointer;
+    min-width: 0;
 }
 .rating-options input {
     position: absolute;
@@ -5511,6 +5515,10 @@ textarea:focus-visible {
 .feedback-page {
     overflow: hidden;
 }
+.feedback-page .wrap {
+    max-width: 100%;
+    overflow-x: hidden;
+}
 .feedback-page .feedback-layout,
 .feedback-page .feedback-copy,
 .feedback-page .feedback-card,
@@ -5538,6 +5546,19 @@ textarea:focus-visible {
     min-width: 0;
     overflow-wrap: anywhere;
 }
+.rating-options {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+}
+.rating-options label {
+    min-width: 0;
+    max-width: 100%;
+}
+.rating-options label > span {
+    min-width: 0;
+    width: 100%;
+}
 .feedback-contact-note {
     display: grid;
     gap: 6px;
@@ -5563,6 +5584,7 @@ textarea:focus-visible {
     }
     .feedback-page .rating-options {
         grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 4px;
     }
 }
 
