@@ -179,6 +179,49 @@ class AdminController extends Controller
         return back()->with('success', 'About Us content saved successfully.');
     }
 
+    public function roboticSurgery()
+    {
+        $robotic = Setting::whereIn('key', [
+            'robotic_intro_content',
+            'robotic_advantages_content',
+            'robotic_image_1',
+            'robotic_image_2',
+            'robotic_image_3',
+            'robotic_velys_content',
+            'robotic_velys_image',
+            'robotic_how_it_works_content',
+            'robotic_how_it_works_image',
+            'robotic_benefits_content',
+            'robotic_comparison_content'
+        ])->pluck('value', 'key');
+        return view('admin.robotic-surgery', compact('robotic'));
+    }
+
+    public function saveRoboticSurgery(Request $request)
+    {
+        $validated = $request->validate([
+            'robotic_intro_content' => 'nullable|string|max:65535',
+            'robotic_advantages_content' => 'nullable|string|max:65535',
+            'robotic_velys_content' => 'nullable|string|max:65535',
+            'robotic_how_it_works_content' => 'nullable|string|max:65535',
+            'robotic_benefits_content' => 'nullable|string|max:65535',
+            'robotic_comparison_content' => 'nullable|string|max:65535',
+        ]);
+
+        foreach ($validated as $key => $value) {
+            Setting::updateOrCreate(['key' => $key], ['value' => $value, 'group' => 'Robotic Surgery']);
+        }
+
+        foreach (['robotic_image_1', 'robotic_image_2', 'robotic_image_3', 'robotic_velys_image', 'robotic_how_it_works_image'] as $key) {
+            if ($request->hasFile($key)) {
+                $path = $this->storeFile($request->file($key), 'robotic');
+                Setting::updateOrCreate(['key' => $key], ['value' => $path, 'group' => 'Robotic Surgery']);
+            }
+        }
+
+        return back()->with('success', 'Robotic Surgery content saved successfully.');
+    }
+
     public function index(string $resource, Request $request)
     {
         abort_unless(isset($this->resources[$resource]), 404);

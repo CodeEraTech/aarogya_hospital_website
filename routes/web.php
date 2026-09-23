@@ -106,7 +106,22 @@ Route::get('/about', function () {
     ])->pluck('value', 'key');
     return view('pages.about', compact('about'));
 })->name('about');
-Route::view('/robotic-surgery', 'home');
+Route::get('/robotic-surgery', function () {
+    $robotic = \App\Models\Setting::whereIn('key', [
+        'robotic_intro_content',
+        'robotic_advantages_content',
+        'robotic_image_1',
+        'robotic_image_2',
+        'robotic_image_3',
+        'robotic_velys_content',
+        'robotic_velys_image',
+        'robotic_how_it_works_content',
+        'robotic_how_it_works_image',
+        'robotic_benefits_content',
+        'robotic_comparison_content'
+    ])->pluck('value', 'key');
+    return view('pages.robotic-surgery', compact('robotic'));
+})->name('robotic-surgery');
 Route::get('/gallery', fn () => view('pages.gallery', ['galleryItems' => GalleryItem::where('status', 'Active')->orderBy('sort_order')->get()]))->name('gallery');
 Route::view('/contact', 'pages.contact')->name('contact');
 Route::get('/pages/{slug}', fn (string $slug) => view('pages.cms-page', ['page' => Page::where('status', 'Active')->where('slug', $slug)->firstOrFail()]))->name('pages.show');
@@ -141,6 +156,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::put('/settings', [AdminController::class, 'saveSettings'])->name('settings.save');
         Route::get('/about', [AdminController::class, 'about'])->name('about');
         Route::put('/about', [AdminController::class, 'saveAbout'])->name('about.save');
+        Route::get('/robotic-surgery', [AdminController::class, 'roboticSurgery'])->name('robotic-surgery');
+        Route::put('/robotic-surgery', [AdminController::class, 'saveRoboticSurgery'])->name('robotic-surgery.save');
         Route::resource('opd-schedules', OpdScheduleController::class)->except(['show']);
         Route::get('/empanelled-corporate/{key}/edit', [EmpanelledController::class, 'edit'])->whereNumber('key')->name('empanelled.edit');
         Route::put('/empanelled-corporate/{key}', [EmpanelledController::class, 'update'])->whereNumber('key')->name('empanelled.update');
