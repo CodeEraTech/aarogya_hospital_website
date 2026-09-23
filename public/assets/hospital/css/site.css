@@ -6100,7 +6100,7 @@ textarea:focus-visible {
 .robotic-image-card img { width: 100%; height: 240px; object-fit: cover; display: block; }
 .robotic-velys-section { display: grid; grid-template-columns: 1fr 400px; gap: 50px; align-items: center; margin: 70px 0; padding: 0; background: transparent; border-radius: 0; }
 .robotic-velys-image { order: 2; }
-.robotic-velys-image img { width: 100%; height: auto; border-radius: 12px; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1); }
+.robotic-velys-image img { width: 100%; height: auto; border-radius: 0; box-shadow: none; }
 .robotic-velys-content { order: 1; }
 .robotic-velys-content h3 { font-size: 26px; color: var(--navy); margin: 12px 0 16px; line-height: 1.3; }
 .robotic-velys-content p { font-size: 15px; line-height: 1.7; color: var(--ink); margin-bottom: 14px; }

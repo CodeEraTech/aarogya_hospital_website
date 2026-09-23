@@ -86,7 +86,7 @@
                 @endif
             </label>
             <label class="full">
-                <span>VELYS Content (Right side)</span>
+                <span>VELYS Content</span>
                 <div class="editor-container">
                     <div id="robotic_velys_content_editor" style="height: 200px;">{!! $robotic['robotic_velys_content'] ?? '<p>Designed for Digital Precision in Knee Replacement Surgery</p>' !!}</div>
                     <input type="hidden" name="robotic_velys_content" id="robotic_velys_content" value="{{ $robotic['robotic_velys_content'] ?? '' }}">
