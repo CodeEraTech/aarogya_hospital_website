@@ -22,7 +22,7 @@
                 <tr>
                     @foreach(($fields ?: ['id']) as $field)
                         <td>
-                            @if(in_array($field, ['content', 'bio', 'description', 'message', 'quote']))
+                            @if(in_array($field, ['content', 'subtitle', 'bio', 'description', 'message', 'quote']))
                                 <span class="truncate">{{ strip_tags($item->$field) }}</span>
                             @elseif(in_array($field, ['image', 'thumbnail']))
                                 @if($item->$field)<img class="file-preview" src="{{ asset($item->$field) }}" alt="Uploaded image">@else—@endif
