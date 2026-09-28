@@ -6436,7 +6436,7 @@ textarea:focus-visible {
     background: rgba(255, 255, 255, 0.95);
     border: 1px solid var(--line);
     border-radius: 50%;
-    color: var(--navy);
+    color: var(--teal);
     cursor: pointer;
     pointer-events: auto;
     transition: all 0.3s ease;
