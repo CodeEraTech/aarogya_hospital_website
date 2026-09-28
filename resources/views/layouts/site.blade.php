@@ -37,8 +37,8 @@
 
     @include('partials.site-footer')
     <nav class="mobile-cta" aria-label="Quick actions">
-        <a href="tel:+911662245450"><i class="fa fa-phone" aria-hidden="true"></i><span>Call</span></a>
-        <a href="tel:+918222049007"><i class="fa fa-phone" aria-hidden="true"></i><span>Helpline</span></a>
+        <a href="tel:{{ preg_replace('/\D+/', '', $siteSettings['site_phone']) }}"><i class="fa fa-phone" aria-hidden="true"></i><span>Call</span></a>
+        <a href="whatsapp://send?phone={{ preg_replace('/\D+/', '', $siteSettings['whatsapp_number']) }}"><i class="fa fa-phone" aria-hidden="true"></i><span>Helpline</span></a>
         <a href="{{ route('appointment.create') }}"><i class="fa fa-calendar" aria-hidden="true"></i><span>Appointment</span></a>
     </nav>
     <script src="{{ asset('assets/hospital/js/site.js') }}?v={{ filemtime(public_path('assets/hospital/js/site.js')) }}" defer></script>
