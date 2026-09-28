@@ -23,9 +23,9 @@
                             @endif
                             <div class="hero-actions">
                                 @if($slide->button_text && $slide->button_url)
-                                <a class="btn btn-primary" href="{{ $slide->button_url }}">{{ $slide->button_text }} <span>â†’</span></a>
+                                <a class="btn btn-primary" href="{{ $slide->button_url }}">{{ $slide->button_text }} <span aria-hidden="true">&rarr;</span></a>
                                 @endif
-                                <a class="btn btn-outline" href="{{ route('services.index') }}">Explore Our Services <span>â†“</span></a>
+                                <a class="btn btn-outline" href="{{ route('services.index') }}">Explore Our Services <span aria-hidden="true">&rarr;</span></a>
                             </div>
                         </div>
                     </div>
@@ -54,9 +54,9 @@
                     <div class="hero-copy">
                         <div class="eyebrow">WELCOME TO BETTER CARE</div>
                         <h1>Aarogya <br>Hospital<span class="hero-tagline">Expert care.<br>Human at heart.</span></h1>
-                        <p class="hero-description">Advanced Orthopaedic, Robotic Surgery, Trauma and Fertility Care â€” with a human touch.</p>
-                        <div class="hero-actions"><a class="btn btn-primary" href="{{ route('appointment.create') }}">Book an Appointment <span>â†’</span></a><a class="btn btn-outline" href="{{ route('services.index') }}">Explore Our Services <span>â†“</span></a></div>
-                        <div class="hero-points"><span><i>â™¡</i>World-Class<br>Technology</span><span><i>â™™</i>Experienced<br>Specialists</span><span><i>â™§</i>Personalised<br>Care</span><span><i>âœ§</i>Better<br>Outcomes</span></div>
+                        <p class="hero-description">Advanced Orthopaedic, Robotic Surgery, Trauma and Fertility Care &mdash; with a human touch.</p>
+                        <div class="hero-actions"><a class="btn btn-primary" href="{{ route('appointment.create') }}">Book an Appointment <span aria-hidden="true">&rarr;</span></a><a class="btn btn-outline" href="{{ route('services.index') }}">Explore Our Services <span aria-hidden="true">&rarr;</span></a></div>
+                        <div class="hero-points"><span><i aria-hidden="true">&#9825;</i>World-Class<br>Technology</span><span><i aria-hidden="true">&#9813;</i>Experienced<br>Specialists</span><span><i aria-hidden="true">&#9827;</i>Personalised<br>Care</span><span><i aria-hidden="true">&#10023;</i>Better<br>Outcomes</span></div>
                     </div>
                 </div>
             </div>
@@ -65,9 +65,9 @@
         <section class="stats-wrap" aria-label="Hospital information">
             <div class="wrap stats">
                 <div><strong>10 years</strong><span>Committed to care</span></div>
-                <div><strong>10 AMâ€“3 PM</strong><span>OPD Â· Mondayâ€“Saturday</span></div>
-                <div><strong>VELYSâ„¢</strong><span>Robotic knee replacement</span></div>
-                <div><strong>24 Ã— 7</strong><span>Orthopaedic &amp; Obs-Gynae emergency</span></div>
+                <div><strong>10 AM&ndash;3 PM</strong><span>OPD &middot; Monday&ndash;Saturday</span></div>
+                <div><strong>VELYS&trade;</strong><span>Robotic knee replacement</span></div>
+                <div><strong>24 &times; 7</strong><span>Orthopaedic &amp; Obs-Gynae emergency</span></div>
             </div>
         </section>
         <section class="section" id="specialities">
@@ -76,7 +76,7 @@
                     <div>
                         <div class="eyebrow">OUR SPECIALITIES</div>
                         <h2>Specialist care. Personal attention.</h2>
-                    </div><a href="{{ route('services.index') }}">Explore all services <span>â†’</span></a>
+                    </div><a href="{{ route('services.index') }}">Explore all services <span aria-hidden="true">&rarr;</span></a>
                 </div>
                 <div class="speciality-grid">
                     @forelse($services as $index => $service)
@@ -86,7 +86,7 @@
                         @else
                         <div class="service-art art-{{ ($index % 4) + 1 }}"><span>{{ str_pad($index + 1, 2, '0', STR_PAD_LEFT) }}</span><small>{{ strtoupper($service->name) }}</small></div>
                         @endif
-                        <div><h3>{{ $service->name }}</h3><p>{{ Str::limit(strip_tags($service->description ?? 'Explore this service at Aarogya Hospital.'), 150) }}</p><a aria-label="Learn more about {{ $service->name }}" href="{{ route('services.show', $service->slug) }}">→</a></div>
+                        <div><h3>{{ $service->name }}</h3><p>{{ Str::limit(strip_tags($service->description ?? 'Explore this service at Aarogya Hospital.'), 150) }}</p><a aria-label="Learn more about {{ $service->name }}" href="{{ route('services.show', $service->slug) }}">&rarr;</a></div>
                     </article>
                     @empty
                     <p class="empty-state">Our services will be listed here shortly.</p>
@@ -99,15 +99,9 @@
                 <div class="robotic-copy">
                     <div class="eyebrow">PRECISION MEETS EXPERIENCE</div>
                     <h2>Robotic-Assisted<br><em>Joint Replacement</em></h2>
-                    <p>VELYSâ„¢ robotic-assisted knee replacement, supported by the hospitalâ€™s orthopaedic team.</p><a class="btn btn-primary" data-track="robotic" href="/robotic-surgery">Discover Robotic Surgery <span>â†’</span></a>
+                    <p>VELYS&trade; robotic-assisted knee replacement, supported by the hospital&rsquo;s orthopaedic team.</p><a class="btn btn-primary" data-track="robotic" href="/robotic-surgery">Discover Robotic Surgery <span aria-hidden="true">&rarr;</span></a>
                 </div>
                 <div class="robotic-image"><img src="/assets/hospital/images/robotic-surgery.jpg" width="1792" height="1024" loading="lazy" alt="Robotic joint-replacement planning system in a modern operating theatre"></div>
-                <ul class="benefits">
-                    <li><span>Robotic knee replacement</span></li>
-                    <li><span>Hip replacement</span></li>
-                    <li><span>Sports injury care</span></li>
-                    <li><span>Orthopaedic trauma</span></li>
-                </ul>
             </div>
         </section>
         <section class="section doctors-section" id="doctors">
@@ -116,7 +110,7 @@
                     <div>
                         <div class="eyebrow">MEET OUR SPECIALISTS</div>
                         <h2>Experts Who Care</h2>
-                    </div><a href="{{ route('doctors.index') }}">View All Doctors <span>â†’</span></a>
+                    </div><a href="{{ route('doctors.index') }}">View All Doctors <span aria-hidden="true">&rarr;</span></a>
                 </div>
                 @if(isset($doctors) && $doctors->count() > 0)
                 <div class="doctor-grid">
@@ -134,7 +128,7 @@
                             @if($doctor->designation)
                             <p>{{ $doctor->designation }}</p>
                             @endif
-                            <a class="doctor-book" href="{{ route('appointment.create') }}">Book consultation â†’</a>
+                            <a class="doctor-book" href="{{ route('appointment.create') }}">Book consultation <span aria-hidden="true">&rarr;</span></a>
                         </div>
                     </article>
                     @endforeach
@@ -178,7 +172,7 @@
                 </div>
                 <aside class="priority">
                     <h2>Your Health<br>Our Priority</h2>
-                    <p>Arrange a consultation with our specialist team.</p><a class="btn btn-light" href="{{ route('appointment.create') }}">Book an Appointment <span>â†’</span></a>
+                    <p>Arrange a consultation with our specialist team.</p><a class="btn btn-light" href="{{ route('appointment.create') }}">Book an Appointment <span aria-hidden="true">&rarr;</span></a>
                 </aside>
             </div>
         </section>
@@ -188,7 +182,7 @@
                     <div>
                         <div class="eyebrow">HEALTH INSIGHTS</div>
                         <h2>Latest from Our Blog</h2>
-                    </div><a href="{{ route('blogs.index') }}">View All Blogs <span>â†’</span></a>
+                    </div><a href="{{ route('blogs.index') }}">View All Blogs <span aria-hidden="true">&rarr;</span></a>
                 </div>
                 @if(isset($blogs) && $blogs->count() > 0)
                 <div class="blog-directory">
@@ -207,7 +201,7 @@
                             @endif
                             <h2><a href="{{ route('blogs.show', $blog->slug) }}">{{ $blog->title }}</a></h2>
                             <p>{{ Str::limit(strip_tags($blog->excerpt ?? $blog->content), 120) }}</p>
-                            <a class="blog-card-link" href="{{ route('blogs.show', $blog->slug) }}">Read More <span>â†’</span></a>
+                            <a class="blog-card-link" href="{{ route('blogs.show', $blog->slug) }}">Read More <span aria-hidden="true">&rarr;</span></a>
                         </div>
                     </article>
                     @endforeach
@@ -229,4 +223,10 @@
         </section>
 @include('partials.google-map')
 @endsection
+
+
+
+
+
+
 

@@ -40,7 +40,7 @@
             </details>
             <a href="{{ route('contact') }}" @class(['active'=> request()->routeIs('contact')])>Contact</a>
         </nav>
-        <a class="btn btn-primary header-cta" href="{{ route('appointment.create') }}" aria-label="Book Appointment">Book Appointment <span>→</span></a>
+        <a class="btn btn-primary header-cta" href="{{ route('appointment.create') }}" aria-label="Book Appointment">Book Appointment <svg class="inline-icon" viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M4 10h11M10 5l5 5-5 5"/></svg></a>
         <span class="header-accreditation"><img src="{{ asset('assets/hospital/images/nabh-accredited.png') }}" alt="NABH Accredited" width="768" height="768"></span>
     </div>
 </header>
