@@ -67,15 +67,10 @@
     @endif
 </section>
 <section class="info-cards-section" aria-label="Hospital information">
-
     <div class="info-cards-wrap">
-
         <!-- ===================== OPD HOURS ===================== -->
-
         <article class="info-card info-card-blue">
-
             <div class="info-card-header">
-
                 <div class="info-card-icon" aria-hidden="true">
                     <svg viewBox="0 0 24 24" fill="none">
                         <rect x="3.5" y="2.5" width="17" height="19" rx="5"></rect>
@@ -83,143 +78,96 @@
                         <path d="M12 16.5V16.51"></path>
                     </svg>
                 </div>
-
                 <h3>OPD HOURS</h3>
-
             </div>
-
             <p>
-                Monday - Saturday: 10:00 AM - 03:00 PM
+                {{ $stats['stat_opd_hours'] ?? 'Monday - Saturday: 10:00 AM - 03:00 PM' }}
             </p>
-
             <a href="/contact" class="info-card-link">
                 <span>Know More</span>
-
                 <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
                     <path d="M5 12H19"></path>
                     <path d="M13 6L19 12L13 18"></path>
                 </svg>
             </a>
-
         </article>
-
-
         <!-- ===================== FIND A DOCTOR ===================== -->
-
         <article class="info-card info-card-green">
-
             <div class="info-card-header">
-
                 <div class="info-card-icon" aria-hidden="true">
                     <svg viewBox="0 0 24 24" fill="none">
                         <path d="M8 4V7"></path>
                         <path d="M16 4V7"></path>
                         <path d="M7 6H9"></path>
                         <path d="M15 6H17"></path>
-
                         <path d="M8.5 8.5H15.5C17.43 8.5 19 10.07 19 12V13.5C19 15.43 17.43 17 15.5 17H14V20"></path>
-
                         <path d="M8.5 8.5C6.57 8.5 5 10.07 5 12V13.5C5 15.43 6.57 17 8.5 17H10V20"></path>
-
                         <circle cx="19" cy="10" r="2"></circle>
                     </svg>
                 </div>
-
                 <h3>FIND A DOCTOR</h3>
-
             </div>
-
             <p>
-                Meet the Orthopaedics specialist and Obs-Gynae Specialist
+                {{ $stats['stat_find_doctor'] ?? 'Meet the Orthopaedics specialist and Obs-Gynae Specialist' }}
             </p>
-
             <a href="/doctors" class="info-card-link">
                 <span>Know More</span>
-
                 <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
                     <path d="M5 12H19"></path>
                     <path d="M13 6L19 12L13 18"></path>
                 </svg>
             </a>
-
         </article>
-
-
         <!-- ===================== OUR LOCATION ===================== -->
-
         <article class="info-card info-card-purple">
-
             <div class="info-card-header">
-
                 <div class="info-card-icon" aria-hidden="true">
                     <svg viewBox="0 0 24 24" fill="none">
                         <path d="M3.5 7.5H15.5V18.5H3.5V7.5Z"></path>
                         <path d="M15.5 10H19L21 13V18.5H15.5"></path>
-
                         <circle cx="7.5" cy="18.5" r="2"></circle>
                         <circle cx="17.5" cy="18.5" r="2"></circle>
-
                         <path d="M7.5 11V14"></path>
                         <path d="M6 12.5H9"></path>
                     </svg>
                 </div>
-
                 <h3>OUR LOCATION</h3>
-
             </div>
-
             <p>
-                Opposite Vishwas School, Near Lic Office, Urban Estate II, Hisar, Haryana 125001
+                {{ $stats['stat_our_location'] ?? 'Opposite Vishwas School, Near Lic Office, Urban Estate II, Hisar, Haryana 125001' }}
             </p>
-
             <a href="/contact" class="info-card-link">
                 <span>Know More</span>
-
                 <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
                     <path d="M5 12H19"></path>
                     <path d="M13 6L19 12L13 18"></path>
                 </svg>
             </a>
-
         </article>
-
-
         <!-- ===================== CONNECT WITH US ===================== -->
-
         <article class="info-card info-card-pink">
-
             <div class="info-card-header">
-
                 <div class="info-card-icon" aria-hidden="true">
                     <svg viewBox="0 0 24 24" fill="none">
                         <path d="M5.5 4H9L11 9L8.5 10.5C9.57 12.67 11.33 14.43 13.5 15.5L15 13L20 15V18.5C20 19.6 19.1 20.5 18 20.5C10.27 20.5 3.5 13.73 3.5 6C3.5 4.9 4.4 4 5.5 4Z"></path>
-
                         <path d="M17 3V8"></path>
                         <path d="M14.5 5.5H19.5"></path>
                     </svg>
                 </div>
-
                 <h3>CONNECT WITH US</h3>
-
             </div>
-
             <p>
-                CALL: 01662-245450, 8222049007, 8222049008
+                {{ $stats['stat_connect_with_us'] ?? 'CALL: 01662-245450, 8222049007, 8222049008' }}
             </p>
-
             <a href="/contact" class="info-card-link">
                 <span>Know More</span>
-
                 <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
                     <path d="M5 12H19"></path>
                     <path d="M13 6L19 12L13 18"></path>
                 </svg>
             </a>
-
         </article>
-
     </div>
-
 </section>
 
 <section class="section" id="specialities">

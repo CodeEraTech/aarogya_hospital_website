@@ -39,8 +39,7 @@ Route::get('/', function () {
             ->orderBy('name')
             ->limit(4)
             ->get(),
-
-        'psettings' => Setting::whereIn('key', ['site_phone', 'whatsapp_number', 'site_email'])->pluck('value', 'key'),
+        'stats' => Setting::whereIn('key', ['stat_find_doctor', 'stat_opd_hours', 'stat_connect_with_us','stat_our_location'])->pluck('value', 'key'),
     ]);
 })->name('home');
 Route::post('/appointments', [AppointmentController::class, 'store'])->middleware('throttle:5,1')->name('appointments.store');
