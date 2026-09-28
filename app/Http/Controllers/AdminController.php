@@ -17,7 +17,7 @@ class AdminController extends Controller
         'pages' => [Page::class, 'Pages', ['title', 'status', 'content']],
         'blogs' => [Blog::class, 'Blog posts', ['title', 'slug', 'content', 'image', 'published_at', 'status', 'meta_title', 'meta_description']],
         'gallery' => [GalleryItem::class, 'Gallery', ['title', 'image', 'status', 'sort_order']],
-        'slides' => [Slide::class, 'Slides', ['title', 'slug', 'image', 'button_text', 'button_url', 'status', 'sort_order']],
+        'slides' => [Slide::class, 'Slides', ['title', 'slug', 'subtitle', 'image', 'button_text', 'button_url', 'status', 'sort_order']],
         'testimonials' => [Testimonial::class, 'Patient testimonials', ['name', 'type', 'quote', 'video_file', 'video_url', 'status', 'sort_order']],
         'appointments' => [Appointment::class, 'Appointments', ['patient_id', 'patient_name', 'mobile_number', 'email', 'preferred_doctor', 'preferred_date', 'preferred_time', 'status', 'message']],
         'feedback' => [Feedback::class, 'Feedback', ['name', 'phone', 'email', 'department', 'rating', 'message', 'status']],
@@ -175,7 +175,7 @@ class AdminController extends Controller
         }
 
         \Log::info('About content saved successfully');
-        
+
         return back()->with('success', 'About Us content saved successfully.');
     }
 
@@ -251,7 +251,7 @@ class AdminController extends Controller
         $data = $request->except(['_token', '_method']);
         if ($resource === 'doctors') $request->validate(['speciality' => 'required|string|max:190']);
         if ($resource === 'services') $request->validate(['description' => 'nullable|string|max:1000', 'image' => 'required|file|mimes:jpg,jpeg,png,webp,gif|max:5120']);
-        if ($resource === 'gallery') $request->validate(['image'=>'required|file|mimes:jpg,jpeg,png,webp,gif|max:5120']);
+        if ($resource === 'gallery') $request->validate(['image' => 'required|file|mimes:jpg,jpeg,png,webp,gif|max:5120']);
         if (in_array($resource, ['doctors', 'services', 'pages', 'blogs', 'slides'])) $data['slug'] = Str::slug($data['title'] ?? $data['name']);
         $data = $this->processFiles($data, $request, $resource);
         if (in_array('status', $this->resources[$resource][2])) $data['status'] = $data['status'] ?? 'Active';
