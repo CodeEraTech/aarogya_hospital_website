@@ -101,7 +101,7 @@
                     <h2>Robotic-Assisted<br><em>Joint Replacement</em></h2>
                     <p>VELYS&trade; robotic-assisted knee replacement, supported by the hospital&rsquo;s orthopaedic team.</p><a class="btn btn-primary" data-track="robotic" href="/robotic-surgery">Discover Robotic Surgery <span aria-hidden="true">&rarr;</span></a>
                 </div>
-                <div class="robotic-image"><img src="/assets/hospital/images/robotic-surgery.jpg" width="1792" height="1024" loading="lazy" alt="Robotic joint-replacement planning system in a modern operating theatre"></div>
+                <div class="robotic-image"><img src="/assets/hospital/images/robotic-surgery.png" width="1792" height="1024" loading="lazy" alt="Robotic joint-replacement planning system in a modern operating theatre"></div>
             </div>
         </section>
         <section class="section doctors-section" id="doctors">
