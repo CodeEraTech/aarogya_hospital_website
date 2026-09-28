@@ -170,6 +170,17 @@
     </div>
 </section>
 
+<section class="robotic-section" id="robotic">
+    <div class="wrap robotic-panel reveal">
+        <div class="robotic-copy">
+            <div class="eyebrow">PRECISION MEETS EXPERIENCE</div>
+            <h2>Robotic-Assisted<br><em>Joint Replacement</em></h2>
+            <p>VELYS&trade; robotic-assisted knee replacement, supported by the hospital&rsquo;s orthopaedic team.</p><a class="btn btn-primary" data-track="robotic" href="/robotic-surgery">Discover Robotic Surgery <span aria-hidden="true">&rarr;</span></a>
+        </div>
+        <div class="robotic-image"><img src="/assets/hospital/images/robotic-surgery.png" width="1792" height="1024" loading="lazy" alt="Robotic joint-replacement planning system in a modern operating theatre"></div>
+    </div>
+</section>
+
 <section class="section" id="specialities">
     <div class="wrap">
         <div class="section-head">
@@ -197,16 +208,7 @@
         </div>
     </div>
 </section>
-<section class="robotic-section" id="robotic">
-    <div class="wrap robotic-panel reveal">
-        <div class="robotic-copy">
-            <div class="eyebrow">PRECISION MEETS EXPERIENCE</div>
-            <h2>Robotic-Assisted<br><em>Joint Replacement</em></h2>
-            <p>VELYS&trade; robotic-assisted knee replacement, supported by the hospital&rsquo;s orthopaedic team.</p><a class="btn btn-primary" data-track="robotic" href="/robotic-surgery">Discover Robotic Surgery <span aria-hidden="true">&rarr;</span></a>
-        </div>
-        <div class="robotic-image"><img src="/assets/hospital/images/robotic-surgery.png" width="1792" height="1024" loading="lazy" alt="Robotic joint-replacement planning system in a modern operating theatre"></div>
-    </div>
-</section>
+
 <section class="section doctors-section" id="doctors">
     <div class="wrap">
         <div class="section-head">

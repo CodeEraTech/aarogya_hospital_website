@@ -5944,7 +5944,7 @@ textarea:focus-visible {
     min-width: 0;
 }
 .footer-grid-modern > div:last-child {
-    min-width: 0;
+    min-width: 500px;
 }
 .footer-grid-modern > div:last-child span {
     overflow-wrap: anywhere;
