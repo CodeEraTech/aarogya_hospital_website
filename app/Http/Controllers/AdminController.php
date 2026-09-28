@@ -17,7 +17,7 @@ class AdminController extends Controller
         'pages' => [Page::class, 'Pages', ['title', 'status', 'content']],
         'blogs' => [Blog::class, 'Blog posts', ['title', 'slug', 'content', 'image', 'published_at', 'status', 'meta_title', 'meta_description']],
         'gallery' => [GalleryItem::class, 'Gallery', ['title', 'image', 'status', 'sort_order']],
-        'slides' => [Slide::class, 'Slides', ['title', 'slug', 'subtitle', 'image', 'button_text', 'button_url', 'status', 'sort_order']],
+        'slides' => [Slide::class, 'Slides', ['title', 'slug', 'image', 'button_text', 'button_url', 'status', 'sort_order']],
         'testimonials' => [Testimonial::class, 'Patient testimonials', ['name', 'type', 'quote', 'video_file', 'video_url', 'status', 'sort_order']],
         'appointments' => [Appointment::class, 'Appointments', ['patient_id', 'patient_name', 'mobile_number', 'email', 'preferred_doctor', 'preferred_date', 'preferred_time', 'status', 'message']],
         'feedback' => [Feedback::class, 'Feedback', ['name', 'phone', 'email', 'department', 'rating', 'message', 'status']],

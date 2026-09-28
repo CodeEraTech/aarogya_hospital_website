@@ -9,6 +9,7 @@ use App\Models\Service;
 use App\Models\Setting;
 use App\Models\Testimonial;
 use App\Models\Blog;
+use App\Models\Slide;
 use App\Models\Page;
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\OpdScheduleController;
@@ -17,6 +18,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('home', [
+        'slides' => \App\Models\Slide::where('status', 'Active')
+            ->orderBy('sort_order')
+            ->get(),
         'testimonials' => Testimonial::where('status', 'Active')
             ->where('type','Text')
             ->orderBy('sort_order')

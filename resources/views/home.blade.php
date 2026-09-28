@@ -54,16 +54,60 @@
         </div>
     </header>
     <main id="main">
-        <section class="hero" id="about">
-            <div class="wrap hero-grid">
-                <div class="hero-copy reveal">
-                    <div class="eyebrow">WELCOME TO BETTER CARE</div>
-                    <h1>Aarogya <br>Hospital<span class="hero-tagline">Expert care.<br>Human at heart.</span></h1>
-                    <p>Advanced Orthopaedic, Robotic Surgery, Trauma and Fertility Care — with a human touch.</p>
-                    <div class="hero-actions"><button class="btn btn-primary" type="button" data-open-appointment>Book an Appointment <span>→</span></button><a class="btn btn-outline" href="#specialities">Explore Our Services <span>↓</span></a></div>
-                    <div class="hero-points"><span><i>♡</i>World-Class<br>Technology</span><span><i>♙</i>Experienced<br>Specialists</span><span><i>♧</i>Personalised<br>Care</span><span><i>✧</i>Better<br>Outcomes</span></div>
+        <section class="hero hero-slider" id="hero">
+            @if(isset($slides) && $slides->count() > 0)
+            <div class="hero-carousel">
+                @foreach($slides as $index => $slide)
+                <div class="hero-slide @if($index === 0) active @endif" data-slide="{{ $index }}">
+                    <div class="hero-background" style="background-image: url('{{ asset($slide->image) }}')"></div>
+                    <div class="wrap hero-grid">
+                        <div class="hero-copy">
+                            @if($slide->slug)
+                            <div class="eyebrow">{{ strtoupper($slide->slug) }}</div>
+                            @endif
+                            <h1>{!! nl2br(e($slide->title)) !!}</h1>
+                            @if($slide->subtitle)
+                            <p class="hero-description">{!! nl2br(e($slide->subtitle)) !!}</p>
+                            @endif
+                            @if($slide->button_text && $slide->button_url)
+                            <div class="hero-actions">
+                                <a class="btn btn-primary" href="{{ $slide->button_url }}">{{ $slide->button_text }} <span>→</span></a>
+                            </div>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+            @if($slides->count() > 1)
+            <div class="hero-controls">
+                <button class="hero-control hero-prev" aria-label="Previous slide">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                </button>
+                <button class="hero-control hero-next" aria-label="Next slide">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                </button>
+            </div>
+            <div class="hero-indicators">
+                @foreach($slides as $index => $slide)
+                <button class="hero-indicator @if($index === 0) active @endif" data-slide="{{ $index }}" aria-label="Go to slide {{ $index + 1 }}"></button>
+                @endforeach
+            </div>
+            @endif
+            @else
+            <div class="hero-slide active">
+                <div class="hero-background" style="background-image: url('/assets/hospital/images/aarogya-hero.jpg')"></div>
+                <div class="wrap hero-grid">
+                    <div class="hero-copy">
+                        <div class="eyebrow">WELCOME TO BETTER CARE</div>
+                        <h1>Aarogya <br>Hospital<span class="hero-tagline">Expert care.<br>Human at heart.</span></h1>
+                        <p class="hero-description">Advanced Orthopaedic, Robotic Surgery, Trauma and Fertility Care — with a human touch.</p>
+                        <div class="hero-actions"><button class="btn btn-primary" type="button" data-open-appointment>Book an Appointment <span>→</span></button><a class="btn btn-outline" href="#specialities">Explore Our Services <span>↓</span></a></div>
+                        <div class="hero-points"><span><i>♡</i>World-Class<br>Technology</span><span><i>♙</i>Experienced<br>Specialists</span><span><i>♧</i>Personalised<br>Care</span><span><i>✧</i>Better<br>Outcomes</span></div>
+                    </div>
                 </div>
             </div>
+            @endif
         </section>
         <section class="stats-wrap" aria-label="Hospital information">
             <div class="wrap stats">
