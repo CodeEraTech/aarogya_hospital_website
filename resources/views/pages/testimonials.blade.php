@@ -85,6 +85,11 @@ return $testimonial->type === 'Text'
 
             @foreach($textTestimonials as $testimonial)
 
+            @php
+            $nameParts = preg_split('/\s+/', trim($testimonial->name ?? ''), -1, PREG_SPLIT_NO_EMPTY);
+            $initials = collect($nameParts)->take(2)->map(fn ($part) => strtoupper(substr($part, 0, 1)))->implode('') ?: 'P';
+            @endphp
+
             <article class="testimonial-text-card">
 
                 <div
@@ -102,22 +107,7 @@ return $testimonial->type === 'Text'
                     <span
                         class="testimonial-initials"
                         aria-hidden="true">
-                        {{
-                                    collect(
-                                        preg_split(
-                                            '/\s+/',
-                                            trim($testimonial->name ?? ''),
-                                            -1,
-                                            PREG_SPLIT_NO_EMPTY
-                                        )
-                                    )
-                                    ->take(2)
-                                    ->map(function ($part) {
-                                        return strtoupper(substr($part, 0, 1));
-                                    })
-                                    ->implode('')
-                                    ?: 'P'
-                                }}
+                        {{ $initials }}
                     </span>
 
                     <div>

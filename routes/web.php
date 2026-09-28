@@ -33,7 +33,12 @@ Route::get('/', function () {
         'doctors' => Doctor::where('status', 'Active')
             ->orderBy('sort_order')
             ->limit(4)
-            ->get()
+            ->get(),
+        'services' => Service::where('status', 'Active')
+            ->orderBy('sort_order')
+            ->orderBy('name')
+            ->limit(4)
+            ->get(),
     ]);
 })->name('home');
 Route::post('/appointments', [AppointmentController::class, 'store'])->middleware('throttle:5,1')->name('appointments.store');

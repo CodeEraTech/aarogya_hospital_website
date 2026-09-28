@@ -1,43 +1,124 @@
-const menuButton=document.querySelector('.menu-btn');const menu=document.querySelector('#main-nav');
-document.querySelectorAll('.nav-dropdown').forEach(dropdown=>{const toggle=dropdown.querySelector('summary,.nav-dropdown-toggle');const submenu=dropdown.querySelector('.nav-dropdown-menu');if(!toggle||!submenu)return;let clicked=false;const setOpen=open=>{dropdown.classList.toggle('open',open);if(dropdown.tagName==='DETAILS')dropdown.open=open;submenu.style.setProperty('display',open?'grid':'none','important');submenu.style.setProperty('visibility',open?'visible':'hidden','important');submenu.style.setProperty('opacity',open?'1':'0','important');submenu.style.setProperty('pointer-events',open?'auto':'none','important')};toggle.addEventListener('click',event=>{event.preventDefault();clicked=!clicked;setOpen(clicked)});dropdown.addEventListener('mouseenter',()=>{if(!clicked)setOpen(true)});dropdown.addEventListener('mouseleave',()=>{if(!clicked)setOpen(false)});document.addEventListener('click',event=>{if(!dropdown.contains(event.target)){clicked=false;setOpen(false)}})});
-if(window.matchMedia('(min-width:1181px)').matches){document.querySelectorAll('.nav-dropdown').forEach(dropdown=>{const toggle=dropdown.querySelector('summary,.nav-dropdown-toggle');const submenu=dropdown.querySelector('.nav-dropdown-menu');if(!toggle||!submenu)return;const placeSubmenu=()=>{const rect=toggle.getBoundingClientRect();submenu.style.setProperty('position','fixed','important');submenu.style.setProperty('top',(rect.bottom+2)+'px','important');submenu.style.setProperty('left',(rect.left+rect.width/2)+'px','important');submenu.style.setProperty('transform','translateX(-50%)','important');submenu.style.setProperty('min-width','230px','important');submenu.style.setProperty('z-index','99999','important')};dropdown.addEventListener('mouseenter',placeSubmenu);toggle.addEventListener('click',placeSubmenu);window.addEventListener('resize',()=>{if(dropdown.classList.contains('open'))placeSubmenu()})})}
-const submenuLinks=[...document.querySelectorAll('.nav-dropdown-menu a[href*="empanelled-corporate"]')];submenuLinks.forEach(link=>{link.dataset.originalHref=link.href;link.removeAttribute('href')});
-const empanelledDropdown=menu?.querySelector('.nav-dropdown');const empanelledToggle=empanelledDropdown?.querySelector('button.nav-dropdown-toggle');const closeEmpanelled=()=>{empanelledDropdown?.classList.remove('open');empanelledToggle?.setAttribute('aria-expanded','false')};empanelledToggle?.addEventListener('click',event=>{event.preventDefault();const open=!empanelledDropdown.classList.contains('open');empanelledDropdown.classList.toggle('open',open);empanelledToggle.setAttribute('aria-expanded',String(open))});document.addEventListener('click',event=>{if(empanelledDropdown&&!empanelledDropdown.contains(event.target))closeEmpanelled()});
-const empanelledLink=menu?.querySelector('a[href*="empanelled-corporate"]');const empanelledSections=window.EMPANELLED_SECTIONS||{1:{name:'Government Departments',slug:'government-departments'},2:{name:'TPA’s',slug:'tpas'},3:{name:'Insurance Companies',slug:'insurance-companies'}};if(empanelledLink){const dropdown=document.createElement('div');dropdown.className='nav-dropdown';const parent=empanelledLink.parentNode;parent.insertBefore(dropdown,empanelledLink);dropdown.appendChild(empanelledLink);const list=document.createElement('div');list.className='nav-dropdown-menu';Object.values(empanelledSections).forEach(item=>{const link=document.createElement('a');link.href='/patient-resources/empanelled-corporate/'+item.slug;link.textContent=item.name;list.appendChild(link)});dropdown.appendChild(list)}
-menuButton?.addEventListener('click',()=>{const open=!menu.classList.contains('open');menu.classList.toggle('open',open);menuButton.setAttribute('aria-expanded',String(open));document.body.classList.toggle('menu-open',open)});
-submenuLinks.forEach(link=>{if(link.dataset.originalHref)link.href=link.dataset.originalHref});
-menu?.querySelectorAll('a').forEach(link=>link.addEventListener('click',()=>{menu.classList.remove('open');menuButton?.setAttribute('aria-expanded','false');document.body.classList.remove('menu-open')}));
-const dialog=document.querySelector('#appointment-dialog');const openDialog=()=>{if(dialog&&!dialog.open){dialog.showModal();setTimeout(()=>dialog.querySelector('input:not([type=hidden])')?.focus(),80)}};
-document.querySelectorAll('[data-appointment-doctor]').forEach(button=>button.addEventListener('click',()=>{const doctor=dialog?.querySelector('[name="doctor"]');if(doctor){doctor.value=button.dataset.appointmentDoctor.split(' & ')[0]}}));
-document.querySelectorAll('[data-open-appointment]').forEach(button=>button.addEventListener('click',openDialog));document.querySelectorAll('[data-close-appointment]').forEach(button=>button.addEventListener('click',()=>dialog?.close()));dialog?.addEventListener('click',event=>{if(event.target===dialog)dialog.close()});document.addEventListener('keydown',event=>{if(event.key==='Escape'&&menu?.classList.contains('open'))menuButton?.click()});
-if(window.AAROGYA_FORM_STATE?.open)openDialog();
-if(new URLSearchParams(window.location.search).has('book'))openDialog();
-document.querySelectorAll('.header-cta').forEach(button=>{button.title='Book Appointment';button.setAttribute('aria-label','Book Appointment')});
-const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('visible');observer.unobserve(entry.target)}}),{threshold:.12});document.querySelectorAll('.reveal').forEach(element=>observer.observe(element));
-document.querySelector('.appointment-form')?.addEventListener('submit',event=>{const form=event.currentTarget;let valid=true;form.querySelectorAll('[required]').forEach(field=>{field.setAttribute('aria-invalid',String(!field.value.trim()));if(!field.value.trim())valid=false});if(!valid){event.preventDefault();form.querySelector('[aria-invalid=true]')?.focus();return}const button=form.querySelector('.submit-btn');if(button){button.disabled=true;button.textContent='Sending request…'}});
-document.querySelectorAll('[data-track]').forEach(element=>element.addEventListener('click',()=>{window.dataLayer=window.dataLayer||[];window.dataLayer.push({event:'aarogya_conversion',action:element.dataset.track})}));
-document.querySelectorAll('.appointment-form select[name="speciality"]').forEach(select=>{select.closest('label')?.remove();select.remove()});
-const serviceLink='/services';document.querySelectorAll('a[href="#specialities"],a[href="/specialities"]').forEach(link=>{link.href=serviceLink;link.textContent=link.textContent.replace(/specialities/gi,'Services')});const homeServices=document.querySelector('#specialities');if(homeServices){homeServices.id='services';homeServices.querySelector('.eyebrow')?.replaceChildren('OUR SERVICES');const exploreLink=homeServices.querySelector('.section-head > a');if(exploreLink){exploreLink.href=serviceLink;exploreLink.replaceChildren('Explore all services ',Object.assign(document.createElement('span'),{textContent:'→'}))}}document.querySelectorAll('a[href^="/specialities/"]').forEach(link=>{link.href=link.getAttribute('href').replace('/specialities/','/services/')});
-const serviceGrid=document.querySelector('#services .speciality-grid');if(serviceGrid){fetch('/services-data',{headers:{Accept:'application/json'}}).then(function(response){return response.ok?response.json():[]}).then(function(services){if(!Array.isArray(services)||!services.length)return;const escapeHtml=function(value){return String(value||'').replace(/[&<>"']/g,function(character){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[character]})};const limitedServices=services.slice(0,4);serviceGrid.innerHTML=limitedServices.map(function(service,index){const name=escapeHtml(service.name);const serviceUrl='/services/'+encodeURIComponent(service.slug);const image=service.image?'<img class="service-card-image" src="/'+escapeHtml(service.image)+'" alt="'+name+'" loading="lazy">':'<div class="service-card-image-placeholder" aria-hidden="true"></div>';return '<article class="speciality-card service-card reveal" style="--delay:'+(index*70)+'ms" onclick="window.location.href=\''+serviceUrl+'\'" style="cursor:pointer">'+image+'<div><h3>'+name+'</h3><p>'+escapeHtml(service.description||'Explore this service at Aarogya Hospital.')+'</p><a aria-label="Learn more about '+name+'" href="'+serviceUrl+'" onclick="event.stopPropagation()">→</a></div></article>'}).join('');serviceGrid.querySelectorAll('.reveal').forEach(function(element){element.classList.add('visible')})}).catch(function(){})}
-document.querySelectorAll('a[href="#doctors"]').forEach(function(link){link.href='/doctors'});document.querySelectorAll('a[href="#contact"]').forEach(function(link){link.href='/contact'});document.querySelectorAll('[data-open-appointment]').forEach(function(button){button.addEventListener('click',function(event){event.preventDefault();event.stopImmediatePropagation();window.location.href='/appointment'},true)});
-const homeNavigation=document.querySelector('.hero')?.closest('body')?.querySelector('.main-nav');if(homeNavigation){const specialitiesLink=homeNavigation.querySelector('a[href="/services"],a[href="#specialities"]');if(specialitiesLink){specialitiesLink.href='/services';specialitiesLink.textContent='Services'}const doctorsLink=homeNavigation.querySelector('a[href="#doctors"]');if(doctorsLink)doctorsLink.href='/doctors';const contactLink=homeNavigation.querySelector('a[href="#contact"]');if(contactLink)contactLink.href='/contact';if(!homeNavigation.querySelector('a[href="/patient-resources/feedback"]')){const feedbackLink=document.createElement('a');feedbackLink.href='/patient-resources/feedback';feedbackLink.textContent='Feedback';const corporate=homeNavigation.querySelector('.nav-dropdown');if(corporate)corporate.after(feedbackLink)}}
-const utilityNavigation=document.querySelector('.utility nav');if(utilityNavigation){utilityNavigation.closest('.utility-inner')?.querySelector(':scope > span')?.remove();utilityNavigation.querySelectorAll('a[href*="/emergency"],a[href^="tel:"],a[href*="#location"]').forEach(function(link){link.remove()});if(!utilityNavigation.querySelector('[data-top-links]')){const topLinks=document.createElement('span');topLinks.dataset.topLinks='true';topLinks.className='top-utility-links';topLinks.innerHTML='<a class="utility-action" href="/robotic-surgery">Robotic Surgery</a><a class="utility-action" href="/patient-resources/opd-schedule">OPD Schedule</a><a class="utility-action" href="/patient-resources/feedback">Feedback</a>';utilityNavigation.prepend(topLinks)}if(!document.querySelector('link[data-social-icons]')){const iconStyles=document.createElement('link');iconStyles.rel='stylesheet';iconStyles.href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css';iconStyles.dataset.socialIcons='true';document.head.appendChild(iconStyles)}fetch('/site-socials',{headers:{Accept:'application/json'}}).then(function(response){return response.ok?response.json():{}}).then(function(socials){const available=Object.keys(socials).filter(function(key){return socials[key]});if(!available.length)return;const links=document.createElement('span');links.className='social-links';links.setAttribute('aria-label','Social media links');const classes={facebook:'fa-facebook',instagram:'fa-instagram',linkedin:'fa-linkedin',youtube:'fa-youtube',whatsapp:'fa-whatsapp'};available.forEach(function(key){const link=document.createElement('a');link.className='social-link social-'+key;link.href=socials[key];link.target='_blank';link.rel='noopener';link.setAttribute('aria-label',key.charAt(0).toUpperCase()+key.slice(1));link.innerHTML='<i class="fa '+classes[key]+'" aria-hidden="true"></i>';links.appendChild(link)});utilityNavigation.appendChild(links)}).catch(function(){})}
-document.querySelectorAll('.main-nav a[href*="opd-schedule"]').forEach(function(link){link.href='/testimonials';link.textContent='Testimonials'});if(document.querySelector('.main-nav')&&!document.querySelector('.main-nav a[href="/testimonials"]')){const mainNav=document.querySelector('.main-nav');const gallery=mainNav.querySelector('a[href*="/gallery"]');if(gallery){const testimonialLink=document.createElement('a');testimonialLink.href='/testimonials';testimonialLink.textContent='Testimonials';gallery.before(testimonialLink)}}
-const utilityOrder=document.querySelector('.utility nav');if(utilityOrder){const reorderUtility=function(){const socials=utilityOrder.querySelector('.social-links');const topLinks=utilityOrder.querySelector('[data-top-links]');if(socials&&utilityOrder.firstElementChild!==socials)utilityOrder.prepend(socials);if(topLinks&&utilityOrder.lastElementChild!==topLinks)utilityOrder.appendChild(topLinks)};reorderUtility();new MutationObserver(reorderUtility).observe(utilityOrder,{childList:true})}
-const topUtilityLinks=document.querySelector('[data-top-links]');if(topUtilityLinks&&!topUtilityLinks.querySelector('a[href="/contact"]')){const contactUtility=document.createElement('a');contactUtility.className='utility-action';contactUtility.href='/contact';contactUtility.textContent='Contact';topUtilityLinks.appendChild(contactUtility)}
-const primaryNavigation=document.querySelector('.main-nav');if(primaryNavigation){primaryNavigation.querySelectorAll('a[href*="/patient-resources/feedback"],a[href="/contact"],a[href="#contact"]').forEach(function(link){link.remove()});if(!primaryNavigation.querySelector('a[href="/blogs"]')){const blogsLink=document.createElement('a');blogsLink.href='/blogs';blogsLink.textContent='Blogs';const galleryLink=primaryNavigation.querySelector('a[href*="/gallery"]');if(galleryLink)galleryLink.before(blogsLink);else primaryNavigation.appendChild(blogsLink)}}
-const utilityInner=document.querySelector('.utility-inner');const relocateSocialLinks=function(){const socialLinks=utilityInner?.querySelector('.utility nav .social-links');if(socialLinks&&utilityInner.firstElementChild!==socialLinks)utilityInner.prepend(socialLinks)};relocateSocialLinks();if(utilityInner){new MutationObserver(relocateSocialLinks).observe(utilityInner,{childList:true,subtree:true})}
-const siteFooters=document.querySelectorAll('.footer');if(siteFooters.length){fetch('/site-footer',{headers:{Accept:'application/json'}}).then(function(response){return response.ok?response.json():null}).then(function(data){if(!data)return;const escapeFooter=function(value){return String(value||'').replace(/[&<>"']/g,function(character){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[character]})};const safeUrl=function(value){return String(value||'').replace(/["'<>]/g,'')};const iconClasses={facebook:'fa-facebook',instagram:'fa-instagram',linkedin:'fa-linkedin',youtube:'fa-youtube',whatsapp:'fa-whatsapp'};const socials=Object.keys(data.socials||{}).map(function(key){return '<a class="social-link social-'+key+'" href="'+safeUrl(data.socials[key])+'" target="_blank" rel="noopener" aria-label="'+key+'"><i class="fa '+iconClasses[key]+'" aria-hidden="true"></i></a>'}).join('');const pages=(data.pages||[]).map(function(page){return '<a href="/pages/'+encodeURIComponent(page.slug)+'">'+escapeFooter(page.title)+'</a>'}).join('');const phone=data.phone?'<a href="tel:'+safeUrl(data.phone)+'">'+escapeFooter(data.phone)+'</a>':'';const email=data.email?'<a href="mailto:'+safeUrl(data.email)+'">'+escapeFooter(data.email)+'</a>':'';const whatsapp=data.whatsapp?'<a href="'+safeUrl(data.whatsapp)+'" target="_blank" rel="noopener">WhatsApp</a>':'';const address=data.address?'<span>'+escapeFooter(data.address)+'</span>':'';const about=escapeFooter(data.about||'Advanced healthcare with modern technology and a human touch.');const logo='/'+safeUrl(data.logo||'assets/hospital/images/aarogya-logo.png');const footerMarkup='<div class="wrap footer-grid footer-grid-modern"><div class="footer-brand"><a class="logo footer-logo" href="/"><img class="footer-logo-image" src="'+logo+'" alt="Aarogya Hospital"></a><p>'+about+'</p></div><div><h3>Quick Links</h3><a href="/blogs">Blogs</a><a href="/patient-resources/feedback">Feedback</a><a href="/testimonials">Testimonials</a><a href="/appointment">Book Appointment</a><a href="/doctors">Doctors</a></div><div><h3>Explore</h3>'+pages+'</div><div><h3>Contact</h3>'+phone+email+whatsapp+address+'<div class="footer-socials">'+socials+'</div></div></div><div class="wrap footer-bottom footer-bottom-modern"><span>© '+new Date().getFullYear()+' Aarogya Hospital. All rights reserved.</span></div>';siteFooters.forEach(function(footer){footer.innerHTML=footerMarkup})}).catch(function(){})}
-const renameFooterExplore=()=>document.querySelectorAll('.footer-grid-modern h3').forEach(e=>{if(e.textContent.trim()==='Explore')e.textContent='Legal'});renameFooterExplore();new MutationObserver(renameFooterExplore).observe(document.body,{childList:true,subtree:true});
-const removeFooterWhatsapp=()=>document.querySelectorAll('.footer-grid-modern a').forEach(e=>{if(e.textContent.trim()==='WhatsApp')e.remove()});removeFooterWhatsapp();new MutationObserver(removeFooterWhatsapp).observe(document.body,{childList:true,subtree:true});
-const removeSocialTooltips=()=>document.querySelectorAll('.utility .social-links a').forEach(e=>e.removeAttribute('title'));removeSocialTooltips();new MutationObserver(removeSocialTooltips).observe(document.body,{childList:true,subtree:true});
+(() => {
+    'use strict';
 
-// Testimonials Carousel
-(function initTestimonialsCarousel(){const carousel=document.querySelector('[data-testimonials-carousel]');if(!carousel)return;const slides=carousel.querySelectorAll('.testimonial-slide');const dotsContainer=document.querySelector('[data-testimonial-dots]');const dots=dotsContainer?dotsContainer.querySelectorAll('.testimonial-dot'):[];if(slides.length<=1)return;let currentIndex=0;let autoSlideInterval;const showSlide=(index)=>{slides.forEach((slide,i)=>{if(i===index){slide.setAttribute('data-active','');slide.style.opacity='1';slide.style.visibility='visible';slide.style.position='relative'}else{slide.removeAttribute('data-active');slide.style.opacity='0';slide.style.visibility='hidden';slide.style.position='absolute'}});dots.forEach((dot,i)=>{if(i===index){dot.setAttribute('data-active','')}else{dot.removeAttribute('data-active')}})};const nextSlide=()=>{currentIndex=(currentIndex+1)%slides.length;showSlide(currentIndex)};const goToSlide=(index)=>{currentIndex=index;showSlide(currentIndex);resetAutoSlide()};const startAutoSlide=()=>{autoSlideInterval=setInterval(nextSlide,5000)};const stopAutoSlide=()=>{if(autoSlideInterval){clearInterval(autoSlideInterval);autoSlideInterval=null}};const resetAutoSlide=()=>{stopAutoSlide();startAutoSlide()};dots.forEach((dot,index)=>{dot.addEventListener('click',()=>goToSlide(index))});carousel.addEventListener('mouseenter',stopAutoSlide);carousel.addEventListener('mouseleave',startAutoSlide);if(dotsContainer){dotsContainer.addEventListener('mouseenter',stopAutoSlide);dotsContainer.addEventListener('mouseleave',startAutoSlide)}showSlide(0);startAutoSlide()})();
+    const menuButton = document.querySelector('.menu-btn');
+    const menu = document.querySelector('#main-nav');
 
-// Make service cards fully clickable
-document.querySelectorAll('.speciality-card:not([data-clickable])').forEach(function(card){const link=card.querySelector('a[href*="/services/"]');if(link){const href=link.href;card.dataset.clickable='true';card.addEventListener('click',function(event){if(event.target.tagName!=='A'){window.location.href=href}})}});
+    menuButton?.addEventListener('click', () => {
+        const open = !menu?.classList.contains('open');
+        menu?.classList.toggle('open', open);
+        menuButton.setAttribute('aria-expanded', String(open));
+        document.body.classList.toggle('menu-open', open);
+    });
 
+    menu?.querySelectorAll('a').forEach((link) => {
+        link.addEventListener('click', () => {
+            menu.classList.remove('open');
+            menuButton?.setAttribute('aria-expanded', 'false');
+            document.body.classList.remove('menu-open');
+        });
+    });
 
-// Hero Slider
-(function initHeroSlider(){const slider=document.querySelector('.hero-slider');if(!slider)return;const slides=slider.querySelectorAll('.hero-slide');const indicators=slider.querySelectorAll('.hero-indicator');const prevBtn=slider.querySelector('.hero-prev');const nextBtn=slider.querySelector('.hero-next');if(slides.length<=1)return;let currentIndex=0;let autoSlideInterval;const showSlide=(index)=>{slides.forEach((slide,i)=>{if(i===index){slide.classList.add('active')}else{slide.classList.remove('active')}});indicators.forEach((indicator,i)=>{if(i===index){indicator.classList.add('active')}else{indicator.classList.remove('active')}});currentIndex=index};const nextSlide=()=>{const next=(currentIndex+1)%slides.length;showSlide(next)};const prevSlide=()=>{const prev=(currentIndex-1+slides.length)%slides.length;showSlide(prev)};const goToSlide=(index)=>{showSlide(index);resetAutoSlide()};const startAutoSlide=()=>{autoSlideInterval=setInterval(nextSlide,5000)};const stopAutoSlide=()=>{if(autoSlideInterval){clearInterval(autoSlideInterval);autoSlideInterval=null}};const resetAutoSlide=()=>{stopAutoSlide();startAutoSlide()};if(prevBtn)prevBtn.addEventListener('click',()=>{prevSlide();resetAutoSlide()});if(nextBtn)nextBtn.addEventListener('click',()=>{nextSlide();resetAutoSlide()});indicators.forEach((indicator,index)=>{indicator.addEventListener('click',()=>goToSlide(index))});slider.addEventListener('mouseenter',stopAutoSlide);slider.addEventListener('mouseleave',startAutoSlide);slider.addEventListener('touchstart',stopAutoSlide);slider.addEventListener('touchend',startAutoSlide);startAutoSlide()})();
+    document.querySelectorAll('.nav-dropdown').forEach((dropdown) => {
+        const summary = dropdown.querySelector('summary');
+        summary?.addEventListener('click', () => {
+            document.querySelectorAll('.nav-dropdown[open]').forEach((other) => {
+                if (other !== dropdown) other.removeAttribute('open');
+            });
+        });
+    });
+
+    const dialog = document.querySelector('#appointment-dialog');
+    document.querySelectorAll('[data-open-appointment]').forEach((button) => {
+        button.addEventListener('click', () => dialog?.showModal());
+    });
+    document.querySelectorAll('[data-close-appointment]').forEach((button) => {
+        button.addEventListener('click', () => dialog?.close());
+    });
+    dialog?.addEventListener('click', (event) => {
+        if (event.target === dialog) dialog.close();
+    });
+
+    if (window.AAROGYA_FORM_STATE?.open) dialog?.showModal();
+    if (new URLSearchParams(window.location.search).has('book')) dialog?.showModal();
+
+    const observer = 'IntersectionObserver' in window
+        ? new IntersectionObserver((entries, currentObserver) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    currentObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.12 })
+        : null;
+    document.querySelectorAll('.reveal').forEach((element) => {
+        if (observer) observer.observe(element);
+        else element.classList.add('visible');
+    });
+
+    document.querySelectorAll('.appointment-form').forEach((form) => {
+        form.addEventListener('submit', (event) => {
+            let valid = true;
+            form.querySelectorAll('[required]').forEach((field) => {
+                const invalid = !field.value.trim();
+                field.setAttribute('aria-invalid', String(invalid));
+                if (invalid) valid = false;
+            });
+            if (!valid) {
+                event.preventDefault();
+                form.querySelector('[aria-invalid="true"]')?.focus();
+                return;
+            }
+            const submit = form.querySelector('.submit-btn');
+            if (submit) {
+                submit.disabled = true;
+                submit.textContent = 'Sending request…';
+            }
+        });
+    });
+
+    document.querySelectorAll('[data-track]').forEach((element) => {
+        element.addEventListener('click', () => {
+            window.dataLayer = window.dataLayer || [];
+            window.dataLayer.push({ event: 'aarogya_conversion', action: element.dataset.track });
+        });
+    });
+
+    document.querySelectorAll('.speciality-card').forEach((card) => {
+        const link = card.querySelector('a[href]');
+        if (!link) return;
+        card.addEventListener('click', (event) => {
+            if (event.target.closest('a,button')) return;
+            window.location.href = link.href;
+        });
+    });
+
+    const initCarousel = (selector, slideSelector, activeClass = 'active') => {
+        const root = document.querySelector(selector);
+        if (!root) return;
+        const slides = [...root.querySelectorAll(slideSelector)];
+        if (slides.length < 2) return;
+        let index = 0;
+        const show = (next) => {
+            index = (next + slides.length) % slides.length;
+            slides.forEach((slide, slideIndex) => slide.classList.toggle(activeClass, slideIndex === index));
+        };
+        let timer = window.setInterval(() => show(index + 1), 5000);
+        const reset = () => {
+            window.clearInterval(timer);
+            timer = window.setInterval(() => show(index + 1), 5000);
+        };
+        root.querySelectorAll('[data-slide-to]').forEach((button) => {
+            button.addEventListener('click', () => {
+                show(Number(button.dataset.slideTo));
+                reset();
+            });
+        });
+        root.querySelector('.hero-prev')?.addEventListener('click', () => { show(index - 1); reset(); });
+        root.querySelector('.hero-next')?.addEventListener('click', () => { show(index + 1); reset(); });
+    };
+
+    initCarousel('.hero-slider', '.hero-slide');
+    initCarousel('[data-testimonials-carousel]', '.testimonial-slide');
+})();

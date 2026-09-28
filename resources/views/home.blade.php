@@ -1,60 +1,10 @@
-<!doctype html>
-<html lang="en">
+@extends('layouts.site')
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Aarogya Hospital | Advanced Care. Human at Heart.</title>
-    <meta name="description" content="Advanced orthopaedics, robotic joint replacement, trauma, emergency and fertility care in Hisar, Haryana.">
-    <link rel="canonical" href="{{ url()->current() }}">
-    <meta property="og:title" content="Aarogya Hospital | Advanced Care. Human at Heart.">
-    <meta property="og:description" content="A healthier tomorrow starts here — advanced care with a human touch.">
-    <meta property="og:image" content="{{ asset('assets/hospital/images/aarogya-hero.jpg') }}">
-    <meta name="theme-color" content="#ffffff">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('assets/hospital/css/site.css') }}?v={{ filemtime(public_path('assets/hospital/css/site.css')) }}">
-    <script type="application/ld+json">
-        {
-            "@@context": "https://schema.org",
-            "@@type": ["Hospital", "MedicalClinic"],
-            "name": "Dr. Bhutani’s Aarogya Hospital",
-            "url": "{{ url('/') }}",
-            "telephone": "+911662245450",
-            "address": {
-                "@@type": "PostalAddress",
-                "streetAddress": "Opposite Vishwas School, Near LIC Office, Urban Estate II",
-                "postalCode": "125001",
-                "addressLocality": "Hisar",
-                "addressRegion": "Haryana",
-                "addressCountry": "IN"
-            },
-            "medicalSpecialty": ["Orthopedic", "Emergency", "Gynecologic"]
-        }
-    </script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-</head>
+@section('title', 'Aarogya Hospital | Advanced Care. Human at Heart.')
+@section('description', 'Advanced orthopaedics, robotic joint replacement, trauma, emergency and fertility care in Hisar, Haryana.')
 
-<body>
-    <a class="skip-link" href="#main">Skip to main content</a>
-    <div class="utility">
-        <div class="wrap utility-inner"><span><b>CARE WITH COMPASSION</b><i></i> Hisar, Haryana</span>
-            <nav aria-label="Utility"><a href="/emergency">◉ 24×7 Emergency</a><a data-track="phone" href="tel:+911662245450">☎ 01662-245450</a></nav>
-        </div>
-    </div>
-    <header class="site-header">
-        <div class="wrap nav-row"><a class="logo" href="/" aria-label="Aarogya Hospital home"><img class="hospital-logo" src="{{ asset('assets/hospital/images/aarogya-logo.png') }}" alt="Dr. Bhutani’s Aarogya Hospital" width="597" height="250"></a><button class="menu-btn" type="button" aria-expanded="false" aria-controls="main-nav"><span></span><span></span><span></span><b class="sr-only">Open menu</b></button>
-            <nav class="main-nav" id="main-nav" aria-label="Main navigation"><a class="active" href="/">Home</a><a href="{{ route('about') }}">About</a><a href="#specialities">Specialities</a><a href="#doctors">Doctors</a><a href="{{ route('opd-schedule') }}">OPD Schedule</a><a href="{{ route('gallery') }}">Gallery</a>
-                <details class="nav-dropdown">
-                    <summary class="nav-dropdown-toggle">Empanelled Corporate <span class="nav-chevron" aria-hidden="true"></span></summary>
-                    <div class="nav-dropdown-menu">@foreach(config('empanelled') as $item)<a href="{{ route('empanelled-corporate', ['slug' => $item['slug']]) }}">{{ $item['name'] }}</a>@endforeach</div>
-                </details><a href="#contact">Contact</a>
-            </nav><button class="btn btn-primary header-cta" type="button" data-open-appointment>Book Appointment <span>→</span></button><span class="header-accreditation"><img src="{{ asset('assets/hospital/images/nabh-accredited.png') }}" alt="NABH Accredited" width="768" height="768"></span>
-        </div>
-    </header>
-    <main id="main">
-        <section class="hero hero-slider" id="hero">
+@section('content')
+<section class="hero hero-slider" id="hero">
             @if(isset($slides) && $slides->count() > 0)
             <div class="hero-carousel">
                 @foreach($slides as $index => $slide)
@@ -73,9 +23,9 @@
                             @endif
                             <div class="hero-actions">
                                 @if($slide->button_text && $slide->button_url)
-                                <a class="btn btn-primary" href="{{ $slide->button_url }}">{{ $slide->button_text }} <span>→</span></a>
+                                <a class="btn btn-primary" href="{{ $slide->button_url }}">{{ $slide->button_text }} <span>â†’</span></a>
                                 @endif
-                                <a class="btn btn-outline" href="{{ route('services.index') }}">Explore Our Services <span>↓</span></a>
+                                <a class="btn btn-outline" href="{{ route('services.index') }}">Explore Our Services <span>â†“</span></a>
                             </div>
                         </div>
                     </div>
@@ -104,9 +54,9 @@
                     <div class="hero-copy">
                         <div class="eyebrow">WELCOME TO BETTER CARE</div>
                         <h1>Aarogya <br>Hospital<span class="hero-tagline">Expert care.<br>Human at heart.</span></h1>
-                        <p class="hero-description">Advanced Orthopaedic, Robotic Surgery, Trauma and Fertility Care — with a human touch.</p>
-                        <div class="hero-actions"><button class="btn btn-primary" type="button" data-open-appointment>Book an Appointment <span>→</span></button><a class="btn btn-outline" href="{{ route('services.index') }}">Explore Our Services <span>↓</span></a></div>
-                        <div class="hero-points"><span><i>♡</i>World-Class<br>Technology</span><span><i>♙</i>Experienced<br>Specialists</span><span><i>♧</i>Personalised<br>Care</span><span><i>✧</i>Better<br>Outcomes</span></div>
+                        <p class="hero-description">Advanced Orthopaedic, Robotic Surgery, Trauma and Fertility Care â€” with a human touch.</p>
+                        <div class="hero-actions"><a class="btn btn-primary" href="{{ route('appointment.create') }}">Book an Appointment <span>â†’</span></a><a class="btn btn-outline" href="{{ route('services.index') }}">Explore Our Services <span>â†“</span></a></div>
+                        <div class="hero-points"><span><i>â™¡</i>World-Class<br>Technology</span><span><i>â™™</i>Experienced<br>Specialists</span><span><i>â™§</i>Personalised<br>Care</span><span><i>âœ§</i>Better<br>Outcomes</span></div>
                     </div>
                 </div>
             </div>
@@ -115,9 +65,9 @@
         <section class="stats-wrap" aria-label="Hospital information">
             <div class="wrap stats">
                 <div><strong>10 years</strong><span>Committed to care</span></div>
-                <div><strong>10 AM–3 PM</strong><span>OPD · Monday–Saturday</span></div>
-                <div><strong>VELYS™</strong><span>Robotic knee replacement</span></div>
-                <div><strong>24 × 7</strong><span>Orthopaedic &amp; Obs-Gynae emergency</span></div>
+                <div><strong>10 AMâ€“3 PM</strong><span>OPD Â· Mondayâ€“Saturday</span></div>
+                <div><strong>VELYSâ„¢</strong><span>Robotic knee replacement</span></div>
+                <div><strong>24 Ã— 7</strong><span>Orthopaedic &amp; Obs-Gynae emergency</span></div>
             </div>
         </section>
         <section class="section" id="specialities">
@@ -126,37 +76,21 @@
                     <div>
                         <div class="eyebrow">OUR SPECIALITIES</div>
                         <h2>Specialist care. Personal attention.</h2>
-                    </div><a href="/specialities">Explore all specialities <span>→</span></a>
+                    </div><a href="{{ route('services.index') }}">Explore all services <span>â†’</span></a>
                 </div>
                 <div class="speciality-grid">
-                    <article class="speciality-card reveal" style="--delay:0ms">
-                        <div class="service-art art-1"><span>01</span><small>BONE &amp; JOINT CARE</small></div>
-                        <div>
-                            <h3>Advanced Orthopaedics</h3>
-                            <p>Joint replacement, sports injury, arthritis and complete bone &amp; joint care.</p><a aria-label="Learn more about Advanced Orthopaedics" href="/specialities/orthopaedics">→</a>
-                        </div>
+                    @forelse($services as $index => $service)
+                    <article class="speciality-card service-card reveal" style="--delay:{{ $index * 70 }}ms">
+                        @if($service->image)
+                        <img class="service-card-image" src="{{ asset($service->image) }}" alt="{{ $service->name }}" loading="lazy">
+                        @else
+                        <div class="service-art art-{{ ($index % 4) + 1 }}"><span>{{ str_pad($index + 1, 2, '0', STR_PAD_LEFT) }}</span><small>{{ strtoupper($service->name) }}</small></div>
+                        @endif
+                        <div><h3>{{ $service->name }}</h3><p>{{ Str::limit(strip_tags($service->description ?? 'Explore this service at Aarogya Hospital.'), 150) }}</p><a aria-label="Learn more about {{ $service->name }}" href="{{ route('services.show', $service->slug) }}">→</a></div>
                     </article>
-                    <article class="speciality-card reveal" style="--delay:70ms">
-                        <div class="service-art art-2"><span>02</span><small>PRECISION SURGERY</small></div>
-                        <div>
-                            <h3>Robotic Joint Replacement</h3>
-                            <p>Next-generation precision-assisted surgery for better mobility.</p><a aria-label="Learn more about Robotic Joint Replacement" href="/specialities/robotic-joint-replacement">→</a>
-                        </div>
-                    </article>
-                    <article class="speciality-card reveal" style="--delay:140ms">
-                        <div class="service-art art-3"><span>03</span><small>FERTILITY CARE</small></div>
-                        <div>
-                            <h3>Gynaecology &amp; Infertility</h3>
-                            <p>Care for infertility, pregnancy and women’s health.</p><a aria-label="Learn more about Infertility &amp; IVF" href="/specialities/infertility-ivf">→</a>
-                        </div>
-                    </article>
-                    <article class="speciality-card reveal" style="--delay:210ms">
-                        <div class="service-art art-4"><span>04</span><small>ROUND-THE-CLOCK CARE</small></div>
-                        <div>
-                            <h3>Emergency &amp; Trauma Care</h3>
-                            <p>24/7 emergency care for orthopaedic and obstetrics-gynaecology patients.</p><a aria-label="Learn more about Emergency &amp; Trauma Care" href="/specialities/trauma-emergency">→</a>
-                        </div>
-                    </article>
+                    @empty
+                    <p class="empty-state">Our services will be listed here shortly.</p>
+                    @endforelse
                 </div>
             </div>
         </section>
@@ -165,7 +99,7 @@
                 <div class="robotic-copy">
                     <div class="eyebrow">PRECISION MEETS EXPERIENCE</div>
                     <h2>Robotic-Assisted<br><em>Joint Replacement</em></h2>
-                    <p>VELYS™ robotic-assisted knee replacement, supported by the hospital’s orthopaedic team.</p><a class="btn btn-primary" data-track="robotic" href="/robotic-surgery">Discover Robotic Surgery <span>→</span></a>
+                    <p>VELYSâ„¢ robotic-assisted knee replacement, supported by the hospitalâ€™s orthopaedic team.</p><a class="btn btn-primary" data-track="robotic" href="/robotic-surgery">Discover Robotic Surgery <span>â†’</span></a>
                 </div>
                 <div class="robotic-image"><img src="/assets/hospital/images/robotic-surgery.jpg" width="1792" height="1024" loading="lazy" alt="Robotic joint-replacement planning system in a modern operating theatre"></div>
                 <ul class="benefits">
@@ -182,7 +116,7 @@
                     <div>
                         <div class="eyebrow">MEET OUR SPECIALISTS</div>
                         <h2>Experts Who Care</h2>
-                    </div><a href="{{ route('doctors.index') }}">View All Doctors <span>→</span></a>
+                    </div><a href="{{ route('doctors.index') }}">View All Doctors <span>â†’</span></a>
                 </div>
                 @if(isset($doctors) && $doctors->count() > 0)
                 <div class="doctor-grid">
@@ -200,7 +134,7 @@
                             @if($doctor->designation)
                             <p>{{ $doctor->designation }}</p>
                             @endif
-                            <button class="doctor-book" type="button" data-open-appointment data-appointment-doctor="{{ $doctor->name }}">Book consultation →</button>
+                            <a class="doctor-book" href="{{ route('appointment.create') }}">Book consultation â†’</a>
                         </div>
                     </article>
                     @endforeach
@@ -244,7 +178,7 @@
                 </div>
                 <aside class="priority">
                     <h2>Your Health<br>Our Priority</h2>
-                    <p>Arrange a consultation with our specialist team.</p><button class="btn btn-light" type="button" data-open-appointment>Book an Appointment <span>→</span></button>
+                    <p>Arrange a consultation with our specialist team.</p><a class="btn btn-light" href="{{ route('appointment.create') }}">Book an Appointment <span>â†’</span></a>
                 </aside>
             </div>
         </section>
@@ -254,7 +188,7 @@
                     <div>
                         <div class="eyebrow">HEALTH INSIGHTS</div>
                         <h2>Latest from Our Blog</h2>
-                    </div><a href="{{ route('blogs.index') }}">View All Blogs <span>→</span></a>
+                    </div><a href="{{ route('blogs.index') }}">View All Blogs <span>â†’</span></a>
                 </div>
                 @if(isset($blogs) && $blogs->count() > 0)
                 <div class="blog-directory">
@@ -273,7 +207,7 @@
                             @endif
                             <h2><a href="{{ route('blogs.show', $blog->slug) }}">{{ $blog->title }}</a></h2>
                             <p>{{ Str::limit(strip_tags($blog->excerpt ?? $blog->content), 120) }}</p>
-                            <a class="blog-card-link" href="{{ route('blogs.show', $blog->slug) }}">Read More <span>→</span></a>
+                            <a class="blog-card-link" href="{{ route('blogs.show', $blog->slug) }}">Read More <span>â†’</span></a>
                         </div>
                     </article>
                     @endforeach
@@ -293,57 +227,6 @@
                 <div><span class="pillar-icon" aria-hidden="true"><svg viewBox="0 0 48 48" focusable="false"><circle cx="24" cy="24" r="14"></circle><circle cx="24" cy="24" r="5"></circle><path d="M24 4v7m0 26v7M4 24h7m26 0h7"></path></svg></span><span>Convenient Location</span></div>
             </div>
         </section>
-    </main>
-    @include('partials.google-map')
-    <footer class="footer" id="contact">
-        <div class="wrap footer-grid">
-            <div><a class="logo footer-logo" href="/"><img class="hospital-logo" src="{{ asset('assets/hospital/images/aarogya-logo.png') }}" alt="Dr. Bhutani’s Aarogya Hospital" width="597" height="250"></a>
-                <p>Advanced orthopaedic, trauma and fertility care with modern technology and a human touch.</p>
-            </div>
-            <div>
-                <h3>Quick Links</h3><a href="#about">About</a><a href="#specialities">Specialities</a><a href="#doctors">Doctors</a><a href="#robotic">Robotic Surgery</a><a href="{{ route('gallery') }}">Gallery</a>
-            </div>
-            <div>
-                <h3>Patient Resources</h3><button type="button" data-open-appointment>Appointment</button><a href="{{ route('empanelled-corporate', ['slug' => config('empanelled.1.slug')]) }}">Insurance &amp; Empanelment</a><a href="{{ route('opd-schedule') }}">OPD Schedule</a><a href="{{ route('feedback.create') }}">Patient Feedback</a><a href="{{ route('emergency') }}">Emergency</a>
-            </div>
-            <div>
-                <h3>Contact</h3><a href="tel:+911662245450">01662-245450</a><a href="tel:+918222049007">+91 82220 49007</a><a href="tel:+918222049008">+91 82220 49008</a><span>Opposite Vishwas School, Near LIC Office, Urban Estate II, Hisar, Haryana 125001</span>
-            </div>
-        </div>
-        <div class="wrap footer-bottom"><span>© 2026 Aarogya Hospital. All rights reserved.</span><span><a href="/privacy">Privacy Policy</a> · <a href="/terms">Terms</a> · <a href="/disclaimer">Disclaimer</a></span></div>
-    </footer>
-    <a class="whatsapp-float" data-track="phone" href="tel:+918222049007" aria-label="Call Aarogya Hospital">☎<span>Call the care team</span></a>
-    <nav class="mobile-cta" aria-label="Quick actions"><a href="tel:+911662245450">☎<span>Call</span></a><a href="tel:+918222049007">☎<span>Helpline</span></a><button type="button" data-open-appointment>▣<span>Appointment</span></button></nav>
-    <dialog class="appointment-dialog" id="appointment-dialog">
-        <div class="dialog-head">
-            <div>
-                <div class="eyebrow">REQUEST A CONSULTATION</div>
-                <h2>Book an Appointment</h2>
-                <p>Share a few details. Our care team will call you shortly.</p>
-            </div><button type="button" data-close-appointment aria-label="Close appointment form">×</button>
-        </div>@if(session('appointment_success'))<div class="form-success" role="status"><i>✓</i>
-            <h3>Thank you.</h3>
-            <p>Your appointment request has been received. Our team will contact you shortly.</p><button class="btn btn-primary" type="button" data-close-appointment>Done</button>
-        </div>@else @if($errors->any())<div class="form-error" role="alert">{{ $errors->first() }}</div>@endif<form class="appointment-form" method="post" action="{{ route('appointments.store') }}" novalidate>@csrf<label><span>Patient Name *</span><input name="name" autocomplete="name" maxlength="80" required value="{{ old('name') }}" placeholder="Your full name"></label><label><span>Mobile Number *</span><input name="phone" type="tel" autocomplete="tel" inputmode="numeric" maxlength="18" required value="{{ old('phone') }}" placeholder="10-digit mobile number"></label><label><span>Email <small>(optional)</small></span><input name="email" type="email" autocomplete="email" value="{{ old('email') }}" placeholder="you@example.com"></label><label><span>Speciality *</span><select name="speciality" required>
-                    <option value="">Select speciality</option>@foreach(['Orthopaedics','Robotic Joint Replacement','Infertility & IVF','Trauma','Other'] as $speciality)<option @selected(old('speciality')===$speciality)>{{ $speciality }}</option>@endforeach
-                </select></label><label><span>Preferred Doctor <small>(optional)</small></span><select name="doctor">
-                    <option value="">Any available specialist</option>@foreach(['Dr. Amit Bhutani','Dr. Puja Bhutani','Dr. Deepak Gupta','Dr. Gunjan Gupta','Dr. Sachin Thakral'] as $doctor)<option @selected(old('doctor')===$doctor)>{{ $doctor }}</option>@endforeach
-                </select></label><label><span>Preferred Date</span><input name="date" type="date" min="{{ now()->toDateString() }}" value="{{ old('date') }}"></label><label><span>Preferred Time</span><select name="time">
-                    <option value="">Select a time</option>@foreach(['Morning (10 AM–12 PM)','Afternoon (12–3 PM)'] as $time)<option @selected(old('time')===$time)>{{ $time }}</option>@endforeach
-                </select></label><label class="full"><span>Message / Concern</span><textarea name="message" maxlength="800" placeholder="Briefly tell us how we can help (avoid sharing sensitive medical information)">{{ old('message') }}</textarea></label>
-            <p class="privacy-note full">By submitting, you consent to being contacted about this appointment request.</p><button class="btn btn-primary full submit-btn" type="submit">Submit Appointment Request <span>→</span></button>
-        </form>@endif
-    </dialog>
-    <script>
-        window.AAROGYA_FORM_STATE = {
-            "open": {
-                {
-                    (session('appointment_success') || $errors - > any()) ? 'true' : 'false'
-                }
-            }
-        };
-    </script>
-    <script src="/assets/hospital/js/site.js?v={{ filemtime(public_path('assets/hospital/js/site.js')) }}" defer></script>
-</body>
+@include('partials.google-map')
+@endsection
 
-</html>

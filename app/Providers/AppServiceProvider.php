@@ -5,7 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\View;
-use App\Models\Setting;
+use App\Models\{Page, Setting};
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -32,6 +32,8 @@ class AppServiceProvider extends ServiceProvider
                 copy(public_path($settings['website_favicon']), public_path('favicon.ico'));
             }
             $view->with('siteSettings', $settings);
+            $view->with('footerPages', Schema::hasTable('pages') ? Page::where('status', 'Active')->orderBy('title')->get(['title', 'slug']) : collect());
+            $view->with('socialKeys', ['facebook' => 'fa-facebook', 'instagram' => 'fa-instagram', 'linkedin' => 'fa-linkedin', 'youtube' => 'fa-youtube', 'whatsapp' => 'fa-whatsapp']);
         });
     }
 }

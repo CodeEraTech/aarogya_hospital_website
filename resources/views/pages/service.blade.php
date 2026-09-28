@@ -42,7 +42,7 @@
             <aside class="priority">
                 <h2>Your Health<br>Our Priority</h2>
                 <p>Arrange a consultation with our specialist team.</p>
-                <button class="btn btn-light" type="button" data-open-appointment>Book an Appointment <span>→</span></button>
+                <a class="btn btn-light" href="{{ route('appointment.create') }}">Book an Appointment <span>→</span></a>
             </aside>
         </aside>
     </div>
