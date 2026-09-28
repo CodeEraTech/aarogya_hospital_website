@@ -6143,7 +6143,7 @@ textarea:focus-visible {
 .hero-slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; visibility: hidden; transition: opacity 0.8s ease, visibility 0.8s ease; }
 .hero-slide.active { position: relative; opacity: 1; visibility: visible; z-index: 1; }
 .hero-background { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-size: cover; background-position: center; background-repeat: no-repeat; }
-.hero-background::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(90deg, rgba(246, 249, 248, 0.95) 0%, rgba(246, 249, 248, 0.7) 50%, rgba(246, 249, 248, 0.3) 100%); }
+/* .hero-background::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(90deg, rgba(246, 249, 248, 0.95) 0%, rgba(246, 249, 248, 0.7) 50%, rgba(246, 249, 248, 0.3) 100%); } */
 .hero-slide .hero-grid { position: relative; z-index: 2; min-height: 565px; }
 .hero-slide .hero-copy { position: relative; z-index: 2; }
 .hero-description { max-width: 500px; font-size: 16px; color: #4b6158; margin: 16px 0 24px; line-height: 1.65; }
