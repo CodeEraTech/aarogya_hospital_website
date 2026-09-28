@@ -5965,6 +5965,9 @@ textarea:focus-visible {
     }
 }
 @media (max-width: 600px) {
+    .footer-grid-modern > div:last-child {
+        min-width: 400px;
+    }
     .footer {
         padding: 38px 0 16px;
     }
