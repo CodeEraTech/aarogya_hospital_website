@@ -59,7 +59,9 @@
             <div class="hero-carousel">
                 @foreach($slides as $index => $slide)
                 <div class="hero-slide @if($index === 0) active @endif" data-slide="{{ $index }}">
+                    @if($slide->image)
                     <div class="hero-background" style="background-image: url('{{ asset($slide->image) }}')"></div>
+                    @endif
                     <div class="wrap hero-grid">
                         <div class="hero-copy">
                             @if($slide->slug)
@@ -67,13 +69,14 @@
                             @endif
                             <h1>{!! nl2br(e($slide->title)) !!}</h1>
                             @if($slide->subtitle)
-                            <p class="hero-description">{!! nl2br(e($slide->subtitle)) !!}</p>
+                            <p class="hero-description">{{ strip_tags($slide->subtitle) }}</p>
                             @endif
-                            @if($slide->button_text && $slide->button_url)
                             <div class="hero-actions">
+                                @if($slide->button_text && $slide->button_url)
                                 <a class="btn btn-primary" href="{{ $slide->button_url }}">{{ $slide->button_text }} <span>→</span></a>
+                                @endif
+                                <a class="btn btn-outline" href="{{ route('services.index') }}">Explore Our Services <span>↓</span></a>
                             </div>
-                            @endif
                         </div>
                     </div>
                 </div>
@@ -102,7 +105,7 @@
                         <div class="eyebrow">WELCOME TO BETTER CARE</div>
                         <h1>Aarogya <br>Hospital<span class="hero-tagline">Expert care.<br>Human at heart.</span></h1>
                         <p class="hero-description">Advanced Orthopaedic, Robotic Surgery, Trauma and Fertility Care — with a human touch.</p>
-                        <div class="hero-actions"><button class="btn btn-primary" type="button" data-open-appointment>Book an Appointment <span>→</span></button><a class="btn btn-outline" href="#specialities">Explore Our Services <span>↓</span></a></div>
+                        <div class="hero-actions"><button class="btn btn-primary" type="button" data-open-appointment>Book an Appointment <span>→</span></button><a class="btn btn-outline" href="{{ route('services.index') }}">Explore Our Services <span>↓</span></a></div>
                         <div class="hero-points"><span><i>♡</i>World-Class<br>Technology</span><span><i>♙</i>Experienced<br>Specialists</span><span><i>♧</i>Personalised<br>Care</span><span><i>✧</i>Better<br>Outcomes</span></div>
                     </div>
                 </div>
