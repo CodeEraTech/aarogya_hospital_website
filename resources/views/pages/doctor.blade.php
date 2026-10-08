@@ -14,7 +14,7 @@
                 <section class="doctor-profile-intro">
                     <h1>{{ $doctor->name }}</h1>
                     @if($doctor->designation)<p class="doctor-profile-designation">{{ $doctor->designation }}</p>@endif
-                    @if($doctor->degree)<p class="doctor-profile-degree">{{ $doctor->degree }}</p>@endif
+                    <!-- @if($doctor->degree)<p class="doctor-profile-degree">{{ $doctor->degree }}</p>@endif -->
                     @if($contactSettings['email'] ?? null)<p><svg viewBox="0 0 20 20" aria-hidden="true"><rect x="3" y="5" width="14" height="11" rx="2"/><path d="m4 7 6 4 6-4"/></svg><a href="mailto:{{ $contactSettings['email'] }}">{{ $contactSettings['email'] }}</a></p>@endif
                     @if($contactSettings['phone'] ?? null)<p><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 3h3l1 4-2 1c1 2 3 3 4 4l1-2 4 1v3c0 1-1 2-2 2C8 16 4 12 4 6c0-2 0-3 1-3Z"/></svg><a href="tel:{{ preg_replace('/[^0-9]+/', '', $contactSettings['phone']) }}">{{ $contactSettings['phone'] }}</a></p>@endif
                     @if($contactSettings['address'] ?? null)<p><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 18s6-5 6-10a6 6 0 1 0-12 0c0 5 6 10 6 10Z"/><circle cx="10" cy="8" r="2"/></svg><span>{{ $contactSettings['address'] }}</span></p>@endif
