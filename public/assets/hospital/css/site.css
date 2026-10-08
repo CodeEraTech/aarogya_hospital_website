@@ -14,6 +14,68 @@
     --shadow: 0 12px 32px rgb(23 44 39 / 6%);
 }
 
+.doctor-detail-page { padding-top: 3.5rem; }
+.doctor-detail-grid { display: grid; grid-template-columns: minmax(260px, 360px) minmax(0, 1fr); gap: clamp(2rem, 6vw, 5rem); align-items: center; }
+.doctor-detail-photo { overflow: hidden; border-radius: 1.5rem; background: var(--blue); aspect-ratio: 4 / 5; }
+.doctor-detail-photo img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.doctor-detail-content h2 { margin: .55rem 0 1.25rem; font-size: clamp(2rem, 4vw, 3.4rem); color: var(--navy); }
+.doctor-detail-degree { margin: -0.75rem 0 1.25rem; color: var(--teal-dark); font-weight: 700; }
+.doctor-profile-page { padding: 3rem 0 5rem; }
+.doctor-profile-grid { display: grid; grid-template-columns: minmax(280px, 42%) minmax(0, 1fr); gap: 1rem; align-items: start; }
+.doctor-profile-photo { overflow: hidden; border-radius: 1rem; background: #eef2f1; aspect-ratio: 1 / 1.08; }
+.doctor-profile-photo img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.doctor-profile-main { display: grid; gap: 1rem; min-width: 0; }
+.doctor-profile-intro { padding: 1.5rem 1.75rem; border-radius: 1rem; background: #e9eff4; color: #12304b; }
+.doctor-profile-intro h1 { margin: 0 0 .2rem; color: #0c1c38; font-size: clamp(1.35rem, 2.5vw, 2rem); }
+.doctor-profile-designation { margin: 0 0 1rem; color: #6876bb; font-size: .9rem; }
+.doctor-profile-degree { margin: 0 0 .8rem; color: #40516b; font-weight: 700; }
+.doctor-profile-intro p:not(.doctor-profile-designation):not(.doctor-profile-degree) { display: flex; align-items: flex-start; gap: .55rem; margin: .65rem 0 0; color: #52657b; font-size: .78rem; line-height: 1.45; }
+.doctor-profile-intro p svg { width: 1rem; height: 1rem; flex: 0 0 auto; fill: none; stroke: #4778d1; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.doctor-profile-intro a { color: inherit; }
+.doctor-profile-lower { display: grid; grid-template-columns: minmax(0, 1fr) 190px; gap: 1rem; align-items: stretch; }
+.doctor-about-card, .doctor-hours-card { border-radius: 1rem; padding: 1.5rem; }
+.doctor-about-card { background: #f3deda; color: #52657b; }
+.doctor-about-card h2 { margin: 0 0 1rem; color: #0c1c38; font-size: 1.1rem; }
+.doctor-about-card .rich-content, .doctor-about-card p { margin: 0; font-size: .78rem; line-height: 1.7; }
+.doctor-hours-card { display: grid; align-content: start; gap: 1.15rem; background: #d9eee8; color: #12304b; }
+.doctor-hours-card div { display: grid; gap: .4rem; }
+.doctor-hours-card small { font-size: .7rem; font-weight: 700; }
+.doctor-hours-card strong, .doctor-hours-card span { font-size: .7rem; line-height: 1.5; }
+.doctor-hours-card .btn { width: 100%; padding: .65rem .5rem; font-size: .7rem; text-align: center; }
+.doctor-testimonials { width: 100%; margin-top: 1rem; padding: 1.35rem 0 0; border-radius: 0; background: transparent; }
+.doctor-testimonials-heading { display: flex; align-items: end; justify-content: space-between; gap: 1rem; }
+.doctor-testimonials-heading h2 { margin: .2rem 0 1rem; color: #0c1c38; font-size: 1.15rem; }
+.doctor-testimonials-track { display: flex; gap: .85rem; overflow: hidden; scroll-snap-type: x mandatory; scroll-behavior: smooth; padding: 0 .05rem .35rem; }
+.doctor-testimonial-card { flex: 0 0 calc((100% - 1.7rem) / 3); min-width: 0; flex-shrink: 0; scroll-snap-align: start; color: var(--ink); }
+.doctor-testimonial-controls { display: flex; align-self: flex-start; gap: .45rem; margin-top: .1rem; }
+.doctor-testimonial-controls button { width: 2rem; height: 2rem; border: 1px solid rgb(12 28 56 / 18%); border-radius: 50%; background: rgb(255 255 255 / 45%); color: #0c1c38; cursor: pointer; }
+.doctor-testimonial-quote { display: block; height: 1rem; color: #fff; font-size: 2rem; font-weight: 800; line-height: .7; }
+.doctor-testimonial-card blockquote { margin: 22px 0; font-size: 15px; line-height: 1.7; }
+.doctor-testimonial-card footer { display: flex; align-items: center; gap: 12px; color: var(--ink); font-size: .72rem; }
+.doctor-testimonial-card .testimonial-initials { display: grid; place-items: center; width: 2rem; height: 2rem; border-radius: 50%; background: var(--teal); color: #fff; font-size: .65rem; }
+.doctor-testimonials-carousel { min-height: 330px; padding: 0; }
+.doctor-testimonials-carousel .testimonial-slide { width: 100%; }
+.doctor-testimonial-row { display: grid; width: 100%; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.25rem; }
+.doctor-testimonials-carousel .doctor-testimonial-card { width: 100%; min-width: 0; min-height: 290px; }
+@media (max-width: 780px) { .doctor-profile-page { padding: 2rem 0 3rem; } .doctor-profile-grid { grid-template-columns: 1fr; } .doctor-profile-photo { max-width: 420px; width: 100%; margin: 0 auto; } }
+@media (min-width: 521px) and (max-width: 900px) { .doctor-testimonial-row { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; } }
+@media (max-width: 520px) { .doctor-profile-lower { grid-template-columns: 1fr; } .doctor-hours-card { grid-template-columns: repeat(2, minmax(0, 1fr)); } .doctor-hours-card .btn { grid-column: 1 / -1; } .doctor-testimonial-row { grid-template-columns: minmax(0, 1fr) !important; gap: 1rem; } .doctor-testimonials { padding: 1.1rem 0 0; } }
+.doctor-detail-description { max-width: 68ch; color: var(--muted); line-height: 1.8; margin-bottom: 1.75rem; }
+.doctor-schedule-card { margin-top: 4rem; padding: clamp(1.5rem, 4vw, 2.5rem); border: 1px solid var(--line); border-radius: 1.25rem; background: var(--blue); }
+.doctor-schedule-card .section-head { margin-bottom: 1.25rem; }
+.doctor-schedule-card .section-head h2 { margin: .4rem 0 0; }
+.doctor-schedule-list { display: grid; gap: .75rem; }
+.doctor-schedule-row { display: flex; justify-content: space-between; gap: 1rem; padding: 1rem 1.1rem; border-radius: .75rem; background: #fff; color: var(--ink); }
+.doctor-schedule-row span { color: var(--muted); }
+.doctor-schedule-empty { margin: 0; color: var(--muted); }
+@media (max-width: 720px) {
+    .doctor-detail-page { padding-top: 2rem; }
+    .doctor-detail-grid { grid-template-columns: 1fr; gap: 1.75rem; }
+    .doctor-detail-photo { max-width: 360px; margin: 0 auto; width: 100%; }
+    .doctor-schedule-card { margin-top: 2.5rem; }
+    .doctor-schedule-row { flex-direction: column; gap: .35rem; }
+}
+
 /* Consistent inline SVG actions and feature icons. */
 .inline-icon {
     width: 1.05em;
@@ -5783,6 +5845,45 @@ textarea:focus-visible {
     .testimonial-text-card {
         min-height: 0;
         padding: 22px;
+    }
+}
+
+/* Doctor detail testimonial cards: keep each slide inside the viewport. */
+.doctor-testimonials-carousel {
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+.doctor-testimonials-carousel::-webkit-scrollbar {
+    display: none;
+}
+.doctor-testimonials-carousel .doctor-testimonial-row {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 1.25rem;
+    width: 100%;
+}
+.doctor-testimonials-carousel .doctor-testimonial-card {
+    flex: 0 0 calc((100% - 2.5rem) / 3);
+    width: calc((100% - 2.5rem) / 3);
+    min-width: 0;
+    max-width: none;
+    scroll-snap-align: start;
+}
+@media (min-width: 521px) and (max-width: 900px) {
+    .doctor-testimonials-carousel .doctor-testimonial-card {
+        flex-basis: calc((100% - 1.25rem) / 2);
+        width: calc((100% - 1.25rem) / 2);
+    }
+}
+@media (max-width: 520px) {
+    .doctor-testimonials-carousel .doctor-testimonial-card {
+        flex-basis: 100%;
+        width: 100%;
     }
 }
 

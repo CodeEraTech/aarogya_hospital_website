@@ -44,6 +44,18 @@ Route::get('/', function () {
 })->name('home');
 Route::post('/appointments', [AppointmentController::class, 'store'])->middleware('throttle:5,1')->name('appointments.store');
 Route::get('/doctors', fn() => view('pages.doctors', ['doctors' => Doctor::where('status', 'Active')->orderBy('sort_order')->orderBy('name')->get()]))->name('doctors.index');
+Route::get('/doctors/{slug}', function (string $slug) {
+    $doctor = Doctor::where('status', 'Active')->where('slug', $slug)->firstOrFail();
+    $schedules = $doctor->opdSchedules()->where('status', 'Active')->orderBy('sort_order')->orderBy('start_time')->get();
+    $testimonials = $doctor->testimonials()->where('status', 'Active')->where('type', 'Text')->whereNotNull('quote')->latest()->get();
+    $contactValues = Setting::whereIn('key', ['site_phone', 'site_email', 'address', 'phone', 'email', 'hospital_address'])->pluck('value', 'key');
+    $contactSettings = [
+        'phone' => filled($contactValues['site_phone'] ?? null) ? $contactValues['site_phone'] : ($contactValues['phone'] ?? null),
+        'email' => filled($contactValues['site_email'] ?? null) ? $contactValues['site_email'] : ($contactValues['email'] ?? null),
+        'address' => filled($contactValues['address'] ?? null) ? $contactValues['address'] : ($contactValues['hospital_address'] ?? null),
+    ];
+    return view('pages.doctor', compact('doctor', 'schedules', 'testimonials', 'contactSettings'));
+})->name('doctors.show');
 Route::view('/appointment', 'pages.appointment')->name('appointment.create');
 Route::get('/testimonials', fn() => view('pages.testimonials', ['testimonials' => Testimonial::where('status', 'Active')->orderBy('sort_order')->latest()->get()]))->name('testimonials');
 Route::get('/blogs', fn() => view('pages.blogs', ['blogs' => Blog::where('status', 'Active')->orderByDesc('published_at')->orderByDesc('created_at')->paginate(9)]))->name('blogs.index');
@@ -147,7 +159,6 @@ Route::get('/services/{slug}', fn(string $slug) => view('pages.service', [
 ]))->name('services.show');
 Route::redirect('/specialities', '/services', 301);
 Route::get('/specialities/{slug}', fn(string $slug) => redirect()->route('services.show', ['slug' => $slug], 301));
-Route::view('/doctors/{slug}', 'home');
 Route::view('/patient-resources/{slug}', 'home');
 
 Route::prefix('admin')->name('admin.')->group(function () {

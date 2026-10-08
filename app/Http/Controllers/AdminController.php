@@ -12,13 +12,13 @@ use Illuminate\Validation\Rule;
 class AdminController extends Controller
 {
     private array $resources = [
-        'doctors' => [Doctor::class, 'Doctors', ['name', 'designation', 'image', 'sort_order', 'status', 'meta_title', 'meta_description']],
+        'doctors' => [Doctor::class, 'Doctors', ['name', 'designation', 'degree', 'description', 'emergency_text', 'image', 'sort_order', 'status', 'meta_title', 'meta_description']],
         'services' => [Service::class, 'Services', ['name', 'description', 'content', 'image', 'status', 'sort_order', 'meta_title', 'meta_tags', 'meta_description']],
         'pages' => [Page::class, 'Pages', ['title', 'status', 'content']],
         'blogs' => [Blog::class, 'Blog posts', ['title', 'slug', 'content', 'image', 'published_at', 'status', 'meta_title', 'meta_description']],
         'gallery' => [GalleryItem::class, 'Gallery', ['title', 'image', 'status', 'sort_order']],
         'slides' => [Slide::class, 'Slides', ['title', 'slug', 'subtitle', 'image', 'button_text', 'button_url', 'status', 'sort_order']],
-        'testimonials' => [Testimonial::class, 'Patient testimonials', ['name', 'type', 'quote', 'video_file', 'video_url', 'status', 'sort_order']],
+        'testimonials' => [Testimonial::class, 'Patient testimonials', ['name', 'doctor_id', 'type', 'quote', 'video_file', 'video_url', 'status', 'sort_order']],
         'appointments' => [Appointment::class, 'Appointments', ['patient_id', 'patient_name', 'mobile_number', 'email', 'preferred_doctor', 'preferred_date', 'preferred_time', 'status', 'message']],
         'feedback' => [Feedback::class, 'Feedback', ['name', 'phone', 'email', 'department', 'rating', 'message', 'status']],
     ];
@@ -249,7 +249,8 @@ class AdminController extends Controller
         abort_if($resource === 'feedback', 404);
         [$model] = $this->resources[$resource];
         $data = $request->except(['_token', '_method']);
-        if ($resource === 'doctors') $request->validate(['speciality' => 'required|string|max:190']);
+        if ($resource === 'doctors') $data['description'] = $request->input('description') ?: null;
+        if ($resource === 'testimonials') $request->validate(['doctor_id' => 'nullable|exists:doctors,id']);
         if ($resource === 'services') $request->validate(['description' => 'nullable|string|max:1000', 'image' => 'required|file|mimes:jpg,jpeg,png,webp,gif|max:5120']);
         if ($resource === 'gallery') $request->validate(['image' => 'required|file|mimes:jpg,jpeg,png,webp,gif|max:5120']);
         if (in_array($resource, ['doctors', 'services', 'pages', 'blogs', 'slides'])) $data['slug'] = Str::slug($data['title'] ?? $data['name']);
@@ -272,7 +273,8 @@ class AdminController extends Controller
         abort_unless(isset($this->resources[$resource]), 404);
         [$model] = $this->resources[$resource];
         $data = $resource === 'feedback' ? $request->only('status') : $request->except(['_token', '_method']);
-        if ($resource === 'doctors') $request->validate(['speciality' => 'required|string|max:190']);
+        if ($resource === 'doctors') $data['description'] = $request->input('description') ?: null;
+        if ($resource === 'testimonials') $request->validate(['doctor_id' => 'nullable|exists:doctors,id']);
         if ($resource === 'services') $request->validate(['description' => 'nullable|string|max:1000', 'image' => 'nullable|file|mimes:jpg,jpeg,png,webp,gif|max:5120']);
         unset($data['slug']);
         $data = $this->processFiles($data, $request, $resource);

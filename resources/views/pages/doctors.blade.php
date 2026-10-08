@@ -3,12 +3,12 @@
 @section('heading', 'Doctors Who Listen. Experts Who Care.')
 @section('intro', 'Meet experienced specialists focused on clear guidance, thoughtful treatment and better outcomes.')
 @section('content')
-<section class="inner-section"><div class="wrap"><div class="filter-bar" role="group" aria-label="Filter doctors"><button class="active" data-doctor-filter="all">All Doctors</button><button data-doctor-filter="orthopaedics">Orthopaedics</button><button data-doctor-filter="fertility">Gynaecology &amp; Infertility</button><button data-doctor-filter="critical-care">Critical Care</button><button data-doctor-filter="physiotherapy">Physiotherapy</button></div><div class="doctor-directory">
+<section class="inner-section"><div class="wrap"><div class="filter-bar" role="group" aria-label="Filter doctors"><button class="active" data-doctor-filter="all">All Doctors</button><button data-doctor-filter="orthopaedics">Orthopaedics</button><button data-doctor-filter="fertility">Gynaecology &amp; Infertility</button><button data-doctor-filter="critical-care">Critical Care</button><button data-doctor-filter="physiotherapy">Physiotherapy</button></div><div class="doctor-grid">
 @foreach($doctors as $doctor)
 @php($category = str_contains(strtolower($doctor->designation), 'fertility') || str_contains(strtolower($doctor->designation), 'gynaec') ? 'fertility' : (str_contains(strtolower($doctor->designation), 'anaesthesia') || str_contains(strtolower($doctor->designation), 'icu') ? 'critical-care' : (str_contains(strtolower($doctor->designation), 'physio') ? 'physiotherapy' : 'orthopaedics')))
-<article class="directory-card" data-doctor-card="{{ $category }}">
-    <div class="directory-photo"><img src="{{ $doctor->image ? asset($doctor->image) : asset('assets/hospital/images/aarogya-logo.png') }}" alt="{{ $doctor->name }}" width="684" height="1024" loading="lazy"></div>
-    <div><h2>{{ $doctor->name }}</h2><p>{{ $doctor->designation }}</p><div class="doctor-meta"><span>Aarogya Hospital, Hisar</span></div><a class="btn btn-outline" href="{{ route('appointment.create') }}">Book Consultation</a></div>
+<article class="doctor-card" data-doctor-card="{{ $category }}">
+    <div class="doctor-photo"><img src="{{ $doctor->image ? asset($doctor->image) : asset('assets/hospital/images/doctor-placeholder.jpg') }}" alt="{{ $doctor->name }}" width="684" height="1024" loading="lazy"></div>
+    <div><h3>{{ $doctor->name }}</h3>@if($doctor->designation)<p>{{ $doctor->designation }}</p>@endif @if($doctor->degree)<small>{{ $doctor->degree }}</small>@endif<a class="doctor-book" href="{{ route('doctors.show', $doctor->slug) }}">Know More <span aria-hidden="true">&rarr;</span></a></div>
 </article>
 @endforeach
 </div></div></section>

@@ -99,11 +99,23 @@
         if (!root) return;
         const slides = [...root.querySelectorAll(slideSelector)];
         if (slides.length < 2) return;
+        const controls = root.parentElement || root;
         let index = 0;
         const show = (next) => {
             index = (next + slides.length) % slides.length;
-            slides.forEach((slide, slideIndex) => slide.classList.toggle(activeClass, slideIndex === index));
+            slides.forEach((slide, slideIndex) => {
+                const active = slideIndex === index;
+                slide.classList.toggle(activeClass, active);
+                if (active) slide.setAttribute('data-active', '');
+                else slide.removeAttribute('data-active');
+            });
+            controls.querySelectorAll('[data-dot-index]').forEach((dot) => {
+                const active = Number(dot.dataset.dotIndex) === index;
+                if (active) dot.setAttribute('data-active', '');
+                else dot.removeAttribute('data-active');
+            });
         };
+        show(0);
         let timer = window.setInterval(() => show(index + 1), 5000);
         const reset = () => {
             window.clearInterval(timer);
@@ -115,10 +127,55 @@
                 reset();
             });
         });
+        controls.querySelectorAll('[data-dot-index]').forEach((button) => {
+            button.addEventListener('click', () => {
+                show(Number(button.dataset.dotIndex));
+                reset();
+            });
+        });
         root.querySelector('.hero-prev')?.addEventListener('click', () => { show(index - 1); reset(); });
         root.querySelector('.hero-next')?.addEventListener('click', () => { show(index + 1); reset(); });
+        controls.querySelector('[data-carousel-prev]')?.addEventListener('click', () => { show(index - 1); reset(); });
+        controls.querySelector('[data-carousel-next]')?.addEventListener('click', () => { show(index + 1); reset(); });
     };
 
     initCarousel('.hero-slider', '.hero-slide');
-    initCarousel('[data-testimonials-carousel]', '.testimonial-slide');
+
+    const initCardCarousel = (selector) => {
+        const root = document.querySelector(selector);
+        const track = root?.querySelector('[data-testimonial-track]');
+        if (!root || !track) return;
+        const cards = [...track.children];
+        if (cards.length < 2) return;
+        const controls = root.parentElement || root;
+        let page = 0;
+        let timer;
+
+        const visibleCards = () => window.innerWidth <= 520 ? 1 : window.innerWidth <= 900 ? 2 : 3;
+        const pageCount = () => Math.max(1, Math.ceil(cards.length / visibleCards()));
+        const show = (next) => {
+            page = (next + pageCount()) % pageCount();
+            const firstVisibleCard = cards[page * visibleCards()];
+            root.scrollTo({
+                left: firstVisibleCard?.offsetLeft ?? 0,
+                behavior: 'smooth',
+            });
+        };
+        const reset = () => {
+            window.clearInterval(timer);
+            timer = window.setInterval(() => show(page + 1), 5000);
+        };
+
+        controls.querySelector('[data-carousel-prev]')?.addEventListener('click', () => { show(page - 1); reset(); });
+        controls.querySelector('[data-carousel-next]')?.addEventListener('click', () => { show(page + 1); reset(); });
+        window.addEventListener('resize', () => {
+            page = 0;
+            root.scrollTo({ left: 0, behavior: 'auto' });
+            reset();
+        });
+        show(0);
+        reset();
+    };
+
+    initCardCarousel('[data-card-carousel]');
 })();

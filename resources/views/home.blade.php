@@ -233,7 +233,10 @@
                     @if($doctor->designation)
                     <p>{{ $doctor->designation }}</p>
                     @endif
-                    <a class="doctor-book" href="{{ route('appointment.create') }}">Book consultation <span aria-hidden="true">&rarr;</span></a>
+                    @if($doctor->degree)
+                    <small>{{ $doctor->degree }}</small>
+                    @endif
+                    <a class="doctor-book" href="{{ route('doctors.show', $doctor->slug) }}">Know More <span aria-hidden="true">&rarr;</span></a>
                 </div>
             </article>
             @endforeach

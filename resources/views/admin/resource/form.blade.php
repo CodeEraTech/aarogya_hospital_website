@@ -20,8 +20,13 @@
                         @php($wide = $long || $field === 'meta_description' || ($resource === 'services' && $field === 'description') || ($resource === 'blogs' && in_array($field, ['meta_title', 'meta_description'])) || ($resource === 'blogs' && $field === 'title') || ($testimonialField && $field !== 'type'))
                         @php($required = (in_array($field, ['name', 'title', 'key', 'content']) && !($resource === 'testimonials' && $field === 'name' && $testimonialType !== 'Text')) || ($resource === 'services' && $field === 'image' && !$item))
                         <label class="{{ $wide ? 'wide' : '' }} {{ $testimonialField ? 'testimonial-field testimonial-'.$field : '' }}">
-                            <span>{{ $field === 'type' ? 'Testimonial type' : ($resource === 'services' && $field === 'description' ? 'Short Description' : ($resource === 'services' && $field === 'image' ? 'Featured Image' : ($resource === 'services' && $field === 'meta_tags' ? 'Meta Tags' : ucwords(str_replace('_', ' ', $field))))) }} @if($required)<b class="required">*</b>@endif</span>
-                            @if($resource === 'testimonials' && $field === 'type')
+                            <span>{{ $field === 'type' ? 'Testimonial type' : ($field === 'doctor_id' ? 'Related doctor' : ($resource === 'services' && $field === 'description' ? 'Short Description' : ($resource === 'services' && $field === 'image' ? 'Featured Image' : ($resource === 'services' && $field === 'meta_tags' ? 'Meta Tags' : ucwords(str_replace('_', ' ', $field)))))) }} @if($required)<b class="required">*</b>@endif</span>
+                            @if($resource === 'testimonials' && $field === 'doctor_id')
+                                <select name="doctor_id">
+                                    <option value="">General testimonial</option>
+                                    @foreach($activeDoctors ?? [] as $doctor)<option value="{{ $doctor->id }}" @selected((string) old('doctor_id', $item?->doctor_id) === (string) $doctor->id)>{{ $doctor->name }}{{ $doctor->designation ? ' — '.$doctor->designation : '' }}</option>@endforeach
+                                </select>
+                            @elseif($resource === 'testimonials' && $field === 'type')
                                 <select name="type" class="testimonial-type">
                                     <option value="Text" @selected(old('type', $item?->{$field} ?? 'Text') === 'Text')>Text testimonial</option>
                                     <option value="File" @selected(old('type', $item?->{$field}) === 'File')>Video file</option>
