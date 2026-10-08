@@ -19,7 +19,7 @@
                         <th>Doctor</th>
                         <!-- <th>Service</th> -->
                         <th>Days</th>
-                        <th>Published hours</th>
+                        <th>OPD hours</th>
                         <th></th>
                     </tr>
                 </thead>
