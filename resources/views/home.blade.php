@@ -220,7 +220,8 @@
         @if(isset($doctors) && $doctors->count() > 0)
         <div class="doctor-grid">
             @foreach($doctors as $doctor)
-            <article class="doctor-card">
+            @php($hasDetail = trim(strip_tags((string) $doctor->description)) !== '')
+            <article class="doctor-card{{ $hasDetail ? ' doctor-card--clickable' : '' }}" @if($hasDetail) data-doctor-url="{{ route('doctors.show', $doctor->slug) }}" role="link" tabindex="0" aria-label="View {{ $doctor->name }}'s profile" @endif>
                 <div class="doctor-photo">
                     @if($doctor->image && file_exists(public_path($doctor->image)))
                     <img src="{{ asset($doctor->image) }}" alt="{{ $doctor->name }}" width="684" height="1024" loading="lazy">
@@ -233,10 +234,8 @@
                     @if($doctor->designation)
                     <p>{{ $doctor->designation }}</p>
                     @endif
-                    @if($doctor->degree)
-                    <small>{{ $doctor->degree }}</small>
-                    @endif
-                    <a class="doctor-book" href="{{ route('doctors.show', $doctor->slug) }}">Know More <span aria-hidden="true">&rarr;</span></a>
+                    <!-- @if($doctor->degree)<small>{{ $doctor->degree }}</small>@endif -->
+                    @if($hasDetail)<a class="doctor-book" href="{{ route('doctors.show', $doctor->slug) }}">Know More <span aria-hidden="true">&rarr;</span></a>@endif
                 </div>
             </article>
             @endforeach

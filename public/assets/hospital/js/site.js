@@ -94,6 +94,20 @@
         });
     });
 
+    document.querySelectorAll('[data-doctor-url]').forEach((card) => {
+        const openProfile = () => { window.location.href = card.dataset.doctorUrl; };
+        card.addEventListener('click', (event) => {
+            if (event.target.closest('a, button')) return;
+            openProfile();
+        });
+        card.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter' || event.key === ' ') {
+                event.preventDefault();
+                openProfile();
+            }
+        });
+    });
+
     const initCarousel = (selector, slideSelector, activeClass = 'active') => {
         const root = document.querySelector(selector);
         if (!root) return;
