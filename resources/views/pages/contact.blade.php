@@ -7,9 +7,9 @@
 @section('content')
 @php
     // Use the exact same admin-managed keys as the shared site footer.
-    $phone = trim($siteSettings['site_phone'] ?? '');
-    $email = trim($siteSettings['site_email'] ?? '');
-    $address = trim($siteSettings['address'] ?? '');
+    $phone = trim($siteSettings['site_phone'] ?? '01662-245450');
+    $email = trim($siteSettings['site_email'] ?? 'care@aarogyahospital.com');
+    $address = trim($siteSettings['address'] ?? 'Opposite Vishwas School, Near LIC Office, Urban Estate II, Hisar, Haryana 125001');
 @endphp
 <section class="inner-section">
     <div class="wrap contact-page-grid">
