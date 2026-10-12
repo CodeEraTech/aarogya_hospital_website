@@ -5597,11 +5597,16 @@ textarea:focus-visible {
 
 /* Feedback page overflow protection */
 .feedback-page {
-    overflow: hidden;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: clip;
 }
 .feedback-page .wrap {
+    width: min(1240px, calc(100% - 48px));
     max-width: 100%;
-    overflow-x: hidden;
+    margin-inline: auto;
+    overflow: visible;
+    box-sizing: border-box;
 }
 .feedback-page .feedback-layout,
 .feedback-page .feedback-copy,
@@ -5664,6 +5669,11 @@ textarea:focus-visible {
 .feedback-page .feedback-layout {
     width: 100%;
     grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+    gap: clamp(24px, 4vw, 56px);
+    box-sizing: border-box;
+}
+.feedback-page,
+.feedback-page * {
     box-sizing: border-box;
 }
 .feedback-page .feedback-copy,
@@ -5698,6 +5708,7 @@ textarea:focus-visible {
 @media (max-width: 600px) {
     .feedback-page .feedback-layout {
         width: 100%;
+        gap: 24px;
     }
     .feedback-page .feedback-card {
         padding: 20px 16px;
