@@ -2093,8 +2093,8 @@ h3 {
 }
 .feedback-layout {
     display: grid;
-    grid-template-columns: 0.8fr 1.2fr;
-    gap: 70px;
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+    gap: clamp(24px, 4vw, 56px);
     align-items: start;
 }
 .feedback-copy {
@@ -2136,7 +2136,7 @@ h3 {
 }
 .feedback-form {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 18px;
 }
 .feedback-form > label {
@@ -2175,11 +2175,22 @@ h3 {
     min-width: 0;
 }
 .rating-options label {
+    position: relative;
     cursor: pointer;
     min-width: 0;
 }
-.rating-options input {
+/* Hidden radios must not inherit full-width text-field sizing or escape their labels. */
+.feedback-form .rating-options input[type="radio"] {
     position: absolute;
+    top: 0;
+    left: 0;
+    width: 1px;
+    height: 1px;
+    min-height: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    clip-path: inset(50%);
     opacity: 0;
     pointer-events: none;
 }
@@ -2200,6 +2211,10 @@ h3 {
     border-color: var(--teal);
     background: #e9f8f8;
     color: var(--teal);
+}
+.rating-options input:focus-visible + span {
+    outline: 2px solid var(--teal);
+    outline-offset: 3px;
 }
 @media (max-width: 900px) {
     .inner-hero {
@@ -2225,7 +2240,7 @@ h3 {
         grid-template-columns: 1fr;
     }
     .feedback-layout {
-        grid-template-columns: 1fr;
+        grid-template-columns: minmax(0, 1fr);
         gap: 25px;
     }
     .feedback-copy {
@@ -2355,7 +2370,7 @@ h3 {
         padding: 20px 16px;
     }
     .feedback-form {
-        grid-template-columns: 1fr;
+        grid-template-columns: minmax(0, 1fr);
     }
     .feedback-form .full,
     .rating-field {
@@ -5595,19 +5610,7 @@ textarea:focus-visible {
     }
 }
 
-/* Feedback page overflow protection */
-.feedback-page {
-    width: 100%;
-    max-width: 100%;
-    overflow-x: clip;
-}
-.feedback-page .wrap {
-    width: min(1240px, calc(100% - 48px));
-    max-width: 100%;
-    margin-inline: auto;
-    overflow: visible;
-    box-sizing: border-box;
-}
+/* Feedback uses the shared .wrap width, including its responsive side gutters. */
 .feedback-page .feedback-layout,
 .feedback-page .feedback-copy,
 .feedback-page .feedback-card,
@@ -5626,23 +5629,19 @@ textarea:focus-visible {
 .feedback-page .feedback-form select,
 .feedback-page .feedback-form textarea {
     box-sizing: border-box;
+    min-width: 0;
     max-width: 100%;
 }
-.feedback-page .contact-tile {
+.feedback-page .contact-tile,
+.feedback-page .contact-tile > div {
     min-width: 0;
+}
+.feedback-page .contact-tile i {
+    flex-shrink: 0;
 }
 .feedback-page .contact-tile a {
     min-width: 0;
     overflow-wrap: anywhere;
-}
-.rating-options {
-    width: 100%;
-    max-width: 100%;
-    min-width: 0;
-}
-.rating-options label {
-    min-width: 0;
-    max-width: 100%;
 }
 .rating-options label > span {
     min-width: 0;
@@ -5664,59 +5663,11 @@ textarea:focus-visible {
 .feedback-contact-note span {
     overflow-wrap: anywhere;
 }
-
-/* Keep the feedback page inside the viewport at every screen width. */
-.feedback-page .feedback-layout {
-    width: 100%;
-    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
-    gap: clamp(24px, 4vw, 56px);
-    box-sizing: border-box;
-}
-.feedback-page,
-.feedback-page * {
-    box-sizing: border-box;
-}
-.feedback-page .feedback-copy,
-.feedback-page .feedback-card,
-.feedback-page .contact-tile > div,
-.feedback-page .feedback-form > label,
-.feedback-page .rating-options label {
-    min-width: 0;
-}
+.feedback-page .feedback-copy h2,
 .feedback-page .feedback-copy p,
-.feedback-page .contact-tile a,
-.feedback-page .feedback-contact-note a,
-.feedback-page .feedback-contact-note span {
+.feedback-page .form-error,
+.feedback-page .form-success {
     overflow-wrap: anywhere;
-    word-break: break-word;
-}
-.feedback-page .feedback-form,
-.feedback-page .feedback-form > label,
-.feedback-page .rating-field,
-.feedback-page .rating-options,
-.feedback-page .feedback-form input,
-.feedback-page .feedback-form select,
-.feedback-page .feedback-form textarea {
-    max-width: 100%;
-    box-sizing: border-box;
-}
-@media (max-width: 900px) {
-    .feedback-page .feedback-layout {
-        grid-template-columns: minmax(0, 1fr);
-    }
-}
-@media (max-width: 600px) {
-    .feedback-page .feedback-layout {
-        width: 100%;
-        gap: 24px;
-    }
-    .feedback-page .feedback-card {
-        padding: 20px 16px;
-    }
-    .feedback-page .rating-options {
-        grid-template-columns: repeat(5, minmax(0, 1fr));
-        gap: 4px;
-    }
 }
 
 /* Testimonials: separate video and text experiences */
