@@ -25,6 +25,6 @@ class DatabaseSeeder extends Seeder
 
         foreach ([['Dr. Amit Bhutani','Orthopaedics & Joint Replacement Specialist','dr-amit-bhutani.jpg'],['Dr. Puja Bhutani','Obstetrics, Gynaecology & Infertility Specialist','dr-puja-bhutani.jpg'],['Dr. Deepak Gupta & Dr. Gunjan Gupta','Anaesthesia, Intensive Care & ICU','dr-deepak-gunjan-gupta.jpg'],['Dr. Sachin Thakral','Physiotherapy & Sports Injury Specialist','dr-sachin-thakral.jpg']] as [$name,$designation,$image]) Doctor::updateOrCreate(['slug'=>Str::slug($name)],['name'=>$name,'designation'=>$designation,'speciality'=>$designation,'image'=>'uploads/doctors/'.$image]);
         foreach (['Advanced Orthopaedics','Robotic Joint Replacement','Gynaecology & Infertility','Emergency & Trauma Care'] as $name) Service::updateOrCreate(['slug'=>Str::slug($name)],['name'=>$name,'description'=>'Specialist care with experienced clinicians and modern technology.']);
-        foreach (['site_phone'=>'01662-245450','site_email'=>'care@aarogyahospital.com','whatsapp_number'=>'+918222049007','address'=>'Opposite Vishwas School, Near LIC Office, Urban Estate II, Hisar, Haryana 125001'] as $key=>$value) Setting::updateOrCreate(['key'=>$key],['value'=>$value,'group'=>'Contact']);
+        foreach (['site_phone'=>'01662-245450','site_email'=>'aarogyahospitalhisar@gmail.com','whatsapp_number'=>'+918222049007','address'=>'Opposite Vishwas School, Near LIC Office, Urban Estate II, Hisar, Haryana 125001'] as $key=>$value) Setting::updateOrCreate(['key'=>$key],['value'=>$value,'group'=>'Contact']);
     }
 }

@@ -23,7 +23,7 @@
                 @if(!empty($siteSettings['address']))<div><strong>Visit us</strong><span>{{ $siteSettings['address'] }}</span></div>@endif
                 {{--
                 <a href="tel:+911662245450"><strong>01662-245450</strong><span>24×7 emergency and hospital line</span></a>
-                <a href="mailto:care@aarogyahospital.com"><strong>care@aarogyahospital.com</strong><span>Email our care team</span></a>
+                <a href="mailto:aarogyahospitalhisar@gmail.com"><strong>aarogyahospitalhisar@gmail.com</strong><span>Email our care team</span></a>
                 <div><strong>Visit us</strong><span>Opposite Vishwas School, Near LIC Office, Urban Estate II, Hisar, Haryana 125001</span></div>
                 --}}
             </div>
