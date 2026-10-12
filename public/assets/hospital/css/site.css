@@ -5659,6 +5659,42 @@ textarea:focus-visible {
 .feedback-contact-note span {
     overflow-wrap: anywhere;
 }
+
+/* Keep the feedback page inside the viewport at every screen width. */
+.feedback-page .feedback-layout {
+    width: 100%;
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+    box-sizing: border-box;
+}
+.feedback-page .feedback-copy,
+.feedback-page .feedback-card,
+.feedback-page .contact-tile > div,
+.feedback-page .feedback-form > label,
+.feedback-page .rating-options label {
+    min-width: 0;
+}
+.feedback-page .feedback-copy p,
+.feedback-page .contact-tile a,
+.feedback-page .feedback-contact-note a,
+.feedback-page .feedback-contact-note span {
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
+.feedback-page .feedback-form,
+.feedback-page .feedback-form > label,
+.feedback-page .rating-field,
+.feedback-page .rating-options,
+.feedback-page .feedback-form input,
+.feedback-page .feedback-form select,
+.feedback-page .feedback-form textarea {
+    max-width: 100%;
+    box-sizing: border-box;
+}
+@media (max-width: 900px) {
+    .feedback-page .feedback-layout {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
 @media (max-width: 600px) {
     .feedback-page .feedback-layout {
         width: 100%;
