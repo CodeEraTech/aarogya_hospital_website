@@ -23,20 +23,8 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Schema::defaultStringLength(191);
-        View::composer(['layouts.site', 'home', 'layouts.admin', 'admin.auth.login'], function ($view): void {
+        View::composer(['layouts.site', 'pages.contact', 'home', 'layouts.admin', 'admin.auth.login'], function ($view): void {
             $settings = Schema::hasTable('settings') ? Setting::pluck('value', 'key') : collect();
-            $contactDefaults = [
-                'phone' => '01662-245450',
-                'email' => 'care@aarogyahospital.com',
-                'address' => 'Opposite Vishwas School, Near LIC Office, Urban Estate II, Hisar, Haryana 125001',
-            ];
-            $settingValue = static fn (string $key): string => trim((string) ($settings->get($key) ?? ''));
-
-            // Keep every public view on the same contact values. Legacy keys are
-            // supported during migration; database values always take priority.
-            $settings->put('site_phone', $settingValue('site_phone') ?: $settingValue('phone') ?: $contactDefaults['phone']);
-            $settings->put('site_email', $settingValue('site_email') ?: $settingValue('email') ?: $contactDefaults['email']);
-            $settings->put('address', $settingValue('address') ?: $settingValue('hospital_address') ?: $contactDefaults['address']);
             if (!empty($settings['website_logo']) && is_file(public_path($settings['website_logo'])) && $settings['website_logo'] !== 'assets/hospital/images/aarogya-logo.png') {
                 copy(public_path($settings['website_logo']), public_path('assets/hospital/images/aarogya-logo.png'));
             }
