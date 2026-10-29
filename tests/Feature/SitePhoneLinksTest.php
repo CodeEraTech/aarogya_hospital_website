@@ -46,6 +46,12 @@ class SitePhoneLinksTest extends TestCase
                 trim(preg_replace('/\s+/', ' ', $footerPhones->textContent)),
                 $url.' footer display'
             );
+
+            if ($url === '/doctors/'.$doctor->slug) {
+                $doctorPhones = $xpath->query('//section[contains(concat(" ", normalize-space(@class), " "), " doctor-profile-intro ")]//span[contains(concat(" ", normalize-space(@class), " "), " phone-links--inline ")]')->item(0);
+                $this->assertNotNull($doctorPhones);
+                $this->assertSame('01662-245450, 8222049007, 8222049008', trim(preg_replace('/\s+/', ' ', $doctorPhones->textContent)));
+            }
         }
     }
 

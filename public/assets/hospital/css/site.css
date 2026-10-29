@@ -4411,6 +4411,15 @@ h3 {
     text-decoration: underline;
     text-underline-offset: 3px;
 }
+.phone-links.phone-links--inline {
+    display: inline;
+    line-height: 1.6;
+}
+.phone-links.phone-links--inline > .phone-link {
+    display: inline;
+    min-height: 0;
+    white-space: nowrap;
+}
 .phone-links > .phone-link:focus-visible,
 .mobile-phone-menu > summary:focus-visible {
     outline: 2px solid var(--teal);
