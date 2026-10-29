@@ -5099,6 +5099,9 @@ textarea:focus-visible {
     align-items: flex-start;
     margin-bottom: 60px;
 }
+.about-section {
+    grid-template-columns: minmax(0, min(440px, 45%)) minmax(0, 1fr);
+}
 .chairman-section {
     grid-template-columns: 1fr 400px;
 }
@@ -5113,6 +5116,16 @@ textarea:focus-visible {
     height: 100%;
     border-radius: 12px;
     object-fit: cover;
+}
+@media (min-width: 901px) {
+    .about-image {
+        height: auto;
+        min-height: 0;
+    }
+    .about-image img {
+        display: block;
+        height: auto;
+    }
 }
 .chairman-image {
     min-height: auto;
