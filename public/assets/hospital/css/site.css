@@ -6155,6 +6155,16 @@ textarea:focus-visible {
 .footer {
     background: #f6f9f7;
 }
+.footer-grid-modern .footer-logo {
+    margin-bottom: 14px;
+}
+.footer-grid-modern .footer-logo-image {
+    width: min(220px, 100%);
+    height: 100px;
+    margin-bottom: 0;
+    object-fit: cover;
+    object-position: center 46%;
+}
 .footer-grid-modern {
     column-gap: 42px;
     row-gap: 28px;
@@ -6232,9 +6242,9 @@ textarea:focus-visible {
     .footer-grid-modern > div:last-child {
         padding-top: 24px;
     }
-    .footer-logo-image {
-        width: min(220px, 100%);
-        height: 76px;
+    .footer-grid-modern .footer-logo-image {
+        width: min(190px, 100%);
+        height: 86px;
     }
     .footer-brand p {
         max-width: 34ch;
