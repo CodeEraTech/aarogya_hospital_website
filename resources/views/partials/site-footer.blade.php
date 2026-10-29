@@ -28,7 +28,7 @@
             <a style="color: #087C60; font-weight: bold; font-size: 18px;" href="mailto:{{ $siteSettings['site_email'] }}">{{ $siteSettings['site_email'] }}</a>
             @endif
             @if(!empty($siteSettings['address']))
-            <span style="color: #087C60; font-weight: bold; font-size: 18px;">{{ $siteSettings['address'] }}</span>
+            <span class="footer-contact-address" style="color: #087C60; font-weight: bold; font-size: 18px;">{{ $siteSettings['address'] }}</span>
             @endif
             <div class="footer-socials">
                 @foreach($socialKeys ?? [] as $key => $icon)

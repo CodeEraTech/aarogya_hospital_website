@@ -6177,6 +6177,23 @@ textarea:focus-visible {
     font-size: 18px;
     font-weight: 700;
 }
+@media (max-width: 1200px) {
+    .footer-grid-modern > div:last-child > .footer-contact-address {
+        min-width: 0;
+        max-width: 100%;
+        white-space: normal;
+        overflow-wrap: break-word;
+        word-break: normal;
+    }
+}
+@media (min-width: 901px) and (max-width: 1200px) {
+    .footer-grid-modern {
+        grid-template-columns: minmax(0, 1fr) minmax(0, 0.6fr) minmax(0, 1.5fr);
+    }
+    .footer-grid-modern > div:last-child {
+        min-width: 0;
+    }
+}
 @media (max-width: 900px) {
     .footer-grid-modern {
         grid-template-columns: repeat(2, minmax(0, 1fr));
