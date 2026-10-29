@@ -3423,6 +3423,11 @@ h3 {
         margin-left: auto !important;
     }
 }
+/* The square uploaded logo has transparent top and bottom padding. */
+.site-header .hospital-logo {
+    object-fit: cover;
+    object-position: center 46%;
+}
 @media (max-width: 1180px) {
     .site-header .menu-btn,
     .site-header .menu-btn[aria-expanded="true"],

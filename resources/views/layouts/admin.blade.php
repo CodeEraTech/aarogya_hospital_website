@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>@yield('title', 'Admin') | Aarogya Hospital</title>
-    <link rel="stylesheet" href="{{ asset('assets/hospital/css/admin.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/hospital/css/admin.css') }}?v={{ substr(sha1_file(public_path('assets/hospital/css/admin.css')), 0, 12) }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/quill@1.3.7/dist/quill.snow.css">
 </head>
