@@ -23,9 +23,7 @@
         </div> -->
         <div>
             <h3>Contact</h3>
-            @if(!empty($siteSettings['site_phone']))
-            <a style="color: #087C60; font-weight: bold; font-size: 18px;" href="tel:{{ preg_replace('/\D+/', '', $siteSettings['site_phone']) }}">{{ $siteSettings['site_phone'] }}</a>
-            @endif
+            <x-phone-links :value="$siteSettings['site_phone'] ?? null" class="phone-links--footer" />
             @if(!empty($siteSettings['site_email']))
             <a style="color: #087C60; font-weight: bold; font-size: 18px;" href="mailto:{{ $siteSettings['site_email'] }}">{{ $siteSettings['site_email'] }}</a>
             @endif

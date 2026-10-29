@@ -4,6 +4,20 @@
     const menuButton = document.querySelector('.menu-btn');
     const menu = document.querySelector('#main-nav');
 
+    document.querySelectorAll('[data-phone-menu]').forEach((phoneMenu) => {
+        document.addEventListener('click', (event) => {
+            if (!phoneMenu.contains(event.target) || event.target.closest('a[href^="tel:"]')) {
+                phoneMenu.open = false;
+            }
+        });
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape' && phoneMenu.open) {
+                phoneMenu.open = false;
+                phoneMenu.querySelector('summary')?.focus();
+            }
+        });
+    });
+
     menuButton?.addEventListener('click', () => {
         const open = !menu?.classList.contains('open');
         menu?.classList.toggle('open', open);

@@ -10,7 +10,10 @@
         </div>
         <div class="schedule-summary">
             <div><span>OPD hours</span><strong>Doctor-wise consultation timings</strong></div>
-            <div><span>Emergency care</span><strong>24/7 for Orthopaedics &amp; Obs-Gynae</strong></div><a href="tel:+911662245450">Call 01662-245450 <span aria-hidden="true">→</span></a>
+            <div><span>Emergency care</span><strong>24/7 for Orthopaedics &amp; Obs-Gynae</strong></div>
+            @if(\App\Support\PhoneNumbers::parse($siteSettings['site_phone'] ?? null))
+            <div><span>Call to confirm availability</span><x-phone-links :value="$siteSettings['site_phone']" /></div>
+            @endif
         </div>
         <div class="table-card">
             <table class="schedule-table">

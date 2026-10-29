@@ -156,9 +156,7 @@
                 </div>
                 <h3>CONNECT WITH US</h3>
             </div>
-            <p>
-                {{ $stats['stat_connect_with_us'] ?? 'CALL: 01662-245450, 8222049007, 8222049008' }}
-            </p>
+            <x-phone-links :value="$siteSettings['site_phone'] ?? null" class="phone-links--home" />
             <a href="/contact" class="info-card-link">
                 <span>Know More</span>
                 <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">

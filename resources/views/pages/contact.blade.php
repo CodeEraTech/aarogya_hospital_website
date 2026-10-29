@@ -18,14 +18,15 @@
             <h2>Care, closer to home.</h2>
             <p>Our team can help you find the right service, doctor, and appointment time.</p>
             <div class="contact-details">
-                @if(!empty($siteSettings['site_phone']))<a href="tel:{{ preg_replace('/\D+/', '', $siteSettings['site_phone']) }}"><strong>{{ $siteSettings['site_phone'] }}</strong><span>24/7 emergency and hospital line</span></a>@endif
+                @if(\App\Support\PhoneNumbers::parse($phone))
+                <div class="contact-phone-card">
+                    <strong>Call us</strong>
+                    <x-phone-links :value="$phone" />
+                    <span>24/7 emergency and hospital line</span>
+                </div>
+                @endif
                 @if(!empty($siteSettings['site_email']))<a href="mailto:{{ $siteSettings['site_email'] }}"><strong>{{ $siteSettings['site_email'] }}</strong><span>Email our care team</span></a>@endif
                 @if(!empty($siteSettings['address']))<div><strong>Visit us</strong><span>{{ $siteSettings['address'] }}</span></div>@endif
-                {{--
-                <a href="tel:+911662245450"><strong>01662-245450</strong><span>24×7 emergency and hospital line</span></a>
-                <a href="mailto:aarogyahospitalhisar@gmail.com"><strong>aarogyahospitalhisar@gmail.com</strong><span>Email our care team</span></a>
-                <div><strong>Visit us</strong><span>Opposite Vishwas School, Near LIC Office, Urban Estate II, Hisar, Haryana 125001</span></div>
-                --}}
             </div>
         </div>
         @php($mapSource = 'https://www.google.com/maps?q='.rawurlencode(trim('Aarogya Hospital, '.$address, ', ')).'&z=17&output=embed')

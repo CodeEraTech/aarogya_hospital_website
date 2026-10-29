@@ -15,6 +15,7 @@ use App\Http\Controllers\PatientController;
 use App\Http\Controllers\OpdScheduleController;
 use App\Http\Controllers\EmpanelledController;
 use Illuminate\Support\Facades\Route;
+use App\Support\PhoneNumbers;
 
 Route::get('/', function () {
     return view('home', [
@@ -78,12 +79,15 @@ Route::get('/site-socials', function () {
 Route::get('/site-footer', function () {
     $keys = ['footer_about', 'website_logo', 'site_phone', 'site_email', 'whatsapp_number', 'address', 'social_facebook', 'social_instagram', 'social_linkedin', 'social_youtube', 'social_whatsapp'];
     $settings = Setting::whereIn('key', $keys)->pluck('value', 'key');
+    $phones = PhoneNumbers::parse($settings['site_phone'] ?? null);
     $whatsapp = $settings['social_whatsapp'] ?? $settings['whatsapp_number'] ?? null;
     if ($whatsapp && ! str_starts_with($whatsapp, 'http')) $whatsapp = 'https://wa.me/' . preg_replace('/\D+/', '', $whatsapp);
     return response()->json([
         'about' => $settings['footer_about'] ?? '',
         'logo' => $settings['website_logo'] ?? 'assets/hospital/images/aarogya-logo.png',
-        'phone' => $settings['site_phone'] ?? '',
+        // Legacy clients receive one dialable phone; newer clients can render the full list.
+        'phone' => $phones[0]['label'] ?? '',
+        'phones' => $phones,
         'email' => $settings['site_email'] ?? '',
         'whatsapp' => $whatsapp,
         'address' => $settings['address'] ?? '',

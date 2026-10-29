@@ -32,6 +32,9 @@
                             @endif
                         @elseif($setting->key === 'footer_about')
                             <textarea name="settings[{{ $setting->key }}]" rows="5" placeholder="Enter footer about text">{{ $setting->value }}</textarea>
+                        @elseif($setting->key === 'site_phone')
+                            <input type="text" name="settings[site_phone]" value="{{ old('settings.site_phone', $setting->value) }}" aria-describedby="site-phone-help" placeholder="01662-245450, 8222049007, 8222049008">
+                            <small id="site-phone-help">Separate phone numbers with commas. Each number will have its own call link on the website.</small>
                         @else
                             <input type="{{ str_starts_with($setting->key, 'social_') ? 'url' : 'text' }}" name="settings[{{ $setting->key }}]" value="{{ $setting->value }}" placeholder="{{ array_key_exists($setting->key, $socialLabels) ? 'Enter '.$settingLabel.' URL' : 'Enter '.strtolower($settingLabel) }}">
                         @endif

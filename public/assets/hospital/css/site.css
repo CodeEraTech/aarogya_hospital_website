@@ -4371,8 +4371,8 @@ h3 {
     gap: 12px;
     margin-top: 28px;
 }
-.contact-details a,
-.contact-details div {
+.contact-details > a,
+.contact-details > div {
     display: grid;
     gap: 3px;
     padding: 18px;
@@ -4386,6 +4386,110 @@ h3 {
 .contact-details span {
     color: var(--muted);
     font-size: 12px;
+}
+/* Each saved hospital number is a separate, readable call target. */
+.phone-links {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    min-width: 0;
+    max-width: 100%;
+}
+.phone-links > .phone-link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 32px;
+    max-width: 100%;
+    color: var(--teal-dark);
+    font-size: 14px;
+    font-weight: 700;
+    overflow-wrap: anywhere;
+    line-height: 1.5;
+}
+.phone-links > .phone-link:hover {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+.phone-links > .phone-link:focus-visible,
+.mobile-phone-menu > summary:focus-visible {
+    outline: 2px solid var(--teal);
+    outline-offset: 3px;
+    border-radius: 4px;
+}
+.footer-grid-modern .phone-links > .phone-link {
+    color: #087c60;
+    font-size: 18px;
+}
+.contact-phone-card .phone-links > .phone-link {
+    font-size: 16px;
+}
+.phone-links--home {
+    margin-bottom: 18px;
+}
+.doctor-profile-intro .phone-links > .phone-link {
+    color: inherit;
+    font-size: inherit;
+}
+.schedule-summary .phone-links {
+    display: flex;
+    margin-bottom: 0;
+}
+.mobile-phone-menu {
+    position: relative;
+    min-width: 0;
+}
+.mobile-phone-menu > summary {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    color: var(--teal);
+    font-size: 18px;
+    cursor: pointer;
+    list-style: none;
+}
+.mobile-phone-menu > summary::-webkit-details-marker {
+    display: none;
+}
+.mobile-phone-options {
+    position: absolute;
+    bottom: calc(100% + 10px);
+    left: 12px;
+    width: min(300px, calc(100vw - 24px));
+    max-height: 60vh;
+    overflow-y: auto;
+    padding: 16px;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: #fff;
+    box-shadow: var(--shadow);
+}
+.mobile-phone-options > strong {
+    display: block;
+    margin-bottom: 10px;
+    color: var(--ink);
+    font-size: 14px;
+}
+.mobile-phone-options .phone-links {
+    align-items: stretch;
+}
+.mobile-phone-options .phone-links > .phone-link {
+    min-height: 44px;
+    justify-content: flex-start;
+    flex-direction: row;
+    padding: 8px 10px;
+    border-radius: 6px;
+    background: #f6f9f7;
+    color: var(--teal-dark);
+    font-size: 16px;
+}
+@media (max-width: 600px) {
+    .phone-links > .phone-link {
+        min-height: 44px;
+    }
 }
 .contact-page-card {
     padding: 30px;

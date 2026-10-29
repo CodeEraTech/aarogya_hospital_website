@@ -19,12 +19,12 @@
             <h2>Every voice helps us care better.</h2>
             <p>Tell us what worked well or where we can improve. Do not include sensitive clinical information in this public form.</p>
 
-            @if($phone)
+            @if(\App\Support\PhoneNumbers::parse($phone))
             <div class="contact-tile">
                 <i aria-hidden="true">&#9742;</i>
                 <div>
                     <small>Need immediate assistance?</small>
-                    <a href="tel:{{ preg_replace('/\D+/', '', $phone) }}"><strong>{{ $phone }}</strong></a>
+                    <x-phone-links :value="$phone" />
                 </div>
             </div>
             @endif

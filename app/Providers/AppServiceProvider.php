@@ -23,7 +23,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Schema::defaultStringLength(191);
-        View::composer(['layouts.site', 'pages.contact', 'pages.feedback', 'home', 'layouts.admin', 'admin.auth.login'], function ($view): void {
+        View::composer(['layouts.site', 'pages.contact', 'pages.feedback', 'pages.opd-schedule', 'home', 'layouts.admin', 'admin.auth.login'], function ($view): void {
             $settings = Schema::hasTable('settings') ? Setting::pluck('value', 'key') : collect();
             if (!empty($settings['website_logo']) && is_file(public_path($settings['website_logo'])) && $settings['website_logo'] !== 'assets/hospital/images/aarogya-logo.png') {
                 copy(public_path($settings['website_logo']), public_path('assets/hospital/images/aarogya-logo.png'));

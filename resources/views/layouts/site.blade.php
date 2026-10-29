@@ -37,7 +37,20 @@
 
     @include('partials.site-footer')
     <nav class="mobile-cta" aria-label="Quick actions">
-        <a href="tel:{{ preg_replace('/\D+/', '', $siteSettings['site_phone']) }}"><i class="fa fa-phone" aria-hidden="true"></i><span>Call</span></a>
+        @php($callNumbers = \App\Support\PhoneNumbers::parse($siteSettings['site_phone'] ?? null))
+        @if(count($callNumbers) > 1)
+        <details class="mobile-phone-menu" data-phone-menu>
+            <summary><i class="fa fa-phone" aria-hidden="true"></i><span>Call</span></summary>
+            <div class="mobile-phone-options">
+                <strong>Call the hospital</strong>
+                <x-phone-links :value="$siteSettings['site_phone']" />
+            </div>
+        </details>
+        @elseif(count($callNumbers) === 1)
+        <a href="{{ $callNumbers[0]['href'] }}" aria-label="Call {{ $callNumbers[0]['label'] }}"><i class="fa fa-phone" aria-hidden="true"></i><span>Call</span></a>
+        @else
+        <a href="{{ route('contact') }}"><i class="fa fa-envelope" aria-hidden="true"></i><span>Contact</span></a>
+        @endif
         <a href="whatsapp://send?phone={{ preg_replace('/\D+/', '', $siteSettings['whatsapp_number']) }}"><i class="fa fa-phone" aria-hidden="true"></i><span>Helpline</span></a>
         <a href="{{ route('appointment.create') }}"><i class="fa fa-calendar" aria-hidden="true"></i><span>Appointment</span></a>
     </nav>
