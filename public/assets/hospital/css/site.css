@@ -4117,10 +4117,10 @@ h3 {
     }
 }
 .site-header {
-    height: 100px;
+    height: 106px;
 }
 .site-header .nav-row {
-    min-height: 100px;
+    min-height: 106px;
 }
 .site-header .logo {
     flex-basis: 210px;
