@@ -23,7 +23,7 @@
         </div> -->
         <div>
             <h3>Contact</h3>
-            <x-phone-links :value="$siteSettings['site_phone'] ?? null" class="phone-links--footer" />
+            <x-phone-links :value="$siteSettings['site_phone'] ?? null" class="phone-links--footer" inline />
             @if(!empty($siteSettings['site_email']))
             <a style="color: #087C60; font-weight: bold; font-size: 18px;" href="mailto:{{ $siteSettings['site_email'] }}">{{ $siteSettings['site_email'] }}</a>
             @endif

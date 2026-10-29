@@ -38,6 +38,14 @@ class SitePhoneLinksTest extends TestCase
                 $targets = array_map(fn ($node) => $node->getAttribute('href'), iterator_to_array($nodes));
                 $this->assertSame($expected, $targets, $url.' '.$section);
             }
+
+            $footerPhones = $xpath->query('//footer[@id="contact"]//span[contains(concat(" ", normalize-space(@class), " "), " phone-links--footer ")]')->item(0);
+            $this->assertNotNull($footerPhones);
+            $this->assertSame(
+                '01662-245450, 8222049007, 8222049008',
+                trim(preg_replace('/\s+/', ' ', $footerPhones->textContent)),
+                $url.' footer display'
+            );
         }
     }
 
